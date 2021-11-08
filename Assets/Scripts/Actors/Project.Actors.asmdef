@@ -1,0 +1,20 @@
+{
+    "name": "Project.Actors",
+    "rootNamespace": "",
+    "references": [
+        "GUID:01f92d4441a571e449c36b1fc8b870a5"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

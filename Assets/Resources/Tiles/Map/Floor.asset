@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3823e4f9b100e2348b5cc902ffafc426, type: 3}
+  m_Name: Floor
+  m_EditorClassIdentifier: 
+  _tileName: Floor
+  _symbol: 46
+  _seeThrough: 1
+  _walkable: 1
+  _textColorInFOV:
+    ColorName: 5
+    Color:
+      serializedVersion: 2
+      rgba: 4285233537
+  _backgroundColorInFOV:
+    ColorName: 4
+    Color:
+      serializedVersion: 2
+      rgba: 4280028180
+  _textColorOutFOV:
+    ColorName: 3
+    Color:
+      serializedVersion: 2
+      rgba: 4281155143
+  _backgroundColorOutFOV:
+    ColorName: 2
+    Color:
+      serializedVersion: 2
+      rgba: 4278190080
