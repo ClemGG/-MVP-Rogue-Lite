@@ -100,6 +100,10 @@ namespace Project.Actors.Behaviours.FOV
                     _visibleCellsForThisActor.UnionWith(FOVPatterns.SquareFOV(actorPosition, this));
                     break;
 
+                case FOVPatternType.Circle:
+                    _visibleCellsForThisActor.UnionWith(FOVPatterns.CircleFOV(actorPosition, this));
+                    break;
+
                 default:
                     break;
             }
@@ -110,6 +114,7 @@ namespace Project.Actors.Behaviours.FOV
             }
 
         }
+
         #endregion
     }
 }

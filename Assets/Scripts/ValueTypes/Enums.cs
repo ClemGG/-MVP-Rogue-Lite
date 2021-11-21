@@ -47,6 +47,7 @@ namespace Project.ValueTypes
     public enum FOVPatternType : byte
     {
         Square = 0,
+        Circle = 1,
     }
 
     #endregion

@@ -33,6 +33,32 @@ namespace Project.Actors.Behaviours.FOV
             return visibleCells;
         }
 
+        internal static HashSet<Vector2Int> CircleFOV(Vector2Int actorPosition, FOV fov)
+        {
+            HashSet<Vector2Int> visibleCells = new HashSet<Vector2Int>();
+
+            foreach (Vector2Int borderTile in fov.BorderTiles)
+            {
+                foreach (Vector2Int position in GetCellsAlongLine(actorPosition, actorPosition + borderTile))
+                {
+                    Cell cell = DungeonMap.s_Map[position.x, position.y];
+
+                    visibleCells.Add(position);
+                    
+                    if (!cell.SeeThrough && !fov.SeeThroughAll)
+                    {
+                        break;
+                    }
+                    if (!IsInsideCircle(actorPosition, position, fov.FovRadius))
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return visibleCells;
+        }
+
         #endregion
 
 
@@ -83,6 +109,14 @@ namespace Project.Actors.Behaviours.FOV
             }
 
             return cells;
+        }
+
+        static bool IsInsideCircle(Vector2Int center, Vector2Int point, float radius)
+        {
+            int dx = center.x - point.x,
+                  dy = center.y - point.y;
+            int distance_squared = dx * dx + dy * dy;
+            return distance_squared <= radius * radius;
         }
 
         #endregion

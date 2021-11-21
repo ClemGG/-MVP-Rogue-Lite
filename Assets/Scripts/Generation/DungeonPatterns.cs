@@ -103,7 +103,7 @@ namespace Project.Map
         /// Creates a standard dungeon, with random rooms and object placements.
         /// </summary>
         /// <param name="doubleCorridors"> Should we generate a single L-shaped Corridor or two ?</param>
-        public static void GenerateRandomDungeon(Vector2Int minMaxFeatureSize, int maxRooms, bool doubleCorridors = false)
+        public static void GenerateRandomDungeon(Vector2Int minMaxFeatureSize, int maxRooms, bool doubleCorridors = false, bool isDarkRoom = false)
         {
 
             // Try to place as many rooms as the specified maxRooms
@@ -126,7 +126,7 @@ namespace Project.Map
                 // As long as it doesn't intersect add it to the list of rooms
                 if (!newRoomIntersects)
                 {
-                    GenerateRectangularFeature(newRoom.Position, newRoom.Size, false, FeatureType.Room);
+                    GenerateRectangularFeature(newRoom.Position, newRoom.Size, isDarkRoom, FeatureType.Room);
                 }
 
 
