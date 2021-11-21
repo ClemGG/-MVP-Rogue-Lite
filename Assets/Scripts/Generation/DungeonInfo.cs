@@ -1,5 +1,5 @@
+using Project.Actors.Entities;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Project.Map
 {
@@ -13,11 +13,14 @@ namespace Project.Map
         public static List<Feature> AllRooms { get; set; } = new List<Feature>();
         public static List<Feature> AllCorridors { get; set; } = new List<Feature>();
 
+        public static List<ActorTile> AllActors { get; set; } = new List<ActorTile>();
+
         public static void Init()
         {
             AllFeatures.Clear();
             AllRooms.Clear();
             AllCorridors.Clear();
+            AllActors.Clear();
         }
 
     }

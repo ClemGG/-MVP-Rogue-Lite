@@ -1,3 +1,4 @@
+using Project.Actors.Behaviours.FOV;
 using Project.Map;
 using UnityEngine;
 
@@ -6,30 +7,39 @@ namespace Project.Logic
 
     public class GameManager : MonoBehaviour
     {
-        DungeonGenerator _dungeonGenerator;
+        [field: SerializeField] private DungeonGenerationSettingsSO _settings { get; set; }
+        [field: SerializeField] private Vector2Int _dungeonSize { get; set; } = new Vector2Int(97, 34);
 
         // Start is called before the first frame update
         void Start()
         {
-            _dungeonGenerator = GetComponent<DungeonGenerator>();
-            GenerateNewDungeon();
+            DungeonGenerator.Init(_dungeonSize);   //We can leave this in Start() if the dungeon settings don't change between generations
+            GenerateNewDungeon(_settings);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetMouseButtonDown(1))
             {
-                _dungeonGenerator.ClearCells();
-                GenerateNewDungeon();
+                DungeonMap.Clear();
+                GenerateNewDungeon(_settings);
             }
         }
 
 
 
-        private void GenerateNewDungeon()
+        public static void GenerateNewDungeon(DungeonGenerationSettingsSO settings)
         {
-            _dungeonGenerator.Init();   //We can leave this in Start() if the dungeon settings don't change between generations
-            _dungeonGenerator.Generate();
+            DungeonGenerator.Generate(settings);
+
+            FOV.Clear();
+            for (int i = 0; i < DungeonInfo.AllActors.Count; i++)
+            {
+                DungeonInfo.AllActors[i].OnTick();
+            }
+            FOV.ShowExploredTiles();
+
+            DungeonMap.Draw();
         }
     }
 }

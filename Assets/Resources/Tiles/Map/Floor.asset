@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3823e4f9b100e2348b5cc902ffafc426, type: 3}
   m_Name: Floor
   m_EditorClassIdentifier: 
-  _tileName: Floor
-  _symbol: 46
-  _seeThrough: 1
-  _walkable: 1
-  _textColorInFOV:
+  <TileName>k__BackingField: Floor
+  <Symbol>k__BackingField: 46
+  <SeeThrough>k__BackingField: 1
+  <Walkable>k__BackingField: 1
+  <TextColorInFOV>k__BackingField:
     ColorName: 5
     Color:
       serializedVersion: 2
       rgba: 4285233537
-  _backgroundColorInFOV:
+  <BackgroundColorInFOV>k__BackingField:
     ColorName: 4
     Color:
       serializedVersion: 2
       rgba: 4280028180
-  _textColorOutFOV:
+  <TextColorOutFOV>k__BackingField:
     ColorName: 3
     Color:
       serializedVersion: 2
       rgba: 4281155143
-  _backgroundColorOutFOV:
+  <BackgroundColorOutFOV>k__BackingField:
     ColorName: 2
     Color:
       serializedVersion: 2

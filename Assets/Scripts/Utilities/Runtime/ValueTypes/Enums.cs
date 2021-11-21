@@ -26,5 +26,9 @@ namespace Project.Utilities.ValueTypes
         {
             return ValuesOf<T>()[UnityEngine.Random.Range(0, LengthOf<T>())];
         }
+        public static T RandomIn<T>(T[] enumArray) where T : Enum
+        {
+            return enumArray[UnityEngine.Random.Range(0, enumArray.Length)];
+        }
     }
 }

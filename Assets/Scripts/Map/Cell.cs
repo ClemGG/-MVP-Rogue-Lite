@@ -61,6 +61,8 @@ namespace Project.Map
         public void Clear()
         {
             Tiles.Clear();
+            IsExplored = false;
+            IsInFov = false;
         }
 
     }

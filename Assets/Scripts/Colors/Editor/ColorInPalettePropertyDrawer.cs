@@ -8,7 +8,7 @@ namespace Project.Colors.Editor
     public class ColorInPaletteDrawer : PropertyDrawer
     {
         BindingFlags _flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-        FieldInfo[] _fields;
+        PropertyInfo[] _fields;
         string[] _fieldNames;
         int[] _fieldIndices;
 
@@ -19,7 +19,7 @@ namespace Project.Colors.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            _fields = typeof(ColorLibrary).GetFields(_flags);
+            _fields = typeof(ColorLibrary).GetProperties(_flags);
             _fieldNames = new string[_fields.Length];
             _fieldIndices = new int[_fields.Length];
             for (int i = 0; i < _fields.Length; i++)
@@ -37,6 +37,7 @@ namespace Project.Colors.Editor
 
             // Draw label
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+            //position.height = 20; //If we don't want to click on the ColorField to show the dropdown
 
             // Don't make child fields be indented
             var indent = EditorGUI.indentLevel;

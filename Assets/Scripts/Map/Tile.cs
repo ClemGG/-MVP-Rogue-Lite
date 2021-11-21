@@ -11,55 +11,38 @@ namespace Project.Map
     [CreateAssetMenu(fileName = "New Tile", menuName = "Rogue/Map/Tile")]
     public class Tile : ScriptableObject
     {
-        #region Fields
 
-        [Space(10)]
-        [Header("Appearance:")]
-        [Space(10)]
+        [field: Space(10)]
+        [field: Header("Appearance:")]
+        [field: Space(10)]
 
-        [SerializeField, Tooltip("The name of the Tile, displayed in the message logs.")]
-        private string _tileName;
+        [field: SerializeField, Tooltip("The name of the Tile, displayed in the message logs.")]
+        public string TileName { get; private set; }
 
-        [SerializeField, Tooltip("The caracter displayed to represent the Tile on screen.")]
-        private char _symbol;
+        [field: SerializeField, Tooltip("The caracter displayed to represent the Tile on screen.")]
+        public char Symbol { get; private set; }
 
-        [SerializeField, Tooltip("Can the player see through this Tile? (If any of the Tiles in a Cell is not see-through, the player cannot see through the Cell at all.)")]
-        private bool _seeThrough;
+        [field: SerializeField, Tooltip("Can the player see through this Tile? (If any of the Tiles in a Cell is not see-through, the player cannot see through the Cell at all.)")]
+        public bool SeeThrough { get; private set; }
 
-        [SerializeField, Tooltip("Can the player walk on this Tile? (If any of the Tiles in a Cell is not walkable, the player cannot walk on the Cell at all.)")]
-        private bool _walkable;
+        [field: SerializeField, Tooltip("Can the player walk on this Tile? (If any of the Tiles in a Cell is not walkable, the player cannot walk on the Cell at all.)")]
+        public bool Walkable { get; private set; }
 
-        [SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
-        private ColorInPalette _textColorInFOV;
+        [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
+        public ColorInPalette TextColorInFOV { get; private set; }
 
-        [SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
-        private ColorInPalette _backgroundColorInFOV;
+        [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
+        public ColorInPalette BackgroundColorInFOV { get; private set; }
 
-        [SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
-        private ColorInPalette _textColorOutFOV;
+        [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
+        public ColorInPalette TextColorOutFOV { get; private set; }
 
-        [SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
-        private ColorInPalette _backgroundColorOutFOV;
-
-        //[Tooltip("The object associated to this Tile. Can own some Behaviours or not.")]
-        //public GameObject mapObject;
-
-        #endregion
+        [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
+        public ColorInPalette BackgroundColorOutFOV { get; private set; }
 
 
+        public Vector2Int Position { get; set; }
 
-        #region Accessors
-
-        public string TileName { get => _tileName; }
-        public char Symbol { get => _symbol; }
-        public bool SeeThrough { get => _seeThrough; }
-        public bool Walkable { get => _walkable; }
-        public ColorInPalette TextColorInFOV { get => _textColorInFOV; }
-        public ColorInPalette BackgroundColorInFOV { get => _backgroundColorInFOV; }
-        public ColorInPalette TextColorOutFOV { get => _textColorOutFOV; }
-        public ColorInPalette BackgroundColorOutFOV { get => _backgroundColorOutFOV; }
-
-        #endregion
 
     }
 }

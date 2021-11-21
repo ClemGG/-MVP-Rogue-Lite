@@ -1,6 +1,5 @@
 using UnityEngine;
 using Project.ValueTypes;
-using Project.Map;
 using System.Linq;
 
 namespace Project.Map
@@ -36,7 +35,7 @@ namespace Project.Map
             {
                 for (int x = startPos.x; x < endPos.x - 1; x++)
                 {
-                    Cell currentCell = Map.s_Map[x, y];
+                    Cell currentCell = DungeonMap.s_Map[x, y];
                     Tile newTile = TileLibrary.Floor;
 
                     //Removes the Wall Tile to replace it by a Floor Tile
@@ -96,7 +95,7 @@ namespace Project.Map
         /// </summary>
         public static void GenerateOneRoom(bool isDarkRoom = false)
         {
-            GenerateRectangularFeature(Vector2Int.one, Map.s_Size - Vector2Int.one, isDarkRoom, FeatureType.Room);
+            GenerateRectangularFeature(Vector2Int.one, DungeonMap.s_Size - Vector2Int.one, isDarkRoom, FeatureType.Room);
         }
 
 
@@ -113,8 +112,9 @@ namespace Project.Map
                 // Determine the size and position of the room randomly
                 int roomWidth = Random.Range(minMaxFeatureSize.x, minMaxFeatureSize.y + 1);
                 int roomHeight = Random.Range(minMaxFeatureSize.x, minMaxFeatureSize.y + 1);
-                int roomXPosition = Random.Range(0, Map.s_Size.x - roomWidth - 1);
-                int roomYPosition = Random.Range(0, Map.s_Size.y - roomHeight - 1);
+                int roomXPosition = Random.Range(1, DungeonMap.s_Size.x - roomWidth - 1);
+                int roomYPosition = Random.Range(1, DungeonMap.s_Size.y - roomHeight - 1);
+                                               //^1 instead of 0 to avoid creating the Room on the outer limits of the dungeon
 
                 // All of our rooms can be represented as Rectangles
                 var newRoom = new Rectangle(roomXPosition, roomYPosition,

@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3823e4f9b100e2348b5cc902ffafc426, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
-  _tileName: Wall
-  _symbol: 35
-  _seeThrough: 0
-  _walkable: 0
-  _textColorInFOV:
+  <TileName>k__BackingField: Wall
+  <Symbol>k__BackingField: 35
+  <SeeThrough>k__BackingField: 0
+  <Walkable>k__BackingField: 0
+  <TextColorInFOV>k__BackingField:
     ColorName: 9
     Color:
       serializedVersion: 2
       rgba: 4285096285
-  _backgroundColorInFOV:
+  <BackgroundColorInFOV>k__BackingField:
     ColorName: 8
     Color:
       serializedVersion: 2
       rgba: 4282398771
-  _textColorOutFOV:
+  <TextColorOutFOV>k__BackingField:
     ColorName: 7
     Color:
       serializedVersion: 2
       rgba: 4283780424
-  _backgroundColorOutFOV:
+  <BackgroundColorOutFOV>k__BackingField:
     ColorName: 6
     Color:
       serializedVersion: 2

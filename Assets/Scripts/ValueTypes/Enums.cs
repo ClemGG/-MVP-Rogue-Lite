@@ -9,8 +9,9 @@ namespace Project.ValueTypes
     public enum DungeonPatternType : byte
     {
         OneRoom = 0,
-        StandardRandom = 1,
-        StandardRandomDoubleCorridors = 2,
+        OneRoomDark = 1,
+        StandardRandom = 2,
+        StandardRandomDoubleCorridors = 3,
         Random = 254,    //Chooses one of the algorithms above randomly
     }
 
@@ -36,6 +37,16 @@ namespace Project.ValueTypes
         SouthWest = 5,
         West = 6,
         NorthWest = 7
+    }
+
+    #endregion
+
+
+    #region Behaviours
+
+    public enum FOVPatternType : byte
+    {
+        Square = 0,
     }
 
     #endregion

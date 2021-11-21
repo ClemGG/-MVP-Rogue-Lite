@@ -54,6 +54,7 @@ namespace Project.Colors
         public static Color32 None { get; } = new Color32(0, 0, 0, 0);
         public static Color32 Black { get; } = new Color32(0, 0, 0, 255);
         public static Color32 Grey { get; } = new Color32(128, 128, 128, 255);
+        public static Color32 Yellow { get; } = new Color32(255, 255, 0, 255);
 
     }
 }
