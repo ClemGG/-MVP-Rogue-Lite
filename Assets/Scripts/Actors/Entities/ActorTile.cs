@@ -35,8 +35,8 @@ namespace Project.Actors.Entities
         //On player turn, compute Movement and show all Cells in FOV
         public void OnTick()
         {
-            //Movement.OnTick(Position);
-            Fov.OnTick(Position);
+            if (Movement) Movement.OnTick(this);
+            if (Fov) Fov.OnTick(Position);
         }
 
         #endregion

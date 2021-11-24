@@ -1,5 +1,6 @@
 using Project.Actors.Behaviours.FOV;
 using Project.Map;
+using Project.Input;
 using UnityEngine;
 
 namespace Project.Logic
@@ -7,19 +8,56 @@ namespace Project.Logic
 
     public class GameManager : MonoBehaviour
     {
+        #region Fields
+
         [field: SerializeField] private DungeonGenerationSettingsSO _settings { get; set; }
         [field: SerializeField] private Vector2Int _dungeonSize { get; set; } = new Vector2Int(97, 34);
+
+
+
+        #endregion
+
+
+        #region Methods
 
         // Start is called before the first frame update
         void Start()
         {
-            DungeonGenerator.Init(_dungeonSize);   //We can leave this in Start() if the dungeon settings don't change between generations
+            PlayerInput.Init();                    //Creates the input map for the player
+            DungeonGenerator.Init(_dungeonSize);   //We can leave this in Start() if the dungeon size doesn't change between generations
             GenerateNewDungeon(_settings);
+
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(1))
+            //Checks if the player has pressed some buttons
+            PlayerInput.Update();
+
+
+            //If the player moves the character...
+            if (PlayerInput.s_isMoving)
+            {
+                //Update the actors' FOV and position
+                FOV.Clear();
+
+                DungeonInfo.s_Player.OnTick();
+
+                //Then do the same for all enemies in the dungeon
+                for (int i = 0; i < DungeonInfo.s_AllActors.Count; i++)
+                {
+                    if (!DungeonInfo.s_AllActors[i].Equals(DungeonInfo.s_Player))
+                    {
+                        DungeonInfo.s_AllActors[i].OnTick();
+                    }
+                }
+
+                //Then we redraw the map
+                FOV.ShowExploredTiles();
+                DungeonMap.Draw();
+            }
+
+            if (PlayerInput.s_rightClick)
             {
                 DungeonMap.Clear();
                 GenerateNewDungeon(_settings);
@@ -33,13 +71,19 @@ namespace Project.Logic
             DungeonGenerator.Generate(settings);
 
             FOV.Clear();
-            for (int i = 0; i < DungeonInfo.AllActors.Count; i++)
+            for (int i = 0; i < DungeonInfo.s_AllActors.Count; i++)
             {
-                DungeonInfo.AllActors[i].OnTick();
+                if (DungeonInfo.s_AllActors[i].Fov)
+                {
+                    DungeonInfo.s_AllActors[i].Fov.OnTick(DungeonInfo.s_AllActors[i].Position);
+                }
             }
             FOV.ShowExploredTiles();
 
             DungeonMap.Draw();
+
         }
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 using Project.Actors.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Project.Map
@@ -9,18 +10,33 @@ namespace Project.Map
     public static class DungeonInfo
     {
         //All generated Features on the map (rooms, corridors, etc.)
-        public static List<Feature> AllFeatures { get; set; } = new List<Feature>();
-        public static List<Feature> AllRooms { get; set; } = new List<Feature>();
-        public static List<Feature> AllCorridors { get; set; } = new List<Feature>();
+        public static List<Feature> s_AllFeatures { get; set; } = new List<Feature>();
+        public static List<Feature> s_AllRooms { get; set; } = new List<Feature>();
+        public static List<Feature> s_AllCorridors { get; set; } = new List<Feature>();
 
-        public static List<ActorTile> AllActors { get; set; } = new List<ActorTile>();
+        public static List<ActorTile> s_AllActors { get; set; } = new List<ActorTile>();
+
+        public static ActorTile s_Player
+        {
+            get
+            {
+                return _player = _player != null ? _player : Array.Find(s_AllActors.ToArray(), tile => tile.TileName == "Player");
+            }
+            private set
+            {
+                _player = value;
+            }
+        }
+        private static ActorTile _player;
+
 
         public static void Init()
         {
-            AllFeatures.Clear();
-            AllRooms.Clear();
-            AllCorridors.Clear();
-            AllActors.Clear();
+            s_AllFeatures.Clear();
+            s_AllRooms.Clear();
+            s_AllCorridors.Clear();
+            s_AllActors.Clear();
+            s_Player = null;
         }
 
     }

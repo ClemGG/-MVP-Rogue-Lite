@@ -1,3 +1,7 @@
+using Project.Actors.Entities;
+using Project.Map;
+using Project.ValueTypes;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Actors.Behaviours.Movement
@@ -9,16 +13,49 @@ namespace Project.Actors.Behaviours.Movement
     /// (ex: An enemy can move randomly, another can charge in a straight line, etc.)
     /// </summary>
     [CreateAssetMenu(fileName = "New Movement Behaviour", menuName = "Rogue/Actors/Behaviours/Movement")]
-    public abstract class Movement : ScriptableObject
+    public class Movement : ScriptableObject
     {
-        public void OnTick(Vector2Int actorPosition)
+        [field: SerializeField] private MovementPatternType _movementPattern { get; set; }
+        private (Cell actorCell, Cell destCell) cells { get; set; } = (null, null);
+
+
+        public void OnTick(ActorTile actor)
         {
-            Move(actorPosition);
+            Move(actor);
         }
 
-        private void Move(Vector2Int actorPosition)
+        protected void Move(ActorTile actor)
         {
+            switch (_movementPattern)
+            {
+                case MovementPatternType.Input:
+                    cells = MovementPatterns.GetInputNextPosition(actor.Position);
+                    break;
 
+                case MovementPatternType.Random:
+                    cells = MovementPatterns.GetRandomAdjacentTile(actor.Position);
+                    break;
+
+                case MovementPatternType.Explore:
+                    cells = MovementPatterns.GetTileClosestToUnexploredFloorTile(actor.Position);
+                    break;
+
+                default:
+                    break;
+            }
+
+            //If the destination is a Walkable Cell, move the ActorTile from the old Tile to the new one.
+            if (cells.destCell.Walkable)
+            {
+                cells.actorCell.Tiles.Remove(actor);
+                cells.destCell.Tiles.Add(actor);
+                actor.Position = cells.destCell.Position;
+            }
+            //Else, display in the Log what Tile we have bumped into.
+            else
+            {
+                Debug.Log($"Cannot walk on \"{cells.destCell.Tiles.First(tile => !tile.Walkable).TileName}\"");
+            }
         }
     }
 }

@@ -54,7 +54,6 @@ namespace Project.Map
         {
             _stringBuilder.Clear();
 
-
             for (int y = 0; y < s_Size.y; y++)
             {
                 for (int x = 0; x < s_Size.x; x++)

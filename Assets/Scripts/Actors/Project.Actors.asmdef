@@ -1,10 +1,10 @@
 {
-    "name": "Project.Actors.Entities",
+    "name": "Project.Actors",
     "rootNamespace": "",
     "references": [
-        "GUID:f25c99395f064a941b5d2167309e476d",
         "GUID:01f92d4441a571e449c36b1fc8b870a5",
-        "GUID:ec21a16e9ff64ba4999e44dbfcf9e46c"
+        "GUID:bd63010749842f04e96a08de6ebab3e2",
+        "GUID:d1b831c2986206b4da98f72f8a5839a8"
     ],
     "includePlatforms": [
         "Editor",

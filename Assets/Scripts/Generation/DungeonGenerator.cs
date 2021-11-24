@@ -68,7 +68,7 @@ namespace Project.Map
         private static void AddPlayer()
         {
             //Get a random Room on the map
-            Feature randomRoom = DungeonInfo.AllRooms[Random.Range(0, DungeonInfo.AllRooms.Count)];
+            Feature randomRoom = DungeonInfo.s_AllRooms[Random.Range(0, DungeonInfo.s_AllRooms.Count)];
             List<Cell> walkableCells = randomRoom.Cells.Where(cell => cell.Walkable).ToList();
 
             //Get a random Walkable Cell in that Room
@@ -78,7 +78,7 @@ namespace Project.Map
             Tile playerTile = TileLibrary.Player;
             playerTile.Position = playerSpawnPoint.Position;
             playerSpawnPoint.Tiles.Add(playerTile);
-            DungeonInfo.AllActors.Add(playerTile as ActorTile);
+            DungeonInfo.s_AllActors.Add(playerTile as ActorTile);
         }
     }
 }

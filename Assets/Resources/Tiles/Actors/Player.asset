@@ -37,4 +37,4 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 0
   <Fov>k__BackingField: {fileID: 11400000, guid: 3c335806ced69e04b9ac959c57872e2f, type: 2}
-  <Movement>k__BackingField: {fileID: 0}
+  <Movement>k__BackingField: {fileID: 11400000, guid: 6491689c49ab6ec439d67674d82059fe, type: 2}

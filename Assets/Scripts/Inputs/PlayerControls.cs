@@ -21,9 +21,17 @@ namespace Project.Input
             ""id"": ""51d781ac-f9ef-4a32-804c-1f0e7d7e4874"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""MovePlus"",
                     ""type"": ""Button"",
                     ""id"": ""8212ed20-c50f-4150-8b06-e9d83f5fd020"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""MoveDiagonal"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc036ec8-e236-419a-a26c-d074f1024f40"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -42,109 +50,54 @@ namespace Project.Input
                     ""name"": ""Numpad"",
                     ""id"": ""5b3991c1-e10d-4fea-b701-977c25c1de90"",
                     ""path"": ""2DVector"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
                     ""id"": ""d78846ce-8787-463d-b993-3d3b6aabd282"",
-                    ""path"": ""<Keyboard>/8"",
+                    ""path"": ""<Keyboard>/numpad8"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
                     ""id"": ""3b862434-6f2d-47fa-a702-cfe45c65a7ac"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/numpad2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
                     ""id"": ""a271b166-7c98-44d9-a04d-f1526cb07f1f"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<Keyboard>/numpad4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
                     ""id"": ""f6e7d06d-b456-44ff-9906-92f9dfb40e47"",
-                    ""path"": ""<Keyboard>/6"",
+                    ""path"": ""<Keyboard>/numpad6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""NumpadDiagonal"",
-                    ""id"": ""b55693be-5883-48f5-ba02-78f47820bd86"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""ee7666f7-f1f4-4357-91b0-dd06511b9266"",
-                    ""path"": ""<Keyboard>/7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""bcbce71d-f38e-4aff-83e9-629fc380ccd7"",
-                    ""path"": ""<Keyboard>/9"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""1d755609-8579-47c3-afcb-7e6ec8c08e2f"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""6bc427d9-2ffd-4b29-a6ee-439a89b7fc17"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -152,10 +105,10 @@ namespace Project.Input
                     ""name"": ""ArrowKeys"",
                     ""id"": ""dd8ccc61-a0e6-4565-b21a-e6da15cef57d"",
                     ""path"": ""2DVector"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -166,7 +119,7 @@ namespace Project.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -177,7 +130,7 @@ namespace Project.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -188,7 +141,7 @@ namespace Project.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -199,7 +152,7 @@ namespace Project.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePlus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -235,6 +188,61 @@ namespace Project.Input
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""NumpadDiagonal"",
+                    ""id"": ""568735f3-ad10-4954-8d40-85ea661b695c"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveDiagonal"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4a8e9b8b-63ba-449b-8e81-7a31badd6573"",
+                    ""path"": ""<Keyboard>/numpad9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveDiagonal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ff85c2ed-2203-43ed-8749-7f63ad8f9b96"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveDiagonal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""21c9cce2-a80d-4460-9af6-a9dbd30d8960"",
+                    ""path"": ""<Keyboard>/numpad7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveDiagonal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3f275e11-bbac-4400-addb-5158aacbaf4d"",
+                    ""path"": ""<Keyboard>/numpad3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveDiagonal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -297,7 +305,7 @@ namespace Project.Input
                     ""name"": ""Numpad"",
                     ""id"": ""b395dbb4-8801-410f-9382-047daf5bcf22"",
                     ""path"": ""2DVector"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
@@ -307,7 +315,7 @@ namespace Project.Input
                 {
                     ""name"": ""up"",
                     ""id"": ""01bb5fbd-6fba-4616-a541-3360fef1d03a"",
-                    ""path"": ""<Keyboard>/8"",
+                    ""path"": ""<Keyboard>/numpad8"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -318,7 +326,7 @@ namespace Project.Input
                 {
                     ""name"": ""down"",
                     ""id"": ""bb2fee2a-9433-4fe8-b157-a2bdc9282cb2"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/numpad2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -329,7 +337,7 @@ namespace Project.Input
                 {
                     ""name"": ""left"",
                     ""id"": ""097d9ac7-3b02-4317-91a8-554bf51e2cb5"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<Keyboard>/numpad4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -340,7 +348,7 @@ namespace Project.Input
                 {
                     ""name"": ""right"",
                     ""id"": ""05bda90e-3dc6-4059-b840-818841ffa846"",
-                    ""path"": ""<Keyboard>/6"",
+                    ""path"": ""<Keyboard>/numpad6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -352,7 +360,7 @@ namespace Project.Input
                     ""name"": ""ArrowKeys"",
                     ""id"": ""f4e5162b-76cb-402b-af91-f65d1cc58471"",
                     ""path"": ""2DVector"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
@@ -404,6 +412,33 @@ namespace Project.Input
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""e4b64747-45b7-41fb-9b11-a8d24e25c0c6"",
+            ""actions"": [
+                {
+                    ""name"": ""RegenerateDungeon"",
+                    ""type"": ""Button"",
+                    ""id"": ""12918ba3-1121-4a7a-a708-07aea74600d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""52ca6980-ec7e-4f4f-98bb-d688818170d4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""RegenerateDungeon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -417,17 +452,32 @@ namespace Project.Input
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""bindingGroup"": ""Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-            m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_MovePlus = m_Player.FindAction("MovePlus", throwIfNotFound: true);
+            m_Player_MoveDiagonal = m_Player.FindAction("MoveDiagonal", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
             m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
+            // Debug
+            m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+            m_Debug_RegenerateDungeon = m_Debug.FindAction("RegenerateDungeon", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -477,13 +527,15 @@ namespace Project.Input
         // Player
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
-        private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_MovePlus;
+        private readonly InputAction m_Player_MoveDiagonal;
         private readonly InputAction m_Player_Interact;
         public struct PlayerActions
         {
             private @PlayerControls m_Wrapper;
             public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @MovePlus => m_Wrapper.m_Player_MovePlus;
+            public InputAction @MoveDiagonal => m_Wrapper.m_Player_MoveDiagonal;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -494,9 +546,12 @@ namespace Project.Input
             {
                 if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
                 {
-                    @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                    @MovePlus.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovePlus;
+                    @MovePlus.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovePlus;
+                    @MovePlus.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovePlus;
+                    @MoveDiagonal.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveDiagonal;
+                    @MoveDiagonal.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveDiagonal;
+                    @MoveDiagonal.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveDiagonal;
                     @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
@@ -504,9 +559,12 @@ namespace Project.Input
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @Move.started += instance.OnMove;
-                    @Move.performed += instance.OnMove;
-                    @Move.canceled += instance.OnMove;
+                    @MovePlus.started += instance.OnMovePlus;
+                    @MovePlus.performed += instance.OnMovePlus;
+                    @MovePlus.canceled += instance.OnMovePlus;
+                    @MoveDiagonal.started += instance.OnMoveDiagonal;
+                    @MoveDiagonal.performed += instance.OnMoveDiagonal;
+                    @MoveDiagonal.canceled += instance.OnMoveDiagonal;
                     @Interact.started += instance.OnInteract;
                     @Interact.performed += instance.OnInteract;
                     @Interact.canceled += instance.OnInteract;
@@ -555,6 +613,39 @@ namespace Project.Input
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // Debug
+        private readonly InputActionMap m_Debug;
+        private IDebugActions m_DebugActionsCallbackInterface;
+        private readonly InputAction m_Debug_RegenerateDungeon;
+        public struct DebugActions
+        {
+            private @PlayerControls m_Wrapper;
+            public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @RegenerateDungeon => m_Wrapper.m_Debug_RegenerateDungeon;
+            public InputActionMap Get() { return m_Wrapper.m_Debug; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+            public void SetCallbacks(IDebugActions instance)
+            {
+                if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+                {
+                    @RegenerateDungeon.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnRegenerateDungeon;
+                    @RegenerateDungeon.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnRegenerateDungeon;
+                    @RegenerateDungeon.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnRegenerateDungeon;
+                }
+                m_Wrapper.m_DebugActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @RegenerateDungeon.started += instance.OnRegenerateDungeon;
+                    @RegenerateDungeon.performed += instance.OnRegenerateDungeon;
+                    @RegenerateDungeon.canceled += instance.OnRegenerateDungeon;
+                }
+            }
+        }
+        public DebugActions @Debug => new DebugActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -564,15 +655,29 @@ namespace Project.Input
                 return asset.controlSchemes[m_KeyboardSchemeIndex];
             }
         }
+        private int m_MouseSchemeIndex = -1;
+        public InputControlScheme MouseScheme
+        {
+            get
+            {
+                if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
+                return asset.controlSchemes[m_MouseSchemeIndex];
+            }
+        }
         public interface IPlayerActions
         {
-            void OnMove(InputAction.CallbackContext context);
+            void OnMovePlus(InputAction.CallbackContext context);
+            void OnMoveDiagonal(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnAccept(InputAction.CallbackContext context);
+        }
+        public interface IDebugActions
+        {
+            void OnRegenerateDungeon(InputAction.CallbackContext context);
         }
     }
 }

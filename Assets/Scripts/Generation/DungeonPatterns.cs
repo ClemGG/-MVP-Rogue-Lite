@@ -47,16 +47,16 @@ namespace Project.Map
 
             }
 
-            DungeonInfo.AllFeatures.Add(newFeature);
+            DungeonInfo.s_AllFeatures.Add(newFeature);
 
             switch (type)
             {
                 case FeatureType.Room:
-                    DungeonInfo.AllRooms.Add(newFeature);
+                    DungeonInfo.s_AllRooms.Add(newFeature);
                     break;
 
                 case FeatureType.Corridor:
-                    DungeonInfo.AllCorridors.Add(newFeature);
+                    DungeonInfo.s_AllCorridors.Add(newFeature);
                     break;
 
                 default:
@@ -121,7 +121,7 @@ namespace Project.Map
                   roomWidth, roomHeight);
 
                 // Check to see if the room rectangle intersects with any other rooms
-                bool newRoomIntersects = DungeonInfo.AllFeatures.Any(feature => newRoom.Intersects(feature.Bounds));
+                bool newRoomIntersects = DungeonInfo.s_AllFeatures.Any(feature => newRoom.Intersects(feature.Bounds));
 
                 // As long as it doesn't intersect add it to the list of rooms
                 if (!newRoomIntersects)
@@ -136,13 +136,13 @@ namespace Project.Map
             //Adding Corridors between Rooms
             // Iterate through each room that was generated
             // Don't do anything with the first room, so start at i = 1 instead of i = 0
-            for (int i = 1; i < DungeonInfo.AllRooms.Count; i++)
+            for (int i = 1; i < DungeonInfo.s_AllRooms.Count; i++)
             {
                 // For all remaing rooms get the center of the room and the previous room
-                int previousRoomCenterX = DungeonInfo.AllRooms[i - 1].Bounds.Center.x;
-                int previousRoomCenterY = DungeonInfo.AllRooms[i - 1].Bounds.Center.y;
-                int currentRoomCenterX = DungeonInfo.AllRooms[i].Bounds.Center.x;
-                int currentRoomCenterY = DungeonInfo.AllRooms[i].Bounds.Center.y;
+                int previousRoomCenterX = DungeonInfo.s_AllRooms[i - 1].Bounds.Center.x;
+                int previousRoomCenterY = DungeonInfo.s_AllRooms[i - 1].Bounds.Center.y;
+                int currentRoomCenterX = DungeonInfo.s_AllRooms[i].Bounds.Center.x;
+                int currentRoomCenterY = DungeonInfo.s_AllRooms[i].Bounds.Center.y;
 
 
                 //If we generate a single L-shaped connection, create 2 Corridors

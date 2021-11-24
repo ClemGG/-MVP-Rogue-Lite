@@ -51,7 +51,7 @@ namespace Project.Actors.Behaviours.FOV
             //We don't reset IsExplored to keep the explored sections visible
             for (int y = 0; y < DungeonMap.s_Size.y; y++)
             {
-                for (int x = 0; x < DungeonMap.s_Size.y; x++)
+                for (int x = 0; x < DungeonMap.s_Size.x; x++)
                 {
                     DungeonMap.s_Map[x, y].IsInFov = false;
                 }

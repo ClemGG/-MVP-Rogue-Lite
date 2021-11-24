@@ -23,22 +23,6 @@ namespace Project.ValueTypes
         Room = 0,
         Corridor = 1,
     }
-
-    /// <summary>
-    /// Designates the orientation of the object relative to the world (ex: Walls from Features)
-    /// </summary>
-    public enum PolarDirection : byte
-    {
-        North = 0,
-        NorthEast = 1,
-        East = 2,
-        SouthEast = 3,
-        South = 4,
-        SouthWest = 5,
-        West = 6,
-        NorthWest = 7
-    }
-
     #endregion
 
 
@@ -48,6 +32,13 @@ namespace Project.ValueTypes
     {
         Square = 0,
         Circle = 1,
+    }
+
+    public enum MovementPatternType : byte
+    {
+        Input = 0,   //Uses the Player's inputs
+        Random = 1,  //The next adjacent Tile is chosen at random
+        Explore = 2, //Finds the closest unexplored Floor Tile until none are found or an enemy is nearby
     }
 
     #endregion
