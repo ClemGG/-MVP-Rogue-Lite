@@ -1,8 +1,8 @@
-using Project.Actors.Entities;
+using Project.Tiles.Actors;
 using System;
 using System.Collections.Generic;
 
-namespace Project.Map
+namespace Project.Generation
 {
     /// <summary>
     /// Contains info about the current generated dungeon (nb. rooms created, objects placed, etc.)
@@ -20,7 +20,7 @@ namespace Project.Map
         {
             get
             {
-                return _player = _player != null ? _player : Array.Find(s_AllActors.ToArray(), tile => tile.TileName == "Player");
+                return _player ??= Array.Find(s_AllActors.ToArray(), tile => tile.TileName == "Player");
             }
             private set
             {

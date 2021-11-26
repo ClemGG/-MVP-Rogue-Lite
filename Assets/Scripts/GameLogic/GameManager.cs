@@ -1,5 +1,5 @@
-using Project.Actors.Behaviours.FOV;
-using Project.Map;
+using Project.Behaviours.FOV;
+using Project.Generation;
 using Project.Input;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace Project.Logic
         void Start()
         {
             PlayerInput.Init();                    //Creates the input map for the player
-            DungeonGenerator.Init(_dungeonSize);   //We can leave this in Start() if the dungeon size doesn't change between generations
+            DungeonMap.Init(_dungeonSize);   //We can leave this in Start() if the dungeon size doesn't change between generations
             GenerateNewDungeon(_settings);
 
         }

@@ -3,19 +3,14 @@ using System.Linq;
 using UnityEngine;
 using Project.ValueTypes;
 using static Project.Utilities.ValueTypes.Enums;
-using Project.Actors.Entities;
+using Project.Tiles.Actors;
+using Project.Tiles;
 
-namespace Project.Map
+namespace Project.Generation
 {
     public static class DungeonGenerator
     {
         private static DungeonGenerationSettingsSO _settings { get; set; }
-
-        // Start is called before the first frame update
-        public static void Init(Vector2Int dungeonSize)
-        {
-            DungeonMap.Init(dungeonSize.x, dungeonSize.y);
-        }
 
         public static void Generate(DungeonGenerationSettingsSO settings)
         {
@@ -45,7 +40,7 @@ namespace Project.Map
                     break;
 
                 case DungeonPatternType.OneRoomDark:
-                    DungeonPatterns.GenerateOneRoom(true);
+                    DungeonPatterns.GenerateOneRoom();
                     break;
 
                 case DungeonPatternType.StandardRandom:

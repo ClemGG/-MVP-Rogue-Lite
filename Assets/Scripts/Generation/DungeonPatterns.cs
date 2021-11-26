@@ -1,8 +1,9 @@
 using UnityEngine;
 using Project.ValueTypes;
 using System.Linq;
+using Project.Tiles;
 
-namespace Project.Map
+namespace Project.Generation
 {
     /// <summary>
     /// Stores all dungeon generation algorithms in one place for ease of use
@@ -18,12 +19,11 @@ namespace Project.Map
         /// <param name="position">The starting generation position (top left corner of the Feature).</param>
         /// <param name="size">The size of the Feature to generate.</param>
         /// <param name="type">The type of the Feature to generate (Room, Corridor, etc.)</param>
-        private static void GenerateRectangularFeature(Vector2Int position, Vector2Int size, bool isDarkRoom, FeatureType type)
+        private static void GenerateRectangularFeature(Vector2Int position, Vector2Int size, FeatureType type)
         {
             Feature newFeature = new Feature
             {
                 Type = type,
-                IsDarkRoom = isDarkRoom,
                 Bounds = new Rectangle(position, size),
             };
 
@@ -73,7 +73,7 @@ namespace Project.Map
             Vector2Int position = new Vector2Int(Mathf.Min(xStart, xEnd), yPosition);
             Vector2Int size = new Vector2Int(Mathf.Abs(xStart - xEnd) + 2, 2);
 
-            GenerateRectangularFeature(position, size, true, FeatureType.Corridor);
+            GenerateRectangularFeature(position, size, FeatureType.Corridor);
         }
 
         // Carve a tunnel out of the map parallel to the y-axis
@@ -82,7 +82,7 @@ namespace Project.Map
             Vector2Int position = new Vector2Int(xPosition, Mathf.Min(yStart, yEnd));
             Vector2Int size = new Vector2Int(2, Mathf.Abs(yStart - yEnd) + 2);
 
-            GenerateRectangularFeature(position, size, true, FeatureType.Corridor);
+            GenerateRectangularFeature(position, size, FeatureType.Corridor);
         }
 
         #endregion
@@ -93,9 +93,9 @@ namespace Project.Map
         /// <summary>
         /// Instantiates a single room the size of the dungeon, with only 4 walls and a floor.
         /// </summary>
-        public static void GenerateOneRoom(bool isDarkRoom = false)
+        public static void GenerateOneRoom()
         {
-            GenerateRectangularFeature(Vector2Int.one, DungeonMap.s_Size - Vector2Int.one, isDarkRoom, FeatureType.Room);
+            GenerateRectangularFeature(Vector2Int.one, DungeonMap.s_Size - Vector2Int.one, FeatureType.Room);
         }
 
 
@@ -103,7 +103,7 @@ namespace Project.Map
         /// Creates a standard dungeon, with random rooms and object placements.
         /// </summary>
         /// <param name="doubleCorridors"> Should we generate a single L-shaped Corridor or two ?</param>
-        public static void GenerateRandomDungeon(Vector2Int minMaxFeatureSize, int maxRooms, bool doubleCorridors = false, bool isDarkRoom = false)
+        public static void GenerateRandomDungeon(Vector2Int minMaxFeatureSize, int maxRooms, bool doubleCorridors = false)
         {
 
             // Try to place as many rooms as the specified maxRooms
@@ -126,7 +126,7 @@ namespace Project.Map
                 // As long as it doesn't intersect add it to the list of rooms
                 if (!newRoomIntersects)
                 {
-                    GenerateRectangularFeature(newRoom.Position, newRoom.Size, isDarkRoom, FeatureType.Room);
+                    GenerateRectangularFeature(newRoom.Position, newRoom.Size, FeatureType.Room);
                 }
 
 
