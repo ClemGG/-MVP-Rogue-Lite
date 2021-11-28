@@ -9,34 +9,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0830862ff51a8b4289a69f9cc8665fd, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 5b69aeb4e4ac9a24095c708054d2dffa, type: 3}
+  m_Name: Rat
   m_EditorClassIdentifier: 
-  <TileName>k__BackingField: Player
-  <Symbol>k__BackingField: 64
+  <TileName>k__BackingField: Rat
+  <Symbol>k__BackingField: 114
   <SeeThrough>k__BackingField: 1
   <Walkable>k__BackingField: 0
   <TextColorInFOV>k__BackingField:
-    ColorName: 13
+    ColorName: 14
     Color:
       serializedVersion: 2
-      rgba: 4292275934
+      rgba: 4281105874
   <BackgroundColorInFOV>k__BackingField:
     ColorName: 0
     Color:
       serializedVersion: 2
       rgba: 0
   <TextColorOutFOV>k__BackingField:
-    ColorName: 11
+    ColorName: 0
     Color:
       serializedVersion: 2
-      rgba: 4292275934
+      rgba: 0
   <BackgroundColorOutFOV>k__BackingField:
     ColorName: 0
     Color:
       serializedVersion: 2
       rgba: 0
   <TileBehaviour>k__BackingField: {fileID: 0}
-  <Fov>k__BackingField: {fileID: 11400000, guid: 3c335806ced69e04b9ac959c57872e2f, type: 2}
-  <Movement>k__BackingField: {fileID: 11400000, guid: 6491689c49ab6ec439d67674d82059fe, type: 2}
-  <Stats>k__BackingField: {fileID: 11400000, guid: 53e2cb09ea6f1d6479ba5b563431be67, type: 2}
+  <Fov>k__BackingField: {fileID: 11400000, guid: 298dfadd5d223bb4193a132187bc0243, type: 2}
+  <Movement>k__BackingField: {fileID: 11400000, guid: 994dac5ff1894744b85f699dccbaf1fa, type: 2}
+  <Stats>k__BackingField: {fileID: 11400000, guid: 352a32de4eed9b44eb145d8ee0a3e5de, type: 2}

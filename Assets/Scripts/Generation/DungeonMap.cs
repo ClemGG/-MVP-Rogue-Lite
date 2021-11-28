@@ -4,6 +4,7 @@ using TMPro;
 
 using Project.Colors;
 using Project.Tiles;
+using System.Linq;
 
 namespace Project.Generation
 {
@@ -74,13 +75,20 @@ namespace Project.Generation
                     else
                     {
                         //Swaps the color is the Cell is visible or not
-                        if (currentCell.IsInFov)
+                        if (currentCell.IsInPlayerFov)
                         {
                             symbolColorFOV = topTile.TextColorInFOV.Color;
                             backgroundColorFOV = topTile.BackgroundColorInFOV.Color;
                         }
                         else
                         {
+                            //If the topTile isn't supposed to be drawn when out of view (like an Enemy for ex),
+                            //We use the topmost Tile with a visible color instead.
+                            if (topTile.TextColorOutFOV.Color.Equals(ColorLibrary.None))
+                            {
+                                topTile = currentCell.Tiles.Last(tile => !tile.TextColorOutFOV.Color.Equals(ColorLibrary.None));    //The the topmost Tile which has a color when out of FOV
+                            }
+
                             symbolColorFOV = topTile.TextColorOutFOV.Color;
                             backgroundColorFOV = topTile.BackgroundColorOutFOV.Color;
                         }

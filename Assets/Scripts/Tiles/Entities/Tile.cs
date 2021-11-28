@@ -1,4 +1,3 @@
-using Project.Tiles.Actors;
 using Project.Colors;
 using UnityEngine;
 using Project.Behaviours.FOV;

@@ -10,15 +10,16 @@ namespace Project.Input
         private static PlayerControls _playerControls { get; set; }
 
         private const float c_autoMoveDelay = .3f;   //Press duration before setting s_IsMoving to true every c_moveDelay seconds.
-        private const float c_autoMoveInterval = .15f;   //Sets s_IsMoving to true once every c_moveDelay seconds instead of just once when pressed.
+        private const float c_autoMoveInterval = .1f;   //Sets s_IsMoving to true once every c_moveDelay seconds instead of just once when pressed.
         private static bool _shouldStartTimers { get; set; }
         private static float _autoMoveDelayTimer { get; set; }
         private static float _autoMoveIntervalTimer { get; set; }
 
-        public static bool s_isMoving { get; private set; }
-        public static bool s_interacts { get; private set; }
-        public static bool s_rightClick { get; private set; }
-        public static Vector2Int s_moveDirResult { get; private set; }
+        public static bool s_Waits { get; private set; }
+        public static bool s_IsMoving { get; private set; }
+        public static bool s_Interacts { get; private set; }
+        public static bool s_RightClick { get; private set; }
+        public static Vector2Int s_MoveDirResult { get; private set; }
         private static Vector2Int s_moveDirPlus { get; set; }
         private static Vector2Int s_moveDirDiagonal { get; set; }
 
@@ -68,10 +69,11 @@ namespace Project.Input
         {
             s_moveDirPlus = Vector2Int.zero;
             s_moveDirDiagonal = Vector2Int.zero;
-            s_moveDirResult = Vector2Int.zero;
+            s_MoveDirResult = Vector2Int.zero;
 
-            s_rightClick = _playerControls.Debug.RegenerateDungeon.triggered;
-            s_interacts = _playerControls.Player.Interact.triggered;
+            s_RightClick = _playerControls.Debug.RegenerateDungeon.triggered;
+            s_Interacts = _playerControls.Player.Interact.triggered;
+            s_Waits = _playerControls.Player.Wait.triggered;
 
             if (_playerControls.Player.MovePlus.triggered || _playerControls.Player.MoveDiagonal.triggered)
             {
@@ -99,7 +101,7 @@ namespace Project.Input
                 }
             }
 
-            s_isMoving = s_moveDirResult != Vector2Int.zero;
+            s_IsMoving = s_MoveDirResult != Vector2Int.zero;
         }
 
 
@@ -120,11 +122,11 @@ namespace Project.Input
             //The result we'll actually use for the movement of the player
             if (s_moveDirPlus == Vector2Int.zero)
             {
-                s_moveDirResult = s_moveDirDiagonal;
+                s_MoveDirResult = s_moveDirDiagonal;
             }
             if (s_moveDirDiagonal == Vector2Int.zero)
             {
-                s_moveDirResult = s_moveDirPlus;
+                s_MoveDirResult = s_moveDirPlus;
             }
 
         }

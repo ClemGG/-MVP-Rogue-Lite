@@ -15,5 +15,21 @@ namespace Project.Generation
         public Rectangle Bounds { get; set; }
         public List<Cell> Cells { get; set; } = new List<Cell>();
 
+
+        public bool ContainsPlayer()
+        {
+            bool contains = false;
+
+            for (int i = 0; i < Cells.Count; i++)
+            {
+                if (Cells[i].Contains<PlayerTile>())
+                {
+                    contains = true;
+                    break;
+                }
+            }
+
+            return contains;
+        }
     }
 }

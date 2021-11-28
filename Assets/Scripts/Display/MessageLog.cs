@@ -9,12 +9,12 @@ namespace Project.Display
     //Used to display messages to the player in the "Message Log" panel
     public static class MessageLog
     {
-        private static TextMeshProUGUI _logTmpro;
-        private static TextMeshProUGUI _logTextField
+        private static TextMeshProUGUI _logTextField;
+        private static TextMeshProUGUI _logField
         {
             get
             {
-                return _logTmpro ??= GameObject.Find("log").GetComponent<TextMeshProUGUI>();
+                return _logTextField ??= GameObject.Find("log").GetComponent<TextMeshProUGUI>();
             }
         }
         private static StringBuilder _stringBuilder { get; set; } = new StringBuilder(500);
@@ -45,7 +45,7 @@ namespace Project.Display
                 _stringBuilder.AppendLine(lines[i]);
             }
 
-            _logTextField.text = _stringBuilder.ToString();
+            _logField.text = _stringBuilder.ToString();
         }
     }
 }

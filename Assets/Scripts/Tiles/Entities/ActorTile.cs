@@ -1,8 +1,9 @@
 using Project.Behaviours.FOV;
 using Project.Behaviours.Movement;
+using Project.Combat;
 using UnityEngine;
 
-namespace Project.Tiles.Actors
+namespace Project.Tiles
 {
     /// <summary>
     /// All actors (Player, enemy, etc.) derive from this class.
@@ -24,6 +25,9 @@ namespace Project.Tiles.Actors
         [field: SerializeField, Tooltip("The Behaviour determining its movement pattern.")]
         public Movement Movement { get; private set; }
 
+        [field: SerializeField, Tooltip("The stats of the Actor (health, strength).")]
+        public ActorStats Stats { get; set; }
+
 
         #endregion
 
@@ -35,7 +39,7 @@ namespace Project.Tiles.Actors
         public void OnTick()
         {
             if (Movement) Movement.OnTick(this);
-            if (Fov) Fov.OnTick(Position);
+            if (Fov) Fov.OnTick(this);
         }
 
         #endregion

@@ -3,8 +3,8 @@ using System.Linq;
 using UnityEngine;
 using Project.ValueTypes;
 using static Project.Utilities.ValueTypes.Enums;
-using Project.Tiles.Actors;
 using Project.Tiles;
+
 
 namespace Project.Generation
 {
@@ -20,10 +20,9 @@ namespace Project.Generation
             _settings = settings;
             GenerateRooms(RandomIn(_settings.DungeonPattern));
             AddPlayer();
+            AddEnemies(Random.Range(0, _settings.MaxEnemiesOnStart));
         }
 
-
-        
 
         private static void GenerateRooms(DungeonPatternType patternType)
         {
@@ -67,13 +66,45 @@ namespace Project.Generation
             List<Cell> walkableCells = randomRoom.Cells.Where(cell => cell.Walkable).ToList();
 
             //Get a random Walkable Cell in that Room
-            Cell playerSpawnPoint = walkableCells[Random.Range(0, walkableCells.Count)];
+            Cell spawnCell = walkableCells[Random.Range(0, walkableCells.Count)];
 
             //Instantiate the player in this Cell
             Tile playerTile = TileLibrary.Player;
-            playerTile.Position = playerSpawnPoint.Position;
-            playerSpawnPoint.Tiles.Add(playerTile);
+            playerTile.Position = spawnCell.Position;
+            spawnCell.Tiles.Add(playerTile);
             DungeonInfo.s_AllActors.Add(playerTile as ActorTile);
+        }
+
+        /// <summary>
+        /// Selects a random Walkable Tile and adds an EnemyTile on top of it.
+        /// </summary>
+        public static void AddEnemies(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                //Get a random Room on the map without any player in it
+                Feature randomRoom = DungeonInfo.s_RandomRoomWithoutPlayer;
+                List<Cell> walkableCells = randomRoom.Cells.Where(cell => cell.Walkable && !cell.IsInPlayerFov).ToList();
+
+                //Get a random Walkable Cell in that Room
+                Cell spawnCell = null;
+                if (walkableCells.Count > 0)
+                {
+                    spawnCell = walkableCells[UnityEngine.Random.Range(0, walkableCells.Count)];
+                }
+
+                //Select a random EnemyTile in the settings' list and add it to the Map
+                Tile enemyTile = TileLibrary.GetRandomEnemy(_settings);
+                if (enemyTile && spawnCell != null)
+                {
+                    enemyTile.Position = spawnCell.Position;
+                    spawnCell.Tiles.Add(enemyTile);
+                    DungeonInfo.s_AllActors.Add(enemyTile as ActorTile);
+                    DungeonInfo.s_AllEnemies.Add(enemyTile as EnemyTile);
+                }
+            }
+
+
         }
     }
 }

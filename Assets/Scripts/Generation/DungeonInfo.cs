@@ -1,4 +1,4 @@
-using Project.Tiles.Actors;
+using Project.Tiles;
 using System;
 using System.Collections.Generic;
 
@@ -15,19 +15,36 @@ namespace Project.Generation
         public static List<Feature> s_AllCorridors { get; set; } = new List<Feature>();
 
         public static List<ActorTile> s_AllActors { get; set; } = new List<ActorTile>();
+        public static List<EnemyTile> s_AllEnemies { get; set; } = new List<EnemyTile>();
 
-        public static ActorTile s_Player
+        public static Feature s_RandomRoomWithoutPlayer
         {
             get
             {
-                return _player ??= Array.Find(s_AllActors.ToArray(), tile => tile.TileName == "Player");
+                //If there's only one giant room, we still want to spawn new enemies in it
+                if(s_AllRooms.Count == 1)
+                {
+                    return s_AllRooms[0];
+                }
+                else
+                {
+                    Feature[] allRoomsWithoutPlayer = Array.FindAll(s_AllRooms.ToArray(), room => !room.ContainsPlayer());
+                    return allRoomsWithoutPlayer[UnityEngine.Random.Range(0, allRoomsWithoutPlayer.Length)];
+                }
             }
-            private set
+        }
+        public static PlayerTile s_Player
+        {
+            get
+            {
+                return _player ??= Array.Find(s_AllActors.ToArray(), tile => tile is PlayerTile) as PlayerTile;
+            }
+            set
             {
                 _player = value;
             }
         }
-        private static ActorTile _player;
+        private static PlayerTile _player;
 
 
         public static void Init()
@@ -36,6 +53,7 @@ namespace Project.Generation
             s_AllRooms.Clear();
             s_AllCorridors.Clear();
             s_AllActors.Clear();
+            s_AllEnemies.Clear();
             s_Player = null;
         }
 

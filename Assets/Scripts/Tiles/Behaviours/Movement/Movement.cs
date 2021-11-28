@@ -1,5 +1,4 @@
 using Project.Tiles;
-using Project.Tiles.Actors;
 using Project.ValueTypes;
 using UnityEngine;
 
@@ -42,6 +41,9 @@ namespace Project.Behaviours.Movement
                 default:
                     break;
             }
+
+            //In case we haven't implemented a pattern method yet
+            if (cells.Equals((null, null))) return;
 
             //If the destination is a Walkable Cell, move the ActorTile from the old Tile to the new one.
             if (cells.destCell.Walkable)

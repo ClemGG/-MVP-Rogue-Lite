@@ -1,4 +1,5 @@
 using Project.Generation;
+using Project.Tiles;
 using Project.ValueTypes;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,6 @@ namespace Project.Behaviours.FOV
         [field: Space(10)]
 
 
-        [field: Min(1), SerializeField, Tooltip("The radius for the Actor's Field Of View.")]
-        public int FovRadius { get; private set; }
-
         [field: SerializeField, Tooltip("Can this Actor see through everything?")]
         public bool SeeThroughAll { get; set; }
 
@@ -34,9 +32,10 @@ namespace Project.Behaviours.FOV
         [field: SerializeField, Tooltip("The shape of the FOV (spherical, sqaure, etc.)")]
         private FOVPatternType FOVPattern { get; set; }
 
+        public int Awareness { get; set; }
         public HashSet<Vector2Int> BorderTiles { get; private set; } = new HashSet<Vector2Int>();     //Contains the limits of our radius
         private HashSet<Vector2Int> _visibleCellsForThisActor { get; set; } = new HashSet<Vector2Int>();
-        protected static HashSet<Vector2Int> _allVisibleCells { get; set; } = new HashSet<Vector2Int>();     //Contains the combined explored Cells of all Actors where ShowForPlayer = true
+        protected static HashSet<Vector2Int> _allCellsVisibleToPlayer { get; set; } = new HashSet<Vector2Int>();     //Contains the combined explored Cells of all Actors where ShowForPlayer = true
 
         #endregion
 
@@ -46,25 +45,25 @@ namespace Project.Behaviours.FOV
 
         public static void Clear()
         {
-            _allVisibleCells.Clear(); 
+            _allCellsVisibleToPlayer.Clear(); 
             
             //We don't reset IsExplored to keep the explored sections visible
             for (int y = 0; y < DungeonMap.s_Size.y; y++)
             {
                 for (int x = 0; x < DungeonMap.s_Size.x; x++)
                 {
-                    DungeonMap.s_Map[x, y].IsInFov = false;
+                    DungeonMap.s_Map[x, y].IsInPlayerFov = false;
                 }
             }
         }
 
         public static void ShowExploredTiles()
         {
-            Vector2Int[] cellsToShow = _allVisibleCells.ToArray();
-            for (int i = 0; i < _allVisibleCells.Count; i++)
+            Vector2Int[] cellsToShow = _allCellsVisibleToPlayer.ToArray();
+            for (int i = 0; i < _allCellsVisibleToPlayer.Count; i++)
             {
                 DungeonMap.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsExplored = true;
-                DungeonMap.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsInFov = true;
+                DungeonMap.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsInPlayerFov = true;
             }
         }
 
@@ -73,9 +72,10 @@ namespace Project.Behaviours.FOV
 
         #region Instance Methods
 
-        public void OnTick(Vector2Int actorPosition)
+        public void OnTick(ActorTile actor)
         {
-            GetVisibleCells(actorPosition);
+            Awareness = actor.Stats.Awareness;
+            GetVisibleCells(actor.Position);
         }
 
         /// <summary>
@@ -86,12 +86,12 @@ namespace Project.Behaviours.FOV
             _visibleCellsForThisActor.Clear();
             BorderTiles.Clear();
 
-            for (int i = -FovRadius; i <= FovRadius; i++)
+            for (int i = -Awareness; i <= Awareness; i++)
             {
-                BorderTiles.Add(new Vector2Int(i, -FovRadius));
-                BorderTiles.Add(new Vector2Int(i, FovRadius));
-                BorderTiles.Add(new Vector2Int(-FovRadius, i));
-                BorderTiles.Add(new Vector2Int(FovRadius, i));
+                BorderTiles.Add(new Vector2Int(i, -Awareness));
+                BorderTiles.Add(new Vector2Int(i, Awareness));
+                BorderTiles.Add(new Vector2Int(-Awareness, i));
+                BorderTiles.Add(new Vector2Int(Awareness, i));
             }
 
             switch (FOVPattern)
@@ -110,7 +110,7 @@ namespace Project.Behaviours.FOV
 
             if (ShowForPlayer)
             {
-                _allVisibleCells.UnionWith(_visibleCellsForThisActor);
+                _allCellsVisibleToPlayer.UnionWith(_visibleCellsForThisActor);
             }
 
         }

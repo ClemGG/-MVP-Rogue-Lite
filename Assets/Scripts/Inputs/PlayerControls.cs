@@ -43,6 +43,14 @@ namespace Project.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Wait"",
+                    ""type"": ""Button"",
+                    ""id"": ""c428471c-0a06-410f-84b1-c26f8720c611"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -243,6 +251,28 @@ namespace Project.Input
                     ""action"": ""MoveDiagonal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed82606c-1656-408e-a8ed-b0be471108ac"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Wait"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c72b0ef-ea6d-4d31-8fa0-309a37f9475d"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Wait"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -471,6 +501,7 @@ namespace Project.Input
             m_Player_MovePlus = m_Player.FindAction("MovePlus", throwIfNotFound: true);
             m_Player_MoveDiagonal = m_Player.FindAction("MoveDiagonal", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_Wait = m_Player.FindAction("Wait", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -530,6 +561,7 @@ namespace Project.Input
         private readonly InputAction m_Player_MovePlus;
         private readonly InputAction m_Player_MoveDiagonal;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_Wait;
         public struct PlayerActions
         {
             private @PlayerControls m_Wrapper;
@@ -537,6 +569,7 @@ namespace Project.Input
             public InputAction @MovePlus => m_Wrapper.m_Player_MovePlus;
             public InputAction @MoveDiagonal => m_Wrapper.m_Player_MoveDiagonal;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @Wait => m_Wrapper.m_Player_Wait;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -555,6 +588,9 @@ namespace Project.Input
                     @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                    @Wait.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWait;
+                    @Wait.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWait;
+                    @Wait.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWait;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -568,6 +604,9 @@ namespace Project.Input
                     @Interact.started += instance.OnInteract;
                     @Interact.performed += instance.OnInteract;
                     @Interact.canceled += instance.OnInteract;
+                    @Wait.started += instance.OnWait;
+                    @Wait.performed += instance.OnWait;
+                    @Wait.canceled += instance.OnWait;
                 }
             }
         }
@@ -669,6 +708,7 @@ namespace Project.Input
             void OnMovePlus(InputAction.CallbackContext context);
             void OnMoveDiagonal(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnWait(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

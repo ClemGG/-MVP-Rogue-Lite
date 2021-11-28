@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea866e1eeef363940a452df87eaec3d9, type: 3}
   m_Name: Default Settings Consolas
   m_EditorClassIdentifier: 
-  <DungeonPattern>k__BackingField: fe
   <MinMaxFeatureSize>k__BackingField: {x: 4, y: 15}
   <MaxRooms>k__BackingField: 20
+  <SpawnChance>k__BackingField: 50
+  <SpawnRate>k__BackingField: 20
+  <DungeonPattern>k__BackingField: fe
+  <EnemiesToSpawn>k__BackingField:
+  - {fileID: 11400000, guid: 652c3509c9ea5d641a7ff85f5a6e5fd3, type: 2}

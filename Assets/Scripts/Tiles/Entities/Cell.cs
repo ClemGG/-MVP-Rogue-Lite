@@ -1,4 +1,3 @@
-using Project.Tiles.Actors;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace Project.Tiles
                                                                         //it is added on top of the others. Only the last Tile is displayed.
 
         public bool IsExplored { get; set; }        //Has the Player already encountered this Cell?
-        public bool IsInFov { get; set; }           //Is this Cell visible by any entity?
+        public bool IsInPlayerFov { get; set; }           //Is this Cell visible by any entity?
 
 
         //Can the player see through this Cell?
@@ -63,9 +62,24 @@ namespace Project.Tiles
         {
             Tiles.Clear();
             IsExplored = false;
-            IsInFov = false;
+            IsInPlayerFov = false;
         }
 
+
+        public bool Contains<TileType>() where TileType : Tile
+        {
+            bool contains = false;
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                if(Tiles[i] is TileType)
+                {
+                    contains = true;
+                    break;
+                }
+            }
+
+            return contains;
+        }
 
         public void OnInteracted(ActorTile actor)
         {

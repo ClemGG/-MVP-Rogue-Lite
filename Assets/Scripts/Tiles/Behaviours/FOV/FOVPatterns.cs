@@ -50,7 +50,7 @@ namespace Project.Behaviours.FOV
                     {
                         break;
                     }
-                    if (!IsInsideCircle(actorPosition, position, fov.FovRadius))
+                    if (!IsInsideCircle(actorPosition, position, fov.Awareness))
                     {
                         break;
                     }

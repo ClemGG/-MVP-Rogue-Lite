@@ -27,6 +27,14 @@ namespace Project.Colors
         [field: SerializeField] private static Color32 ActorBackgroundFov { get; } = Swatch.DbLight;
         [field: SerializeField] private static Color32 ActorFov { get; } = Swatch.DbLight;
 
+        //Enemy Colors
+        [field: SerializeField] private static Color32 Rat { get; } = Swatch.DbBrightWood;
+
+
+        //Log
+        //For all info to write on the console logs on screen
+        [field: SerializeField] public static Color32 Gold { get; } = Swatch.DbSun;
+
 
         //Debug
         [field: SerializeField] public static Color32 debug_BackgroundHighlight { get; } = Swatch.Yellow;  //To highlight Tiles if we want to debug something
