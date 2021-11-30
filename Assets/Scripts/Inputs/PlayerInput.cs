@@ -1,4 +1,5 @@
 
+using Project.Display;
 using UnityEngine;
 
 namespace Project.Input
@@ -19,6 +20,7 @@ namespace Project.Input
         public static bool s_IsMoving { get; private set; }
         public static bool s_Interacts { get; private set; }
         public static bool s_RightClick { get; private set; }
+        public static bool s_IsCheckingTiles { get; private set; }
         public static Vector2Int s_MoveDirResult { get; private set; }
         private static Vector2Int s_moveDirPlus { get; set; }
         private static Vector2Int s_moveDirDiagonal { get; set; }
@@ -74,6 +76,13 @@ namespace Project.Input
             s_RightClick = _playerControls.Debug.RegenerateDungeon.triggered;
             s_Interacts = _playerControls.Player.Interact.triggered;
             s_Waits = _playerControls.Player.Wait.triggered;
+            if (_playerControls.Player.Examine.triggered)
+            {
+                s_IsCheckingTiles = !s_IsCheckingTiles;
+                MessageLog.Print(s_IsCheckingTiles ? "You enter Examine Mode." : "You exit Examine Mode.");
+            }
+
+
 
             if (_playerControls.Player.MovePlus.triggered || _playerControls.Player.MoveDiagonal.triggered)
             {

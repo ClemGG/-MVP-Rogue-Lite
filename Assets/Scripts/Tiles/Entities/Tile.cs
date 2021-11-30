@@ -33,7 +33,7 @@ namespace Project.Tiles
         public ColorInPalette TextColorInFOV { get; private set; }
 
         [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
-        public ColorInPalette BackgroundColorInFOV { get; private set; }
+        public ColorInPalette BackgroundColorInFOV { get; set; }
 
         [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
         public ColorInPalette TextColorOutFOV { get; private set; }

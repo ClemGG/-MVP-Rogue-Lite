@@ -51,6 +51,14 @@ namespace Project.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Examine"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc278548-dacb-46b5-a1ed-088dddc96786"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -271,6 +279,17 @@ namespace Project.Input
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Wait"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""607bcdba-ab91-45b5-bff9-0c9736968854"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Examine"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -502,6 +521,7 @@ namespace Project.Input
             m_Player_MoveDiagonal = m_Player.FindAction("MoveDiagonal", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             m_Player_Wait = m_Player.FindAction("Wait", throwIfNotFound: true);
+            m_Player_Examine = m_Player.FindAction("Examine", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -562,6 +582,7 @@ namespace Project.Input
         private readonly InputAction m_Player_MoveDiagonal;
         private readonly InputAction m_Player_Interact;
         private readonly InputAction m_Player_Wait;
+        private readonly InputAction m_Player_Examine;
         public struct PlayerActions
         {
             private @PlayerControls m_Wrapper;
@@ -570,6 +591,7 @@ namespace Project.Input
             public InputAction @MoveDiagonal => m_Wrapper.m_Player_MoveDiagonal;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputAction @Wait => m_Wrapper.m_Player_Wait;
+            public InputAction @Examine => m_Wrapper.m_Player_Examine;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -591,6 +613,9 @@ namespace Project.Input
                     @Wait.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWait;
                     @Wait.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWait;
                     @Wait.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWait;
+                    @Examine.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExamine;
+                    @Examine.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExamine;
+                    @Examine.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExamine;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -607,6 +632,9 @@ namespace Project.Input
                     @Wait.started += instance.OnWait;
                     @Wait.performed += instance.OnWait;
                     @Wait.canceled += instance.OnWait;
+                    @Examine.started += instance.OnExamine;
+                    @Examine.performed += instance.OnExamine;
+                    @Examine.canceled += instance.OnExamine;
                 }
             }
         }
@@ -709,6 +737,7 @@ namespace Project.Input
             void OnMoveDiagonal(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
             void OnWait(InputAction.CallbackContext context);
+            void OnExamine(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

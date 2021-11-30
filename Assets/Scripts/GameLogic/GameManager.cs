@@ -13,7 +13,7 @@ namespace Project.Logic
 
         [field: SerializeField] private DungeonGenerationSettingsSO _settings { get; set; }
         [field: SerializeField] private Vector2Int _dungeonSize { get; set; } = new Vector2Int(97, 34);
-        [field: SerializeField] private int _turnsPassedOnWait = 50;
+        [field: SerializeField] private int _turnsPassedOnWait { get; set; } = 50;
 
         private int _nbTurnsPassed { get; set; } = 0;   //Increments each time the Player takes an action
 
@@ -36,6 +36,12 @@ namespace Project.Logic
         {
             //Checks if the player has pressed some buttons
             PlayerInput.Update();
+
+            if (PlayerInput.s_IsCheckingTiles)
+            {
+                DungeonMap.GetTileUnderMouse();
+                return;
+            }
 
             //If we wait, we add a certain amount of turns to the count.
             //Then we get how many times we have to call certain functions that should have been called

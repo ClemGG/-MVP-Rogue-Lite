@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2e27c587a31504480e51e6ffd95eb3, type: 3}
   m_Name: Player FOV
   m_EditorClassIdentifier: 
-  <FovRadius>k__BackingField: 7
   <SeeThroughAll>k__BackingField: 0
   <ShowForPlayer>k__BackingField: 1
   <FOVPattern>k__BackingField: 1

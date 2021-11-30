@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Examine",
+                    "type": "Button",
+                    "id": "bc278548-dacb-46b5-a1ed-088dddc96786",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -256,6 +264,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Wait",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "607bcdba-ab91-45b5-bff9-0c9736968854",
+                    "path": "<Keyboard>/slash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Examine",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

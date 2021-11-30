@@ -14,7 +14,7 @@ namespace Project.Generation
         public static Vector2Int s_Size { get; set; }   //Keeps the map size in memory for future iterations through the array
         private static StringBuilder _stringBuilder { get; set; }
         private static TextMeshProUGUI _mapTextField { get; set; }
-        
+
 
         public static void Init(Vector2Int size)
         {
@@ -100,10 +100,42 @@ namespace Project.Generation
                     _stringBuilder.Append(tileAppearance);
                 }
 
-                _stringBuilder.Append("\n");
+                //Not needed anymore since out TMP Component auto wraps
+                //and this messes up with GetTileUnderMouse().
+                //_stringBuilder.Append("\n");
             }
 
             _mapTextField.text = _stringBuilder.ToString();
         }
+
+
+        public static Tile GetTileUnderMouse()
+        {
+            Tile topTile = null;
+            Vector2Int coords = Vector2Int.zero;
+
+            //Having \n characters messes up the characterCount, so we removed them
+            int charIndex = TMP_TextUtilities.FindIntersectingCharacter(_mapTextField, UnityEngine.Input.mousePosition, null, true);
+
+            if (charIndex != -1 && charIndex != _mapTextField.textInfo.characterCount)
+            {
+                coords = new Vector2Int(charIndex % s_Size.x,  charIndex / s_Size.x);
+                Cell cellUnderMouse = s_Map[coords.x, coords.y];
+
+                //We only want to examine visible Cells
+                if (cellUnderMouse.IsInPlayerFov)
+                {
+                    topTile = cellUnderMouse.Tiles[cellUnderMouse.Tiles.Count - 1];
+                }
+            }
+
+            if (topTile != null)
+            {
+                Debug.Log($"Cell[{coords.x}, {coords.y}] Contains : {topTile.TileName}");
+            }
+            return topTile;
+        }
+
+
     }
 }
