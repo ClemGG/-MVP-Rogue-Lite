@@ -14,8 +14,8 @@ namespace Project.Behaviours.Movement
         /// </summary>
         internal static (Cell, Cell) GetInputNextPosition(Vector2Int actorPosition)
         {
-            Cell actorCell = DungeonMap.s_Map[actorPosition.x, actorPosition.y];
-            Cell destCell = DungeonMap.s_Map[actorPosition.x + PlayerInput.s_MoveDirResult.x, actorPosition.y - PlayerInput.s_MoveDirResult.y];
+            Cell actorCell = DungeonInfo.s_Map[actorPosition.x, actorPosition.y];
+            Cell destCell = DungeonInfo.s_Map[actorPosition.x + PlayerInput.s_MoveDirResult.x, actorPosition.y - PlayerInput.s_MoveDirResult.y];
 
             return (actorCell, destCell);
         }

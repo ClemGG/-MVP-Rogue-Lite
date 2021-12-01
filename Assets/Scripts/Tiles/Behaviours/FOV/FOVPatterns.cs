@@ -21,7 +21,7 @@ namespace Project.Behaviours.FOV
             {
                 foreach (Vector2Int position in GetCellsAlongLine(actorPosition, actorPosition + borderTile))
                 {
-                    Cell cell = DungeonMap.s_Map[position.x, position.y];
+                    Cell cell = DungeonInfo.s_Map[position.x, position.y];
                     visibleCells.Add(position);
 
                     if (!cell.SeeThrough && !fov.SeeThroughAll)
@@ -42,7 +42,7 @@ namespace Project.Behaviours.FOV
             {
                 foreach (Vector2Int position in GetCellsAlongLine(actorPosition, actorPosition + borderTile))
                 {
-                    Cell cell = DungeonMap.s_Map[position.x, position.y];
+                    Cell cell = DungeonInfo.s_Map[position.x, position.y];
 
                     visibleCells.Add(position);
                     
@@ -69,8 +69,8 @@ namespace Project.Behaviours.FOV
         {
             HashSet<Vector2Int> cells = new HashSet<Vector2Int>();
 
-            origin.Clamp(Vector2Int.zero, DungeonMap.s_Size - Vector2Int.one);
-            destination.Clamp(Vector2Int.zero, DungeonMap.s_Size - Vector2Int.one);
+            origin.Clamp(Vector2Int.zero, DungeonInfo.s_Size - Vector2Int.one);
+            destination.Clamp(Vector2Int.zero, DungeonInfo.s_Size - Vector2Int.one);
             Vector2Int delta = new Vector2Int
                 (
                     Mathf.Abs(destination.x - origin.x),
@@ -91,7 +91,7 @@ namespace Project.Behaviours.FOV
             {
                 cells.Add(origin);
 
-                if (origin.x < 0 || origin.y < 0 || origin.x > DungeonMap.s_Size.x || origin.y > DungeonMap.s_Size.y)
+                if (origin.x < 0 || origin.y < 0 || origin.x > DungeonInfo.s_Size.x || origin.y > DungeonInfo.s_Size.y)
                     break;
                 if (origin == destination)
                     break;

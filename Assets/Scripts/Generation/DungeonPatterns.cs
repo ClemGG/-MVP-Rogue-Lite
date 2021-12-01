@@ -35,7 +35,7 @@ namespace Project.Generation
             {
                 for (int x = startPos.x; x < endPos.x - 1; x++)
                 {
-                    Cell currentCell = DungeonMap.s_Map[x, y];
+                    Cell currentCell = DungeonInfo.s_Map[x, y];
                     Tile newTile = TileLibrary.Floor;
 
                     //Removes the Wall Tile to replace it by a Floor Tile
@@ -95,7 +95,7 @@ namespace Project.Generation
         /// </summary>
         public static void GenerateOneRoom()
         {
-            GenerateRectangularFeature(Vector2Int.one, DungeonMap.s_Size - Vector2Int.one, FeatureType.Room);
+            GenerateRectangularFeature(Vector2Int.one, DungeonInfo.s_Size - Vector2Int.one, FeatureType.Room);
         }
 
 
@@ -112,8 +112,8 @@ namespace Project.Generation
                 // Determine the size and position of the room randomly
                 int roomWidth = Random.Range(minMaxFeatureSize.x, minMaxFeatureSize.y + 1);
                 int roomHeight = Random.Range(minMaxFeatureSize.x, minMaxFeatureSize.y + 1);
-                int roomXPosition = Random.Range(1, DungeonMap.s_Size.x - roomWidth - 1);
-                int roomYPosition = Random.Range(1, DungeonMap.s_Size.y - roomHeight - 1);
+                int roomXPosition = Random.Range(1, DungeonInfo.s_Size.x - roomWidth - 1);
+                int roomYPosition = Random.Range(1, DungeonInfo.s_Size.y - roomHeight - 1);
                                                //^1 instead of 0 to avoid creating the Room on the outer limits of the dungeon
 
                 // All of our rooms can be represented as Rectangles

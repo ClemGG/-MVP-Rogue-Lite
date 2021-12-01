@@ -8,7 +8,20 @@ namespace Project.Input
     {
         #region Fields
 
-        private static PlayerControls _playerControls { get; set; }
+        private static PlayerControls _playerControls 
+        {
+            get
+            {
+                if(_controls == null)
+                {
+                    _controls = new PlayerControls();
+                    _controls.Enable();
+                    GetTriggerInputs();
+                }
+                return _controls;
+            }
+        }
+        private static PlayerControls _controls;
 
         private const float c_autoMoveDelay = .3f;   //Press duration before setting s_IsMoving to true every c_moveDelay seconds.
         private const float c_autoMoveInterval = .1f;   //Sets s_IsMoving to true once every c_moveDelay seconds instead of just once when pressed.
@@ -31,14 +44,6 @@ namespace Project.Input
 
         #region Methods
 
-        //Called once in the GameManager's Start method
-        public static void Init()
-        {
-            _playerControls = new PlayerControls();
-            _playerControls.Enable();
-
-            GetTriggerInputs();
-        }
 
 
         //Called in the GameManager's Update method

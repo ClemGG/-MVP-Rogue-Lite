@@ -26,10 +26,7 @@ namespace Project.Logic
         // Start is called before the first frame update
         void Start()
         {
-            PlayerInput.Init();                    //Creates the input map for the player
-            DungeonMap.Init(_dungeonSize);   //We can leave this in Start() if the dungeon size doesn't change between generations
             GenerateNewDungeon(_settings);
-
         }
 
         private void Update()
@@ -39,7 +36,7 @@ namespace Project.Logic
 
             if (PlayerInput.s_IsCheckingTiles)
             {
-                DungeonMap.GetTileUnderMouse();
+                MapLog.GetTileUnderMouse();
                 return;
             }
 
@@ -90,7 +87,7 @@ namespace Project.Logic
 
                 //Then we redraw the map
                 FOV.ShowExploredTiles();
-                DungeonMap.Draw();
+                MapLog.Draw(DungeonInfo.s_Size, DungeonInfo.s_Map);
 
                 //Updates the player's stat UI
                 PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
@@ -98,16 +95,16 @@ namespace Project.Logic
 
             if (PlayerInput.s_RightClick)
             {
-                DungeonMap.Clear();
+                DungeonInfo.ClearMap();
                 GenerateNewDungeon(_settings);
             }
         }
 
 
 
-        public static void GenerateNewDungeon(DungeonGenerationSettingsSO settings)
+        public void GenerateNewDungeon(DungeonGenerationSettingsSO settings)
         {
-            DungeonGenerator.Generate(settings);
+            DungeonGenerator.Generate(settings, _dungeonSize);
 
             AutoRedrawMap();
 
@@ -115,7 +112,7 @@ namespace Project.Logic
             PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
 
         }
-        private static void AutoRedrawMap()
+        private void AutoRedrawMap()
         {
             //Update the actors' FOVs and positions
             FOV.Clear();
@@ -129,7 +126,7 @@ namespace Project.Logic
 
             //Then we redraw the map
             FOV.ShowExploredTiles();
-            DungeonMap.Draw();
+            MapLog.Draw(DungeonInfo.s_Size, DungeonInfo.s_Map);
         }
 
         #endregion

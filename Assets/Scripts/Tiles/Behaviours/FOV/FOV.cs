@@ -48,11 +48,11 @@ namespace Project.Behaviours.FOV
             _allCellsVisibleToPlayer.Clear(); 
             
             //We don't reset IsExplored to keep the explored sections visible
-            for (int y = 0; y < DungeonMap.s_Size.y; y++)
+            for (int y = 0; y < DungeonInfo.s_Size.y; y++)
             {
-                for (int x = 0; x < DungeonMap.s_Size.x; x++)
+                for (int x = 0; x < DungeonInfo.s_Size.x; x++)
                 {
-                    DungeonMap.s_Map[x, y].IsInPlayerFov = false;
+                    DungeonInfo.s_Map[x, y].IsInPlayerFov = false;
                 }
             }
         }
@@ -62,8 +62,8 @@ namespace Project.Behaviours.FOV
             Vector2Int[] cellsToShow = _allCellsVisibleToPlayer.ToArray();
             for (int i = 0; i < _allCellsVisibleToPlayer.Count; i++)
             {
-                DungeonMap.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsExplored = true;
-                DungeonMap.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsInPlayerFov = true;
+                DungeonInfo.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsExplored = true;
+                DungeonInfo.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsInPlayerFov = true;
             }
         }
 

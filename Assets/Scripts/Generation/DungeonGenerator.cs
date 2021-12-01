@@ -12,10 +12,10 @@ namespace Project.Generation
     {
         private static DungeonGenerationSettingsSO _settings { get; set; }
 
-        public static void Generate(DungeonGenerationSettingsSO settings)
+        public static void Generate(DungeonGenerationSettingsSO settings, Vector2Int dungeonSize)
         {
             //Resets all infos about the last generated map (if any)
-            DungeonInfo.Init();
+            DungeonInfo.Init(dungeonSize);
 
             _settings = settings;
             GenerateRooms(RandomIn(_settings.DungeonPattern));
