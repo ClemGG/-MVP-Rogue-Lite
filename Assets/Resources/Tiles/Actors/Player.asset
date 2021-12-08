@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   <TileName>k__BackingField: Player
+  <Description>k__BackingField: This is you.
   <Symbol>k__BackingField: 64
   <SeeThrough>k__BackingField: 1
   <Walkable>k__BackingField: 0
@@ -36,7 +37,7 @@ MonoBehaviour:
     Color:
       serializedVersion: 2
       rgba: 0
-  <TileBehaviour>k__BackingField: {fileID: 0}
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: ea9b803e3a4183e499bcd37d46b55e40, type: 2}
   <Fov>k__BackingField: {fileID: 11400000, guid: 3c335806ced69e04b9ac959c57872e2f, type: 2}
   <Movement>k__BackingField: {fileID: 11400000, guid: 6491689c49ab6ec439d67674d82059fe, type: 2}
-  <Stats>k__BackingField: {fileID: 11400000, guid: 53e2cb09ea6f1d6479ba5b563431be67, type: 2}
+  _statsTemplate: {fileID: 11400000, guid: 53e2cb09ea6f1d6479ba5b563431be67, type: 2}

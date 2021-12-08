@@ -9,7 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30feeaf87aa72454caf190edc9af2c10, type: 3}
-  m_Name: Enemy Movement
+  m_Script: {fileID: 11500000, guid: 02e520e7ae2eefa428fe181ec8635e1c, type: 3}
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  <_movementPattern>k__BackingField: 1
+  _attack: 20
+  _attackChance: 50
+  _awareness: 7
+  _defense: 2
+  _defenseChance: 40
+  _gold: 0
+  _health: 100
+  _maxHealth: 100
+  _speed: 10

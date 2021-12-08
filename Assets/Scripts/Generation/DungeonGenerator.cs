@@ -38,10 +38,6 @@ namespace Project.Generation
                     DungeonPatterns.GenerateOneRoom();
                     break;
 
-                case DungeonPatternType.OneRoomDark:
-                    DungeonPatterns.GenerateOneRoom();
-                    break;
-
                 case DungeonPatternType.StandardRandom:
                     DungeonPatterns.GenerateRandomDungeon(_settings.MinMaxFeatureSize, _settings.MaxRooms);
                     break;
@@ -90,7 +86,7 @@ namespace Project.Generation
                 Cell spawnCell = null;
                 if (walkableCells.Count > 0)
                 {
-                    spawnCell = walkableCells[UnityEngine.Random.Range(0, walkableCells.Count)];
+                    spawnCell = walkableCells[Random.Range(0, walkableCells.Count)];
                 }
 
                 //Select a random EnemyTile in the settings' list and add it to the Map

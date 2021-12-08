@@ -20,13 +20,38 @@ namespace Project.Tiles
 
 
         [field: SerializeField, Tooltip("The Behaviour determining its field of view.")]
-        public FOV Fov { get; private set; }
+        public FOV Fov
+        {
+            get
+            {
+                //Auto-retrieves a FOV using the TileName.
+                return _fovTemplate = _fovTemplate != null ? _fovTemplate : FOVLibrary.GetFov(TileName);
+            }
+        }
+        private FOV _fovTemplate;
 
         [field: SerializeField, Tooltip("The Behaviour determining its movement pattern.")]
-        public Movement Movement { get; private set; }
+        public Movement Movement
+        {
+            get
+            {
+                //Auto-retrieves an ActorStats using the TileName.
+                return _movementTemplate = _movementTemplate != null ? _movementTemplate : MovementLibrary.GetMovement(TileName);
+            }
+        }
+        private Movement _movementTemplate;
 
-        [field: SerializeField, Tooltip("The stats of the Actor (health, strength).")]
-        public ActorStats Stats { get; set; }
+
+        [field: Tooltip("The stats of the Actor (health, strength).")]
+        public ActorStats Stats
+        {
+            get 
+            {
+                //Auto-retrieves an ActorStats using the TileName.
+                return _statsTemplate = _statsTemplate != null ? _statsTemplate : StatsLibrary.GetStats(TileName);
+            }
+        }
+        private ActorStats _statsTemplate;
 
 
         #endregion

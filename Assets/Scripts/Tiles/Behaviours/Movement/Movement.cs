@@ -55,7 +55,7 @@ namespace Project.Behaviours.Movement
             //Else, display in the Log what Tile we have bumped into.
             else
             {
-                cells.destCell.OnInteracted(actor);
+                cells.destCell.OnActorEntered(actor);
             }
         }
     }

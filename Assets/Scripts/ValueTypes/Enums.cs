@@ -9,7 +9,6 @@ namespace Project.ValueTypes
     public enum DungeonPatternType : byte
     {
         OneRoom = 0,
-        OneRoomDark = 1,
         StandardRandom = 2,
         StandardRandomDoubleCorridors = 3,
         Random = 254,    //Chooses one of the algorithms above randomly
@@ -39,6 +38,13 @@ namespace Project.ValueTypes
         Input = 0,   //Uses the Player's inputs
         Random = 1,  //The next adjacent Tile is chosen at random
         Explore = 2, //Finds the closest unexplored Floor Tile until none are found or an enemy is nearby
+    }
+
+    //Describes the action to take for a specific TileBehaviour when an Actor walks into it.
+    public enum TileBehaviourType : byte
+    {
+        Collision = 0,  //Activates the TileBehaviour when the Actor bumps into the Tile
+        Combat = 1,     //Activates the TileBehaviour when the Actor walks towards the ActorTile to deal it damage
     }
 
     #endregion

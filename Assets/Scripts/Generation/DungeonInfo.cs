@@ -1,6 +1,7 @@
 using Project.Tiles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Generation
@@ -96,5 +97,34 @@ namespace Project.Generation
             }
         }
 
+
+
+        ///Used to retrieve Cells on the map
+        public static Cell GetCellAt(Vector2Int pos)
+        {
+            return s_Map[pos.x, pos.y];
+        }
+        
+        ///Used to retrieve enemies on the map
+        public static ActorTile GetActorAt(Vector2Int pos)
+        {
+            return GetCellAt(pos).Tiles.FirstOrDefault(tile => tile is ActorTile) as ActorTile;
+        }
+
+
+        internal static void RemoveActor(ActorTile actor)
+        {
+            GetCellAt(actor.Position).Tiles.Remove(actor);
+            s_AllActors.Remove(actor);
+
+            if (actor is EnemyTile)
+            {
+                s_AllEnemies.Remove(actor as EnemyTile);
+            }
+            else if(actor is PlayerTile)
+            {
+                s_Player = null;
+            }
+        }
     }
 }

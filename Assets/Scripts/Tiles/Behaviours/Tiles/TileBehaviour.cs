@@ -1,6 +1,7 @@
 using Project.Display;
 using UnityEngine;
 using Project.Tiles;
+using Project.ValueTypes;
 
 namespace Project.Behaviours.Tiles
 {
@@ -14,12 +15,41 @@ namespace Project.Behaviours.Tiles
     public class TileBehaviour : ScriptableObject
     {
         [field: SerializeField]
+        private TileBehaviourType BehaviourType { get; set; }
+        [field: SerializeField]
         private string TextOnCollision { get; set; }
 
 
-        public void OnInteracted(ActorTile actor, Cell thisCell, Tile thisTile)
+        public void OnActorEntered(ActorTile attackingActor, Cell thisCell, Tile thisTile)
+        {
+            switch (BehaviourType)
+            {
+                case TileBehaviourType.Collision:
+                    PrintCollision(attackingActor, thisTile);
+                    break;
+
+                case TileBehaviourType.Combat:
+                    AttackActor(attackingActor, thisTile);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void PrintCollision(ActorTile actor, Tile thisTile)
         {
             MessageLog.Print(string.Format(TextOnCollision, actor.TileName, thisTile.TileName));
+        }
+
+
+        private void AttackActor(ActorTile attackingActor, Tile thisTile)
+        {
+            //We only engage combat if the target (this) is also an Actor
+            if(thisTile is ActorTile)
+            {
+                CombatSystem.ConductAttack(attackingActor, thisTile as ActorTile);
+            }
         }
     }
 }

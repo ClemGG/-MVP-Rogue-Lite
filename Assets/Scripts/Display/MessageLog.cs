@@ -1,3 +1,4 @@
+using Project.Logic;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -9,18 +10,16 @@ namespace Project.Display
     //Used to display messages to the player in the "Message Log" panel
     public static class MessageLog
     {
-        private static TextMeshProUGUI _logTextField;
-        private static TextMeshProUGUI _logField
+        private static TextMeshProUGUI LogTextField
         {
             get
             {
-                return _logTextField ??= GameObject.Find("log").GetComponent<TextMeshProUGUI>();
+                return _ltf ??= GameObject.Find("log").GetComponent<TextMeshProUGUI>();
             }
         }
-        private static StringBuilder _stringBuilder { get; set; } = new StringBuilder(500);
+        private static TextMeshProUGUI _ltf;
+        private static StringBuilder StringBuilder { get; set; } = new StringBuilder(500);
 
-        // Define the maximum number of lines to store
-        private static readonly int _maxLines = 5;
 
         // Use a Queue to keep track of the lines of text
         // The first line added to the log will also be the first removed
@@ -33,19 +32,19 @@ namespace Project.Display
             _lines.Enqueue(message);
 
             // When exceeding the maximum number of lines remove the oldest one.
-            if (_lines.Count > _maxLines)
+            if (_lines.Count > GameSystem.c_MaxLines)
             {
                 _lines.Dequeue();
             }
 
-            _stringBuilder.Clear();
+            StringBuilder.Clear();
             string[] lines = _lines.ToArray();
             for (int i = 0; i < lines.Length; i++)
             {
-                _stringBuilder.AppendLine(lines[i]);
+                StringBuilder.AppendLine(lines[i]);
             }
 
-            _logField.text = _stringBuilder.ToString();
+            LogTextField.text = StringBuilder.ToString();
         }
     }
 }

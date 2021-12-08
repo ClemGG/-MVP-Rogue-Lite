@@ -314,6 +314,14 @@ namespace Project.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleHelp"",
+                    ""type"": ""Button"",
+                    ""id"": ""b95017ac-ffb4-47a5-ab15-56ec393791b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -459,6 +467,17 @@ namespace Project.Input
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60eba281-875a-4c3d-9048-d7b822553041"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ToggleHelp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -526,6 +545,7 @@ namespace Project.Input
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
             m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
+            m_UI_ToggleHelp = m_UI.FindAction("ToggleHelp", throwIfNotFound: true);
             // Debug
             m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
             m_Debug_RegenerateDungeon = m_Debug.FindAction("RegenerateDungeon", throwIfNotFound: true);
@@ -645,12 +665,14 @@ namespace Project.Input
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_Move;
         private readonly InputAction m_UI_Accept;
+        private readonly InputAction m_UI_ToggleHelp;
         public struct UIActions
         {
             private @PlayerControls m_Wrapper;
             public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_UI_Move;
             public InputAction @Accept => m_Wrapper.m_UI_Accept;
+            public InputAction @ToggleHelp => m_Wrapper.m_UI_ToggleHelp;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -666,6 +688,9 @@ namespace Project.Input
                     @Accept.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAccept;
                     @Accept.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAccept;
                     @Accept.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAccept;
+                    @ToggleHelp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
+                    @ToggleHelp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
+                    @ToggleHelp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -676,6 +701,9 @@ namespace Project.Input
                     @Accept.started += instance.OnAccept;
                     @Accept.performed += instance.OnAccept;
                     @Accept.canceled += instance.OnAccept;
+                    @ToggleHelp.started += instance.OnToggleHelp;
+                    @ToggleHelp.performed += instance.OnToggleHelp;
+                    @ToggleHelp.canceled += instance.OnToggleHelp;
                 }
             }
         }
@@ -743,6 +771,7 @@ namespace Project.Input
         {
             void OnMove(InputAction.CallbackContext context);
             void OnAccept(InputAction.CallbackContext context);
+            void OnToggleHelp(InputAction.CallbackContext context);
         }
         public interface IDebugActions
         {

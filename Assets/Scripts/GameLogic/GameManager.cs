@@ -3,6 +3,7 @@ using Project.Generation;
 using Project.Display;
 using Project.Input;
 using UnityEngine;
+using Project.Tiles;
 
 namespace Project.Logic
 {
@@ -26,6 +27,7 @@ namespace Project.Logic
         // Start is called before the first frame update
         void Start()
         {
+            MessageLog.Print(GameSystem.c_ShowHelpText);
             GenerateNewDungeon(_settings);
         }
 
@@ -33,6 +35,21 @@ namespace Project.Logic
         {
             //Checks if the player has pressed some buttons
             PlayerInput.Update();
+
+            if (GameSystem.s_IsGameOver) 
+            { 
+                //Reset everything needed here for another game
+
+                return;
+            }
+
+
+            if (PlayerInput.s_RightClick)
+            {
+                DungeonInfo.ClearMap();
+                GenerateNewDungeon(_settings);
+            }
+
 
             if (PlayerInput.s_IsCheckingTiles)
             {
@@ -65,15 +82,21 @@ namespace Project.Logic
             {
                 //Update the player's FOV and position
                 FOV.Clear();
+                InspectorLog.ClearHealthbarsList();
 
                 DungeonInfo.s_Player.OnTick();
 
                 //Then do the same for all enemies in the dungeon
                 for (int i = 0; i < DungeonInfo.s_AllActors.Count; i++)
                 {
-                    if (!DungeonInfo.s_AllActors[i].Equals(DungeonInfo.s_Player))
+                    ActorTile actor = DungeonInfo.s_AllActors[i];
+                    if (!actor.Equals(DungeonInfo.s_Player))
                     {
-                        DungeonInfo.s_AllActors[i].OnTick();
+                        actor.OnTick();
+                        if (actor.Stats != null && DungeonInfo.GetCellAt(actor.Position).IsInPlayerFov)
+                        {
+                            InspectorLog.DisplayHealth(actor);
+                        }
                     }
                 }
 
@@ -89,15 +112,22 @@ namespace Project.Logic
                 FOV.ShowExploredTiles();
                 MapLog.Draw(DungeonInfo.s_Size, DungeonInfo.s_Map);
 
+                //Then we draw the healthbars of all visible Enemies
+                //Needs to be called after FOV.ShowExploredTiles() to set Cell.IsInPlayerFov to true
+                for (int i = 0; i < DungeonInfo.s_AllEnemies.Count; i++)
+                {
+                    EnemyTile enemy = DungeonInfo.s_AllEnemies[i];
+                    enemy.OnTick();
+                    if (enemy.Stats != null && DungeonInfo.GetCellAt(enemy.Position).IsInPlayerFov)
+                    {
+                        InspectorLog.DisplayHealth(enemy);
+                    }
+                }
+
                 //Updates the player's stat UI
                 PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
             }
 
-            if (PlayerInput.s_RightClick)
-            {
-                DungeonInfo.ClearMap();
-                GenerateNewDungeon(_settings);
-            }
         }
 
 

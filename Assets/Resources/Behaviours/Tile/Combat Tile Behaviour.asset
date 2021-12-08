@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2e27c587a31504480e51e6ffd95eb3, type: 3}
-  m_Name: Player FOV
+  m_Script: {fileID: 11500000, guid: 216ed5430db8e06419bd9fde12662cf1, type: 3}
+  m_Name: Combat Tile Behaviour
   m_EditorClassIdentifier: 
-  <SeeThroughAll>k__BackingField: 0
-  <ShowForPlayer>k__BackingField: 1
-  <FOVPattern>k__BackingField: 1
+  <BehaviourType>k__BackingField: 1
+  <TextOnCollision>k__BackingField: 

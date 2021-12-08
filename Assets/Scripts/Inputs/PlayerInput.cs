@@ -29,6 +29,7 @@ namespace Project.Input
         private static float _autoMoveDelayTimer { get; set; }
         private static float _autoMoveIntervalTimer { get; set; }
 
+        public static bool s_ToggleHelp { get; private set; }
         public static bool s_Waits { get; private set; }
         public static bool s_IsMoving { get; private set; }
         public static bool s_Interacts { get; private set; }
@@ -78,6 +79,7 @@ namespace Project.Input
             s_moveDirDiagonal = Vector2Int.zero;
             s_MoveDirResult = Vector2Int.zero;
 
+            s_ToggleHelp = _playerControls.UI.ToggleHelp.triggered;
             s_RightClick = _playerControls.Debug.RegenerateDungeon.triggered;
             s_Interacts = _playerControls.Player.Interact.triggered;
             s_Waits = _playerControls.Player.Wait.triggered;
@@ -85,6 +87,10 @@ namespace Project.Input
             {
                 s_IsCheckingTiles = !s_IsCheckingTiles;
                 MessageLog.Print(s_IsCheckingTiles ? "You enter Examine Mode." : "You exit Examine Mode.");
+                if (!s_IsCheckingTiles)
+                {
+                    InspectorLog.ClearDescription();
+                }
             }
 
 

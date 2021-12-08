@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Rat
   m_EditorClassIdentifier: 
   <TileName>k__BackingField: Rat
+  <Description>k__BackingField: A strange species of Rat, capable of adapting to
+    many environments.
   <Symbol>k__BackingField: 114
   <SeeThrough>k__BackingField: 1
   <Walkable>k__BackingField: 0
@@ -36,7 +38,6 @@ MonoBehaviour:
     Color:
       serializedVersion: 2
       rgba: 0
-  <TileBehaviour>k__BackingField: {fileID: 0}
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: ea9b803e3a4183e499bcd37d46b55e40, type: 2}
   <Fov>k__BackingField: {fileID: 11400000, guid: 298dfadd5d223bb4193a132187bc0243, type: 2}
   <Movement>k__BackingField: {fileID: 11400000, guid: 994dac5ff1894744b85f699dccbaf1fa, type: 2}
-  <Stats>k__BackingField: {fileID: 11400000, guid: 352a32de4eed9b44eb145d8ee0a3e5de, type: 2}

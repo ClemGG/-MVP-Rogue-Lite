@@ -9,7 +9,7 @@ namespace Project.Display
 {
     public static class MapLog
     {
-        private static StringBuilder _stringBuilder 
+        private static StringBuilder StringBuilder 
         {
             get 
             {
@@ -17,15 +17,15 @@ namespace Project.Display
             }
         }
         private static StringBuilder _sb;
-        private static TextMeshProUGUI _mapTextField 
+        private static TextMeshProUGUI MapTextField 
         { 
             get 
             { 
-                return _mapField ??= GameObject.Find("map").GetComponent<TextMeshProUGUI>(); 
+                return _mf ??= GameObject.Find("map").GetComponent<TextMeshProUGUI>(); 
             } 
-            set => _mapField = value; 
+            set => _mf = value; 
         }
-        private static TextMeshProUGUI _mapField;
+        private static TextMeshProUGUI _mf;
 
         //Temporary variables
         private static Vector2Int _mapSize;
@@ -39,7 +39,7 @@ namespace Project.Display
         {
             _mapSize = mapSize;
             _cells = cells;
-            _stringBuilder.Clear();
+            StringBuilder.Clear();
 
             for (int y = 0; y < mapSize.y; y++)
             {
@@ -82,7 +82,7 @@ namespace Project.Display
 
                     tileAppearance = ColorLibrary.ColoredCharAndBackground(topTile.Symbol, symbolColorFOV, backgroundColorFOV);
 
-                    _stringBuilder.Append(tileAppearance);
+                    StringBuilder.Append(tileAppearance);
                 }
 
                 //Not needed anymore since out TMP Component auto wraps
@@ -90,7 +90,7 @@ namespace Project.Display
                 //_stringBuilder.Append("\n");
             }
 
-            _mapTextField.text = _stringBuilder.ToString();
+            MapTextField.text = StringBuilder.ToString();
         }
 
 
@@ -103,13 +103,13 @@ namespace Project.Display
                 Vector2Int coords = Vector2Int.zero;
 
                 //Having \n characters messes up the characterCount, so we removed them
-                int charIndex = TMP_TextUtilities.FindIntersectingCharacter(_mapTextField, UnityEngine.Input.mousePosition, null, true);
+                int charIndex = TMP_TextUtilities.FindIntersectingCharacter(MapTextField, UnityEngine.Input.mousePosition, null, true);
 
                 if (_lastCharIndex != charIndex)
                 {
                     _lastCharIndex = charIndex;
 
-                    if (charIndex != -1 && charIndex != _mapTextField.textInfo.characterCount)
+                    if (charIndex != -1 && charIndex != MapTextField.textInfo.characterCount)
                     {
                         coords = new Vector2Int(charIndex % _mapSize.x, charIndex / _mapSize.x);
                         Cell cellUnderMouse = _cells[coords.x, coords.y];
@@ -127,7 +127,11 @@ namespace Project.Display
 
                     if (_lastExaminedTile != null)
                     {
-                        Debug.Log($"Cell[{coords.x}, {coords.y}] Contains : {_lastExaminedTile.TileName}");
+                        InspectorLog.DisplayTileDescription(_lastExaminedTile);
+                    }
+                    else
+                    {
+                        InspectorLog.ClearDescription();
                     }
                 }
             }

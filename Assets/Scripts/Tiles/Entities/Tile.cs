@@ -20,6 +20,9 @@ namespace Project.Tiles
         [field: SerializeField, Tooltip("The name of the Tile, displayed in the message logs.")]
         public string TileName { get; private set; }
 
+        [field: SerializeField, TextArea(2, 10), Tooltip("The description displayed in the InspectorLog when we hover the cursor over the Tile.")]
+        public string Description { get; private set; }
+
         [field: SerializeField, Tooltip("The caracter displayed to represent the Tile on screen.")]
         public char Symbol { get; private set; }
 
@@ -33,7 +36,7 @@ namespace Project.Tiles
         public ColorInPalette TextColorInFOV { get; private set; }
 
         [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
-        public ColorInPalette BackgroundColorInFOV { get; set; }
+        public ColorInPalette BackgroundColorInFOV { get; private set; }
 
         [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
         public ColorInPalette TextColorOutFOV { get; private set; }
@@ -47,9 +50,9 @@ namespace Project.Tiles
         public Vector2Int Position { get; set; }
 
 
-        public void OnInteracted(ActorTile actor, Cell thisCell)
+        public void OnActorEntered(ActorTile actor, Cell thisCell)
         {
-            if (TileBehaviour) TileBehaviour.OnInteracted(actor, thisCell, this);
+            if (TileBehaviour) TileBehaviour.OnActorEntered(actor, thisCell, this);
         }
 
     }

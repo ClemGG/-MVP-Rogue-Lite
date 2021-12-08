@@ -50,6 +50,12 @@ namespace Project.Colors
 
 
 
+        public static string ColoredText(string text, Color32 textColor)
+        {
+            string coloredChar = $"<color=#{ColorToHex(textColor)}>{text}</color>";
+            return coloredChar;
+        }
+
         public static string ColoredChar(char caracter, Color32 textColor)
         {
             string coloredChar = $"<color=#{ColorToHex(textColor)}>{caracter}</color>";

@@ -17,7 +17,7 @@ namespace Project.Tiles
                                                                         //it is added on top of the others. Only the last Tile is displayed.
 
         public bool IsExplored { get; set; }        //Has the Player already encountered this Cell?
-        public bool IsInPlayerFov { get; set; }           //Is this Cell visible by any entity?
+        public bool IsInPlayerFov { get; set; }     //Is this Cell visible by the player?
 
 
         //Can the player see through this Cell?
@@ -81,11 +81,11 @@ namespace Project.Tiles
             return contains;
         }
 
-        public void OnInteracted(ActorTile actor)
+        public void OnActorEntered(ActorTile actor)
         {
             for (int i = 0; i < Tiles.Count; i++)
             {
-                Tiles[i].OnInteracted(actor, this);
+                Tiles[i].OnActorEntered(actor, this);
             }
         }
     }

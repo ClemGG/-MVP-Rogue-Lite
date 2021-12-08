@@ -10,5 +10,6 @@ namespace Project.Colors
         public int ColorName;
 
         public Color32 Color;
+
     }
 }

@@ -62,8 +62,9 @@ namespace Project.Behaviours.FOV
             Vector2Int[] cellsToShow = _allCellsVisibleToPlayer.ToArray();
             for (int i = 0; i < _allCellsVisibleToPlayer.Count; i++)
             {
-                DungeonInfo.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsExplored = true;
-                DungeonInfo.s_Map[cellsToShow[i].x, cellsToShow[i].y].IsInPlayerFov = true;
+                Cell c = DungeonInfo.s_Map[cellsToShow[i].x, cellsToShow[i].y];
+                c.IsExplored = true;
+                c.IsInPlayerFov = true;
             }
         }
 
