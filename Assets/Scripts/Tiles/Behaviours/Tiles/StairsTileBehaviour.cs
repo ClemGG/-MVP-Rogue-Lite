@@ -12,12 +12,22 @@ namespace Project.Behaviours.Tiles
 
         public override void OnActorInteracted(PlayerTile player, Cell thisCell, Tile thisTile)
         {
-            // When the Player presses the Interact button while on a Stairs Tile, we generate a new level...
-            GameSystem.s_FloorLevel += IsUpstairs ? -1 : 1;
-            GameObject.Find("GameManager").GetComponent<GameManager>().GenerateNewDungeon();
+            //If the Player tries to climb back up without reaching the goal, OR tries to go back down after reching the goal,
+            //the corresponding Stairs will be locked.
+            if (IsUpstairs ^ !GameSystem.s_IsGoalReached)
+            {
 
-            //And the change the MapLog's title to reflect the new level.
-            MapLog.ChangeTitle();
+                // When the Player presses the Interact button while on a Stairs Tile, we generate a new level...
+                GameSystem.s_FloorLevel += IsUpstairs ? -1 : 1;
+                GameObject.Find("GameManager").GetComponent<GameManager>().GenerateNewDungeon();
+
+                //And the change the MapLog's title to reflect the new level.
+                MapLog.ChangeTitle();
+            }
+            else
+            {
+                MessageLog.Print("You cannot go back now!");
+            }
         }
     }
 }

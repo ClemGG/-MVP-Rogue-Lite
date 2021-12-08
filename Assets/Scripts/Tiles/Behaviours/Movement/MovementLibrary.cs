@@ -5,6 +5,7 @@ namespace Project.Behaviours.Movement
 {
     public static class MovementLibrary
     {
+        //TODO : Use Object Pooling instead of those Instantiate() to recycle the Tiles instead of wasting memory on recreating them.
         public static Movement PlayerMovement { get { return Object.Instantiate(Resources.Load<Movement>("Behaviours/Movement/PlayerMovement")); } }
         public static Movement RatMovement { get { return Object.Instantiate(Resources.Load<Movement>("Behaviours/Movement/RatMovement")); } }
 

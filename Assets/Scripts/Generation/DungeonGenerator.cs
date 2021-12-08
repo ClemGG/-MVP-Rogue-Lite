@@ -82,7 +82,7 @@ namespace Project.Generation
                 DungeonInfo.s_Upstairs = upstairsTile;
             }
             //If we are at the last floor or higher, we create a Downstairs Tile
-            if(GameSystem.s_FloorLevel < GameSystem.s_MaxFloorLevel)
+            if(GameSystem.s_FloorLevel < GameSystem.c_MaxFloorLevel)
             {
                 //Get a random Walkable Cell in that Room
                 //For the downstairs, we set them at Center.x - 1 to not overlap them with the upstairs

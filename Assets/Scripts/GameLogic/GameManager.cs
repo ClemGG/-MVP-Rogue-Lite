@@ -4,6 +4,7 @@ using Project.Display;
 using Project.Input;
 using UnityEngine;
 using Project.Tiles;
+using System;
 
 namespace Project.Logic
 {
@@ -12,6 +13,7 @@ namespace Project.Logic
     {
         #region Fields
 
+        [field: SerializeField] private GameObject _helpCanvas { get; set; }
         [field: SerializeField] private DungeonGenerationSettingsSO _settings { get; set; }
         [field: SerializeField] private Vector2Int _dungeonSize { get; set; } = new Vector2Int(97, 34);
         [field: SerializeField] private int _turnsPassedOnWait { get; set; } = 50;
@@ -26,10 +28,25 @@ namespace Project.Logic
         // Start is called before the first frame update
         void Start()
         {
+            
+            SetupComponents();
+
             MessageLog.Print(GameSystem.c_ShowHelpText);
             MapLog.ChangeTitle();
             GenerateNewDungeon();
         }
+
+        private void SetupComponents()
+        {
+            if (_helpCanvas)
+            {
+                _helpCanvas.SetActive(false);
+            }
+        }
+
+
+
+
 
         private void Update()
         {
@@ -44,12 +61,22 @@ namespace Project.Logic
                     return;
                 }
 
+                if (PlayerInput.s_ToggleHelp)
+                {
+                    _helpCanvas.SetActive(!_helpCanvas.activeSelf);
+                }
+                //We don't want the Player to do anything while the Commands menu is active
+                if (_helpCanvas.activeSelf)
+                {
+                    return;
+                }
 
+#if UNITY_EDITOR
                 if (PlayerInput.s_RightClick)
                 {
                     GenerateNewDungeon();
                 }
-
+#endif
 
                 if (PlayerInput.s_IsCheckingTiles)
                 {

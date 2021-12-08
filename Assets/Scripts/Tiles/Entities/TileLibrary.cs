@@ -13,6 +13,7 @@ namespace Project.Tiles
     {
         #region Accessors
 
+        //TODO : Use Object Pooling instead of those Instantiate() to recycle the Tiles instead of wasting memory on recreating them.
         public static Tile Floor { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Floor")); } } 
         public static Tile Wall { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Wall")); } }
         public static Tile Door { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Door")); } }

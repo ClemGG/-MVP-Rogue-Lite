@@ -11,6 +11,7 @@ namespace Project.Combat
     /// </summary>
     public static class StatsLibrary
     {
+        //TODO : Use Object Pooling instead of those Instantiate() to recycle the Tiles instead of wasting memory on recreating them.
         public static ActorStats PlayerStats { get { return Object.Instantiate(Resources.Load<ActorStats>("Stats/PlayerStats")); } }
         public static ActorStats RatStats
         {
@@ -18,9 +19,14 @@ namespace Project.Combat
             //We use the floorLevel so that the Enemy becomes stronger the deeper the player goes into the dungeon
             get
             {
+                //If the Player hasn't reached the goal yet, we progressively increase the difficulty when he goes down a level
+                //Otherwise, he's climbing back up; so we set all the monsters in the floor to maximum difficulty
+                int difficultyLevel = GameSystem.s_IsGoalReached ? GameSystem.c_MaxFloorLevel : GameSystem.s_FloorLevel;
+
+
                 ActorStats ratStats = Object.Instantiate(Resources.Load<ActorStats>("Stats/RatStats"));
-                ratStats.Attack += GameSystem.s_FloorLevel/3;
-                ratStats.Defense += GameSystem.s_FloorLevel/3;
+                ratStats.Attack += difficultyLevel / 3;
+                ratStats.Defense += difficultyLevel / 3;
                 ratStats.Gold = Random.Range(0, ratStats.Gold + 1);
                 return ratStats;
             }

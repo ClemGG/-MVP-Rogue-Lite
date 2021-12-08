@@ -11,6 +11,7 @@ namespace Project.Behaviours.FOV
     /// </summary>
     public static class FOVLibrary
     {
+        //TODO : Use Object Pooling instead of those Instantiate() to recycle the Tiles instead of wasting memory on recreating them.
         public static FOV PlayerFOV { get { return Object.Instantiate(Resources.Load<FOV>("Behaviours/FOV/PlayerFOV")); } }
         public static FOV RatFOV { get { return Object.Instantiate(Resources.Load<FOV>("Behaviours/FOV/RatFOV")); } }
 

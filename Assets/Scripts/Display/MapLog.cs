@@ -57,7 +57,7 @@ namespace Project.Display
 
         public static void ChangeTitle()
         {
-            TitleMapTextField.text = $"Map (level {GameSystem.s_FloorLevel}/{GameSystem.s_MaxFloorLevel})";
+            TitleMapTextField.text = $"Map (level {GameSystem.s_FloorLevel}/{GameSystem.c_MaxFloorLevel})";
         }
 
         public static void Draw(Vector2Int mapSize, Cell[,] cells)
