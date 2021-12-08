@@ -21,13 +21,13 @@ namespace Project.Tiles
         public string TileName { get; private set; }
 
         [field: SerializeField, TextArea(2, 10), Tooltip("The description displayed in the InspectorLog when we hover the cursor over the Tile.")]
-        public string Description { get; private set; }
+        public string Description { get; internal set; }
 
         [field: SerializeField, Tooltip("The caracter displayed to represent the Tile on screen.")]
-        public char Symbol { get; private set; }
+        public char Symbol { get; internal set; }
 
         [field: SerializeField, Tooltip("Can the player see through this Tile? (If any of the Tiles in a Cell is not see-through, the player cannot see through the Cell at all.)")]
-        public bool SeeThrough { get; private set; }
+        public bool SeeThrough { get; internal set; }
 
         [field: SerializeField, Tooltip("Can the player walk on this Tile? (If any of the Tiles in a Cell is not walkable, the player cannot walk on the Cell at all.)")]
         public bool Walkable { get; private set; }
@@ -53,6 +53,10 @@ namespace Project.Tiles
         public void OnActorEntered(ActorTile actor, Cell thisCell)
         {
             if (TileBehaviour) TileBehaviour.OnActorEntered(actor, thisCell, this);
+        }
+        public void OnActorCollided(ActorTile actor, Cell thisCell)
+        {
+            if (TileBehaviour) TileBehaviour.OnActorCollided(actor, thisCell, this);
         }
 
     }

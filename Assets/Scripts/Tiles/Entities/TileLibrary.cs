@@ -11,19 +11,27 @@ namespace Project.Tiles
     /// </summary>
     public static class TileLibrary
     {
+        #region Accessors
+
         public static Tile Floor { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Floor")); } } 
         public static Tile Wall { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Wall")); } }
+        public static Tile Door { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Door")); } }
         public static Tile Player { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Actors/Player")); } }
         public static Tile Rat { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Actors/Rat")); } }
-        
+
 
         private static PropertyInfo[] _fieldsNames
-        { get 
+        {
+            get
             {
                 return _fields ??= typeof(TileLibrary).GetProperties();
             }
         }
         private static PropertyInfo[] _fields;
+
+        #endregion
+
+        #region public Methods
 
         internal static EnemyTile GetRandomEnemy(DungeonGenerationSettingsSO settings)
         {
@@ -38,5 +46,7 @@ namespace Project.Tiles
 
             return null;
         }
+
+        #endregion
     }
 }

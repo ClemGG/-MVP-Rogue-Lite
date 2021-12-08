@@ -9,32 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0830862ff51a8b4289a69f9cc8665fd, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 3823e4f9b100e2348b5cc902ffafc426, type: 3}
+  m_Name: Door
   m_EditorClassIdentifier: 
-  <TileName>k__BackingField: Player
-  <Description>k__BackingField: This is you.
-  <Symbol>k__BackingField: 64
-  <SeeThrough>k__BackingField: 1
-  <Walkable>k__BackingField: 0
+  <TileName>k__BackingField: Door
+  <Description>k__BackingField: A closed door.
+  <Symbol>k__BackingField: 43
+  <SeeThrough>k__BackingField: 0
+  <Walkable>k__BackingField: 1
   <TextColorInFOV>k__BackingField:
-    ColorName: 13
+    ColorName: 18
     Color:
       serializedVersion: 2
-      rgba: 4292275934
+      rgba: 4289639614
   <BackgroundColorInFOV>k__BackingField:
-    ColorName: 0
+    ColorName: 17
     Color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4283126881
   <TextColorOutFOV>k__BackingField:
-    ColorName: 11
+    ColorName: 16
     Color:
       serializedVersion: 2
-      rgba: 4292275934
+      rgba: 4287271838
   <BackgroundColorOutFOV>k__BackingField:
-    ColorName: 0
+    ColorName: 15
     Color:
       serializedVersion: 2
-      rgba: 0
-  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 24aa35f22f6f63947b998f4a21ab5a86, type: 2}
+      rgba: 4281153607
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 851fad3b4af0e59438bde9acd2912fff, type: 2}

@@ -51,11 +51,15 @@ namespace Project.Behaviours.Movement
                 cells.actorCell.Tiles.Remove(actor);
                 cells.destCell.Tiles.Add(actor);
                 actor.Position = cells.destCell.Position;
+
+                //If the cells contains a Tile that racts when entered, invoke its method.
+                cells.destCell.OnActorEntered(actor);
+
             }
-            //Else, display in the Log what Tile we have bumped into.
             else
             {
-                cells.destCell.OnActorEntered(actor);
+                //Else, display in the Log what Tile we have bumped into.
+                cells.destCell.OnActorCollided(actor);
             }
         }
     }

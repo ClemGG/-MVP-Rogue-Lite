@@ -49,6 +49,9 @@ namespace Project.Generation
                 default:
                     break;
             }
+
+            //Once we have created all Features, we add Doors between Corridors and Rooms
+            DungeonPatterns.GenerateDoors();
         }
 
 

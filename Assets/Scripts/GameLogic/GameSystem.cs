@@ -15,7 +15,7 @@ namespace Project.Logic
 
         #region Display
 
-        public const string c_ShowHelpText = "Press h to toggle the commans menu.";
+        public const string c_ShowHelpText = "Press h to toggle the commands menu.";
 
         // Define the maximum number of lines in the MessageLog our resolution allows
         public const int c_MaxLines = 5;

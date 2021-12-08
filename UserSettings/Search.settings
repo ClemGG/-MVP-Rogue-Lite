@@ -10,6 +10,9 @@ scopes = {
 	"last_search.83F126EB" = "asmdef"
 	"OpenInspectorPreview.83F126EB" = "0"
 	"currentGroup.83F126EB" = "asset"
+	"last_search.7C5D90A9" = "memory pr"
+	"OpenInspectorPreview.7C5D90A9" = "0"
+	"currentGroup.7C5D90A9" = "all"
 }
 providers = {
 	asset = {

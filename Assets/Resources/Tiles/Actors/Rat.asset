@@ -38,6 +38,4 @@ MonoBehaviour:
     Color:
       serializedVersion: 2
       rgba: 0
-  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: ea9b803e3a4183e499bcd37d46b55e40, type: 2}
-  <Fov>k__BackingField: {fileID: 11400000, guid: 298dfadd5d223bb4193a132187bc0243, type: 2}
-  <Movement>k__BackingField: {fileID: 11400000, guid: 994dac5ff1894744b85f699dccbaf1fa, type: 2}
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 24aa35f22f6f63947b998f4a21ab5a86, type: 2}

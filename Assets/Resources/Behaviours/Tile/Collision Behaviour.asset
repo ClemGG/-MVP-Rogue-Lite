@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 216ed5430db8e06419bd9fde12662cf1, type: 3}
-  m_Name: Collision Tile Behaviour
+  m_Script: {fileID: 11500000, guid: fe84b6b1efef8414593ae3da028b8bed, type: 3}
+  m_Name: Collision Behaviour
   m_EditorClassIdentifier: 
-  <BehaviourType>k__BackingField: 0
   <TextOnCollision>k__BackingField: The {0} bumped into a {1}.

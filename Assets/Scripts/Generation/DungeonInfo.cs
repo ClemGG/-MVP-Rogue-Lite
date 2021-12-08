@@ -11,6 +11,8 @@ namespace Project.Generation
     /// </summary>
     public static class DungeonInfo
     {
+        #region Accessors
+
         //Map Info
         public static Cell[,] s_Map { get; set; }
         public static Vector2Int s_Size { get; set; }   //Keeps the map size in memory for future iterations through the array
@@ -20,6 +22,7 @@ namespace Project.Generation
         public static List<Feature> s_AllFeatures { get; set; } = new List<Feature>();
         public static List<Feature> s_AllRooms { get; set; } = new List<Feature>();
         public static List<Feature> s_AllCorridors { get; set; } = new List<Feature>();
+        public static List<Tile> s_AllDoors { get; set; } = new List<Tile>();
 
         public static List<ActorTile> s_AllActors { get; set; } = new List<ActorTile>();
         public static List<EnemyTile> s_AllEnemies { get; set; } = new List<EnemyTile>();
@@ -53,12 +56,17 @@ namespace Project.Generation
         }
         private static PlayerTile _player;
 
+        #endregion
+
+        #region Public Methods
+
 
         public static void Init(Vector2Int size)
         {
             s_AllFeatures.Clear();
             s_AllRooms.Clear();
             s_AllCorridors.Clear();
+            s_AllDoors.Clear();
             s_AllActors.Clear();
             s_AllEnemies.Clear();
             s_Player = null;
@@ -97,6 +105,51 @@ namespace Project.Generation
             }
         }
 
+        /// <summary>
+        /// Get an IEnumerable of Cells in a line from the Origin Cell to the Destination Cell
+        /// The resulting IEnumerable includes the Origin and Destination Cells
+        /// Uses Bresenham's line algorithm to determine which Cells are in the closest approximation to a straight line between the two Cells
+        /// </summary>
+        /// <param name="xOrigin">X location of the Origin Cell at the start of the line with 0 as the farthest left</param>
+        /// <param name="yOrigin">Y location of the Origin Cell at the start of the line with 0 as the top</param>
+        /// <param name="xDestination">X location of the Destination Cell at the end of the line with 0 as the farthest left</param>
+        /// <param name="yDestination">Y location of the Destination Cell at the end of the line with 0 as the top</param>
+        /// <returns>IEnumerable of Cells in a line from the Origin Cell to the Destination Cell which includes the Origin and Destination Cells</returns>
+        public static IEnumerable<Cell> GetCellsAlongLine(int xOrigin, int yOrigin, int xDestination, int yDestination)
+        {
+            xOrigin = Mathf.Clamp(xOrigin, 0, s_Size.x - 1);
+            yOrigin = Mathf.Clamp(yOrigin, 0, s_Size.y - 1);
+            xDestination = Mathf.Clamp(xDestination, 0, s_Size.x - 1);
+            yDestination = Mathf.Clamp(yDestination, 0, s_Size.y - 1);
+
+            int dx = Math.Abs(xDestination - xOrigin);
+            int dy = Math.Abs(yDestination - yOrigin);
+
+            int sx = xOrigin < xDestination ? 1 : -1;
+            int sy = yOrigin < yDestination ? 1 : -1;
+            int err = dx - dy;
+
+            while (true)
+            {
+                yield return s_Map[xOrigin, yOrigin];
+                if (xOrigin == xDestination && yOrigin == yDestination)
+                {
+                    break;
+                }
+                int e2 = 2 * err;
+                if (e2 > -dy)
+                {
+                    err -= dy;
+                    xOrigin += sx;
+                }
+                if (e2 < dx)
+                {
+                    err += dx;
+                    yOrigin += sy;
+                }
+            }
+        }
+
 
 
         ///Used to retrieve Cells on the map
@@ -126,5 +179,7 @@ namespace Project.Generation
                 s_Player = null;
             }
         }
+
+        #endregion
     }
 }

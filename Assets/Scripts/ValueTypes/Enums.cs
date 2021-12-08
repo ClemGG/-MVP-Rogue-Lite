@@ -40,12 +40,5 @@ namespace Project.ValueTypes
         Explore = 2, //Finds the closest unexplored Floor Tile until none are found or an enemy is nearby
     }
 
-    //Describes the action to take for a specific TileBehaviour when an Actor walks into it.
-    public enum TileBehaviourType : byte
-    {
-        Collision = 0,  //Activates the TileBehaviour when the Actor bumps into the Tile
-        Combat = 1,     //Activates the TileBehaviour when the Actor walks towards the ActorTile to deal it damage
-    }
-
     #endregion
 }

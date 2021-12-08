@@ -71,7 +71,21 @@ namespace Project.Tiles
             bool contains = false;
             for (int i = 0; i < Tiles.Count; i++)
             {
-                if(Tiles[i] is TileType)
+                if (Tiles[i] is TileType)
+                {
+                    contains = true;
+                    break;
+                }
+            }
+
+            return contains;
+        }
+        public bool Contains<TileType>(string tileName) where TileType : Tile
+        {
+            bool contains = false;
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                if (Tiles[i] is TileType && Tiles[i].TileName == tileName)
                 {
                     contains = true;
                     break;
@@ -86,6 +100,13 @@ namespace Project.Tiles
             for (int i = 0; i < Tiles.Count; i++)
             {
                 Tiles[i].OnActorEntered(actor, this);
+            }
+        }
+        public void OnActorCollided(ActorTile actor)
+        {
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                Tiles[i].OnActorCollided(actor, this);
             }
         }
     }

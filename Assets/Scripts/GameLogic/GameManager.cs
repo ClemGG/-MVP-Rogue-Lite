@@ -36,47 +36,48 @@ namespace Project.Logic
             //Checks if the player has pressed some buttons
             PlayerInput.Update();
 
-            if (GameSystem.s_IsGameOver) 
-            { 
-                //Reset everything needed here for another game
-
-                return;
-            }
-
-
-            if (PlayerInput.s_RightClick)
             {
-                DungeonInfo.ClearMap();
-                GenerateNewDungeon(_settings);
-            }
-
-
-            if (PlayerInput.s_IsCheckingTiles)
-            {
-                MapLog.GetTileUnderMouse();
-                return;
-            }
-
-            //If we wait, we add a certain amount of turns to the count.
-            //Then we get how many times we have to call certain functions that should have been called
-            //during the waiting time, and we call them.
-            if (PlayerInput.s_Waits)
-            {
-                MessageLog.Print($"You wait for {_turnsPassedOnWait} turns.");
-
-                _nbTurnsPassed += _turnsPassedOnWait;
-                int nbCalls = _turnsPassedOnWait % _settings.SpawnRate;
-                for (int i = 0; i < nbCalls; i++)
+                if (GameSystem.s_IsGameOver)
                 {
-                    DungeonGenerator.AddEnemies(1);
+                    //Reset everything needed here for another game
+
+                    return;
                 }
 
-                AutoRedrawMap();
 
-                //Updates the player's stat UI
-                PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
+                if (PlayerInput.s_RightClick)
+                {
+                    DungeonInfo.ClearMap();
+                    GenerateNewDungeon(_settings);
+                }
+
+
+                if (PlayerInput.s_IsCheckingTiles)
+                {
+                    MapLog.GetTileUnderMouse();
+                    return;
+                }
+
+                //If we wait, we add a certain amount of turns to the count.
+                //Then we get how many times we have to call certain functions that should have been called
+                //during the waiting time, and we call them.
+                if (PlayerInput.s_Waits)
+                {
+                    MessageLog.Print($"You wait for {_turnsPassedOnWait} turns.");
+
+                    _nbTurnsPassed += _turnsPassedOnWait;
+                    int nbCalls = _turnsPassedOnWait % _settings.SpawnRate;
+                    for (int i = 0; i < nbCalls; i++)
+                    {
+                        DungeonGenerator.AddEnemies(1);
+                    }
+
+                    AutoRedrawMap();
+
+                    //Updates the player's stat UI
+                    PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
+                }
             }
-
             //If the player moves the character...
             if (PlayerInput.s_IsMoving)
             {

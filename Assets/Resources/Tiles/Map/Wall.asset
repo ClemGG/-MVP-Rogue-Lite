@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   <TileName>k__BackingField: Wall
+  <Description>k__BackingField: 
   <Symbol>k__BackingField: 35
   <SeeThrough>k__BackingField: 0
   <Walkable>k__BackingField: 0
@@ -36,4 +37,4 @@ MonoBehaviour:
     Color:
       serializedVersion: 2
       rgba: 4281280031
-  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: b8bc97fdceb556946ad6581a8dc56f72, type: 2}
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: fe433da383975d14997c1425de1afe7d, type: 2}
