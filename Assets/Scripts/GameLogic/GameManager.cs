@@ -18,7 +18,6 @@ namespace Project.Logic
 
         private int _nbTurnsPassed { get; set; } = 0;   //Increments each time the Player takes an action
 
-
         #endregion
 
 
@@ -28,7 +27,8 @@ namespace Project.Logic
         void Start()
         {
             MessageLog.Print(GameSystem.c_ShowHelpText);
-            GenerateNewDungeon(_settings);
+            MapLog.ChangeTitle();
+            GenerateNewDungeon();
         }
 
         private void Update()
@@ -47,8 +47,7 @@ namespace Project.Logic
 
                 if (PlayerInput.s_RightClick)
                 {
-                    DungeonInfo.ClearMap();
-                    GenerateNewDungeon(_settings);
+                    GenerateNewDungeon();
                 }
 
 
@@ -128,14 +127,19 @@ namespace Project.Logic
                 //Updates the player's stat UI
                 PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
             }
-
+            else if (PlayerInput.s_Interacts)
+            {
+                //We get all Tiles underneath the Player and we call OnActorInteracted on their TileBehaviour
+                DungeonInfo.GetCellAt(DungeonInfo.s_Player.Position).OnActorInteracted(DungeonInfo.s_Player);
+            }
         }
 
 
 
-        public void GenerateNewDungeon(DungeonGenerationSettingsSO settings)
+        public void GenerateNewDungeon()
         {
-            DungeonGenerator.Generate(settings, _dungeonSize);
+            DungeonInfo.ClearMap();
+            DungeonGenerator.Generate(_settings, _dungeonSize);
 
             AutoRedrawMap();
 

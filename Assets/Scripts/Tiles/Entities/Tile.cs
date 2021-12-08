@@ -1,6 +1,5 @@
 using Project.Colors;
 using UnityEngine;
-using Project.Behaviours.FOV;
 using Project.Behaviours.Tiles;
 
 namespace Project.Tiles
@@ -57,6 +56,10 @@ namespace Project.Tiles
         public void OnActorCollided(ActorTile actor, Cell thisCell)
         {
             if (TileBehaviour) TileBehaviour.OnActorCollided(actor, thisCell, this);
+        }
+        public void OnActorInteracted(PlayerTile player, Cell thisCell)
+        {
+            if (TileBehaviour) TileBehaviour.OnActorInteracted(player, thisCell, this);
         }
 
     }

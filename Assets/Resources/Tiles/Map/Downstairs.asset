@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3823e4f9b100e2348b5cc902ffafc426, type: 3}
+  m_Name: Downstairs
+  m_EditorClassIdentifier: 
+  <TileName>k__BackingField: Downstairs
+  <Description>k__BackingField: The stairs leading to the lower level of the dungeon.
+  <Symbol>k__BackingField: 62
+  <SeeThrough>k__BackingField: 1
+  <Walkable>k__BackingField: 1
+  <TextColorInFOV>k__BackingField:
+    ColorName: 22
+    Color:
+      serializedVersion: 2
+      rgba: 4278190080
+  <BackgroundColorInFOV>k__BackingField:
+    ColorName: 21
+    Color:
+      serializedVersion: 2
+      rgba: 4281117293
+  <TextColorOutFOV>k__BackingField:
+    ColorName: 20
+    Color:
+      serializedVersion: 2
+      rgba: 4292275934
+  <BackgroundColorOutFOV>k__BackingField:
+    ColorName: 19
+    Color:
+      serializedVersion: 2
+      rgba: 4278190080
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: d66ebb4e7e25dd240a2c358637e5ed80, type: 2}

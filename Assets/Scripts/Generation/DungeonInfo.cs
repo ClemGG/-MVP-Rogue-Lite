@@ -56,7 +56,13 @@ namespace Project.Generation
         }
         private static PlayerTile _player;
 
+        //The Stairs allowing the player to generate the next level
+        public static Tile s_Upstairs { get; set; }
+        public static Tile s_Downstairs { get; set; }
+
         #endregion
+
+
 
         #region Public Methods
 
@@ -70,7 +76,8 @@ namespace Project.Generation
             s_AllActors.Clear();
             s_AllEnemies.Clear();
             s_Player = null;
-
+            s_Upstairs = null;
+            s_Downstairs = null;
 
 
             s_Size = size;

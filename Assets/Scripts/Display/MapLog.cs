@@ -1,5 +1,7 @@
 using Project.Colors;
+using Project.Logic;
 using Project.Tiles;
+using System;
 using System.Linq;
 using System.Text;
 using TMPro;
@@ -9,6 +11,8 @@ namespace Project.Display
 {
     public static class MapLog
     {
+        #region Fields
+
         private static StringBuilder StringBuilder 
         {
             get 
@@ -17,23 +21,44 @@ namespace Project.Display
             }
         }
         private static StringBuilder _sb;
-        private static TextMeshProUGUI MapTextField 
-        { 
-            get 
-            { 
-                return _mf ??= GameObject.Find("map").GetComponent<TextMeshProUGUI>(); 
-            } 
-            set => _mf = value; 
+        private static TextMeshProUGUI MapTextField
+        {
+            get
+            {
+                return _mf ??= GameObject.Find("map").GetComponent<TextMeshProUGUI>();
+            }
+            set => _mf = value;
         }
         private static TextMeshProUGUI _mf;
+        private static TextMeshProUGUI TitleMapTextField
+        {
+            get
+            {
+                return _tmf ??= GameObject.Find("title \"Map\"").GetComponent<TextMeshProUGUI>();
+            }
+            set => _tmf = value;
+        }
+        private static TextMeshProUGUI _tmf;
 
         //Temporary variables
         private static Vector2Int _mapSize;
         private static Cell[,] _cells;
+
+
         private static int _lastCharIndex = -1;
         private static Vector3 _lastMousePos;
         private static Tile _lastExaminedTile = null;
 
+        #endregion
+
+
+        #region Public Methods
+
+
+        public static void ChangeTitle()
+        {
+            TitleMapTextField.text = $"Map (level {GameSystem.s_FloorLevel}/{GameSystem.s_MaxFloorLevel})";
+        }
 
         public static void Draw(Vector2Int mapSize, Cell[,] cells)
         {
@@ -139,5 +164,7 @@ namespace Project.Display
             return _lastExaminedTile;
         }
 
+
+        #endregion
     }
 }

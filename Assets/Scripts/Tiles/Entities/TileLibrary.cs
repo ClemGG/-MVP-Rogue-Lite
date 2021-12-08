@@ -16,6 +16,8 @@ namespace Project.Tiles
         public static Tile Floor { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Floor")); } } 
         public static Tile Wall { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Wall")); } }
         public static Tile Door { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Door")); } }
+        public static Tile Upstairs { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Upstairs")); } }
+        public static Tile Downstairs { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Downstairs")); } }
         public static Tile Player { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Actors/Player")); } }
         public static Tile Rat { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Actors/Rat")); } }
 

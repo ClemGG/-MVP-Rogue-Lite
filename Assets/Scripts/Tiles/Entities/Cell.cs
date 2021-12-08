@@ -109,5 +109,12 @@ namespace Project.Tiles
                 Tiles[i].OnActorCollided(actor, this);
             }
         }
+        public void OnActorInteracted(PlayerTile player)
+        {
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                Tiles[i].OnActorInteracted(player, this);
+            }
+        }
     }
 }

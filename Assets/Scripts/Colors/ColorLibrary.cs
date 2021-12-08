@@ -38,6 +38,13 @@ namespace Project.Colors
         [field: SerializeField] private static Color32 DoorFov { get; } = Swatch.ComplimentLightest;
 
 
+        //Stairs Colors
+        [field: SerializeField] private static Color32 StairsBackground { get; } = Swatch.Black;
+        [field: SerializeField] private static Color32 Stairs { get; } = Swatch.DbLight;
+        [field: SerializeField] private static Color32 StairsBackgroundFov { get; } = Swatch.DbGrass;
+        [field: SerializeField] private static Color32 StairsFov { get; } = Swatch.Black;
+
+
         //Log
         //For all info to write on the console logs on screen
         [field: SerializeField] public static Color32 Gold { get; } = Swatch.DbSun;

@@ -8,7 +8,9 @@ namespace Project.Logic
         #region Flags
 
         public static bool s_IsGameOver { get; set; } = false;
-        public static int s_FloorLevel { get; set; } = 1;
+        public static int s_PreviousFloorLevel { get; set; } = 0;   // Used to determine if we should spawn the Player on the Upstairs or npt
+        public static int s_FloorLevel { get; set; } = 1;           // Incremented/Decremented in the Stairs' TileBehaviour
+        public static int s_MaxFloorLevel { get; set; } = 20;           // The deepest level the Player can go
 
         #endregion
 
