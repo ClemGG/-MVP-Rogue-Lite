@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TileName>k__BackingField: Upstairs
   <Description>k__BackingField: The stairs leading to the upper level of the dungeon.
-  <Symbol>k__BackingField: 60
+  <Symbol>k__BackingField: 85
   <SeeThrough>k__BackingField: 1
   <Walkable>k__BackingField: 1
   <TextColorInFOV>k__BackingField:

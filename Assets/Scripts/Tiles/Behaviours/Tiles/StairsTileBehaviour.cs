@@ -16,7 +16,6 @@ namespace Project.Behaviours.Tiles
             //the corresponding Stairs will be locked.
             if (IsUpstairs ^ !GameSystem.s_IsGoalReached)
             {
-
                 // When the Player presses the Interact button while on a Stairs Tile, we generate a new level...
                 GameSystem.s_FloorLevel += IsUpstairs ? -1 : 1;
                 GameObject.Find("GameManager").GetComponent<GameManager>().GenerateNewDungeon();

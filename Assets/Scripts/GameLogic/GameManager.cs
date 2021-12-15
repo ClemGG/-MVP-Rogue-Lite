@@ -34,6 +34,7 @@ namespace Project.Logic
             MessageLog.Print(GameSystem.c_ShowHelpText);
             MapLog.ChangeTitle();
             GenerateNewDungeon();
+
         }
 
         private void SetupComponents()

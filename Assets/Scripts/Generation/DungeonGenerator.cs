@@ -65,15 +65,14 @@ namespace Project.Generation
             Cell spawnCell;
 
             //If we are at the second floor or deeper, we create a Upstairs Tile
-            if (GameSystem.s_FloorLevel > 1)
+            if (GameSystem.s_FloorLevel > 1 && !DungeonInfo.s_Upstairs)
             {
                 //Get a random Walkable Cell in that Room
                 //For the upstairs, we set them at Center.x + 1 to not overlap them with the downstairs
                 //in case we only generate One Room.
-                Vector2Int spawnPos = DungeonInfo.s_AllRooms.First().Bounds.Center;
+                Vector2Int spawnPos = DungeonInfo.s_AllRooms[0].Bounds.Center;
                 spawnPos.x += 1;
                 spawnCell = DungeonInfo.GetCellAt(spawnPos);
-
 
                 //Instantiate the Upstairs in this Cell
                 Tile upstairsTile = TileLibrary.Upstairs;
@@ -82,12 +81,12 @@ namespace Project.Generation
                 DungeonInfo.s_Upstairs = upstairsTile;
             }
             //If we are at the last floor or higher, we create a Downstairs Tile
-            if(GameSystem.s_FloorLevel < GameSystem.c_MaxFloorLevel)
+            if(GameSystem.s_FloorLevel < GameSystem.c_MaxFloorLevel && !DungeonInfo.s_Downstairs)
             {
                 //Get a random Walkable Cell in that Room
                 //For the downstairs, we set them at Center.x - 1 to not overlap them with the upstairs
                 //in case we only generate One Room.
-                Vector2Int spawnPos = DungeonInfo.s_AllRooms.Last().Bounds.Center;
+                Vector2Int spawnPos = DungeonInfo.s_AllRooms[DungeonInfo.s_AllRooms.Count - 1].Bounds.Center;
                 spawnPos.x -= 1;
                 spawnCell = DungeonInfo.GetCellAt(spawnPos);
 

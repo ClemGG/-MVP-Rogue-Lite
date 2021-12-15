@@ -82,7 +82,7 @@ namespace Project.Display
         /// </summary>
         internal static void DisplayTileDescription(Tile tile)
         {
-            string name = $"<b>{ColorLibrary.ColoredText(tile.TileName, tile.TextColorInFOV.Color)}</b>";
+            string name = $"<b>{ColorLibrary.ColoredText(tile.TileName, ColorLibrary.DisplayedTileName)}</b>";
             string health = tile is ActorTile a ? $" ({a.Stats.Health}/{a.Stats.MaxHealth})" : null;
             DescriptionText.text = $"{name + health}\n\n{tile.Description}";
         }
