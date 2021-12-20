@@ -35,7 +35,7 @@ public static class CombatSystem
 
         int damage = hits - blocks;
 
-        ResolveDamage(defender, damage);
+        ResolveDamage(attacker, defender, damage);
     }
 
     // The attacker rolls based on his stats to see if he gets any hits
@@ -100,7 +100,7 @@ public static class CombatSystem
     }
 
     // Apply any damage that wasn't blocked to the defender
-    private static void ResolveDamage(ActorTile defender, int damage)
+    private static void ResolveDamage(ActorTile attacker, ActorTile defender, int damage)
     {
         if (damage > 0)
         {
@@ -110,7 +110,7 @@ public static class CombatSystem
 
             if (defender.Stats.Health <= 0)
             {
-                ResolveDeath(defender);
+                ResolveDeath(attacker, defender);
             }
         }
         else
@@ -120,7 +120,7 @@ public static class CombatSystem
     }
 
     // Remove the defender from the map and add some messages upon death.
-    private static void ResolveDeath(ActorTile defender)
+    private static void ResolveDeath(ActorTile attacker, ActorTile defender)
     {
         if (defender is PlayerTile)
         {
@@ -131,6 +131,11 @@ public static class CombatSystem
         {
             DungeonInfo.RemoveActor(defender);
             MessageLog.Print($"  The {defender.TileName} died and dropped {defender.Stats.Gold} gold.");
+
+            if(attacker is PlayerTile)
+            {
+                attacker.Stats.Gold += defender.Stats.Gold;
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea866e1eeef363940a452df87eaec3d9, type: 3}
-  m_Name: Default Settings Consolas
+  m_Name: Default Dungeon Settings Consolas
   m_EditorClassIdentifier: 
   <MinMaxFeatureSize>k__BackingField: {x: 4, y: 15}
   <MaxRooms>k__BackingField: 20

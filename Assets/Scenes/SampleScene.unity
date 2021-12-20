@@ -4862,8 +4862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 0, y: 250}
+  m_AnchoredPosition: {x: -5, y: -20}
+  m_SizeDelta: {x: -10, y: 250}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1928276163
 MonoBehaviour:
@@ -5023,9 +5023,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_helpCanvas>k__BackingField: {fileID: 2119950517}
-  <_settings>k__BackingField: {fileID: 11400000, guid: e222847056a8d20428e5316db490b4b2, type: 2}
+  <_dungeonSettings>k__BackingField: {fileID: 11400000, guid: e222847056a8d20428e5316db490b4b2, type: 2}
+  <_enemySettings>k__BackingField: {fileID: 11400000, guid: f95f58feb52b4ea45b5b4fc92cfec1ca, type: 2}
+  <_itemSettings>k__BackingField: {fileID: 11400000, guid: 27a7fb8f3dca5a9488dc08d67f5692e7, type: 2}
   <_dungeonSize>k__BackingField: {x: 97, y: 34}
   <_turnsPassedOnWait>k__BackingField: 20
+  <_turnsBeforeSpawn>k__BackingField: 20
+  <_enemySpawnChance>k__BackingField: 50
 --- !u!1 &2103766201
 GameObject:
   m_ObjectHideFlags: 0

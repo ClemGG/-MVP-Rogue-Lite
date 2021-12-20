@@ -29,7 +29,7 @@ namespace Project.Tiles
         public bool SeeThrough { get; internal set; }
 
         [field: SerializeField, Tooltip("Can the player walk on this Tile? (If any of the Tiles in a Cell is not walkable, the player cannot walk on the Cell at all.)")]
-        public bool Walkable { get; private set; }
+        public bool Walkable { get; internal set; }
 
         [field: SerializeField, Tooltip("The color of the symbol when in FOV. Uses a string to retrieve it automatically by reflection.")]
         public ColorInPalette TextColorInFOV { get; private set; }

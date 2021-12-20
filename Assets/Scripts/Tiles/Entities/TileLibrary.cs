@@ -14,13 +14,31 @@ namespace Project.Tiles
         #region Accessors
 
         //TODO : Use Object Pooling instead of those Instantiate() to recycle the Tiles instead of wasting memory on recreating them.
+
+        #region Dungeon
+
         public static Tile Floor { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Floor")); } } 
         public static Tile Wall { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Wall")); } }
         public static Tile Door { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Door")); } }
         public static Tile Upstairs { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Upstairs")); } }
         public static Tile Downstairs { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Map/Downstairs")); } }
+
+        #endregion
+
+
+        #region Actors
+
         public static Tile Player { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Actors/Player")); } }
         public static Tile Rat { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Actors/Rat")); } }
+
+        #endregion
+
+
+        #region Items
+        public static Tile FinalItem { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Items/Final Item")); } }
+        public static Tile HealthPotion { get { return Object.Instantiate(Resources.Load<Tile>("Tiles/Items/Health Potion")); } }
+
+        #endregion
 
 
         private static PropertyInfo[] _fieldsNames
@@ -36,14 +54,14 @@ namespace Project.Tiles
 
         #region public Methods
 
-        internal static EnemyTile GetRandomEnemy(DungeonGenerationSettingsSO settings)
+        internal static Tile GetTile(string name)
         {
-            string enemyName = settings.EnemiesToSpawn[Random.Range(0, settings.EnemiesToSpawn.Length)].TileName.Replace(" ", null);
+            string tileName = name.Replace(" ", null);
             for (int i = 0; i < _fieldsNames.Length; i++)
             {
-                if (enemyName.Equals(_fieldsNames[i].Name))
+                if (tileName == _fieldsNames[i].Name)
                 {
-                    return (EnemyTile)_fieldsNames[i].GetValue(_fieldsNames[i]);
+                    return (Tile)_fieldsNames[i].GetValue(_fieldsNames[i]);
                 }
             }
 

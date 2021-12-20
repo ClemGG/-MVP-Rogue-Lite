@@ -9,20 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a3c38aa44c8af479d88b4e840bbcd5, type: 3}
-  m_Name: Rat
+  m_Script: {fileID: 11500000, guid: dfe022163035a7244bc7a579d0f68dbf, type: 3}
+  m_Name: Health Potion
   m_EditorClassIdentifier: 
-  <TileName>k__BackingField: Rat
-  <Description>k__BackingField: A strange species of Rat, capable of adapting to
-    many environments.
-  <Symbol>k__BackingField: 114
+  <TileName>k__BackingField: Health Potion
+  <Description>k__BackingField: A potion restoring some HP.
+  <Symbol>k__BackingField: 105
   <SeeThrough>k__BackingField: 1
-  <Walkable>k__BackingField: 0
+  <Walkable>k__BackingField: 1
   <TextColorInFOV>k__BackingField:
-    ColorName: 14
+    ColorName: 24
     Color:
       serializedVersion: 2
-      rgba: 4281105874
+      rgba: 4278255360
   <BackgroundColorInFOV>k__BackingField:
     ColorName: 4
     Color:
@@ -38,4 +37,6 @@ MonoBehaviour:
     Color:
       serializedVersion: 2
       rgba: 4278190080
-  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 24aa35f22f6f63947b998f4a21ab5a86, type: 2}
+  <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 513bf49f0559a4b4ebdf2c58f10d6803, type: 2}
+  _isStackable: 1
+  _isConsumable: 1

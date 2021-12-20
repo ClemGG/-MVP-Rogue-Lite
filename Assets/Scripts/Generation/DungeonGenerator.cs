@@ -10,17 +10,22 @@ namespace Project.Generation
 {
     public static class DungeonGenerator
     {
-        private static DungeonGenerationSettingsSO _settings { get; set; }
+        private static DungeonGenerationSettingsSO _dungeonSettings { get; set; }
+        private static TileGenerationSettingsSO _enemySettings { get; set; }
+        private static TileGenerationSettingsSO _itemSettings { get; set; }
 
-        public static void Generate(DungeonGenerationSettingsSO settings, Vector2Int dungeonSize)
+        public static void Generate(DungeonGenerationSettingsSO dungeonSettings, TileGenerationSettingsSO enemySettings, TileGenerationSettingsSO itemSettings, Vector2Int dungeonSize)
         {
             //Resets all infos about the last generated map (if any)
             DungeonInfo.Init(dungeonSize);
 
-            _settings = settings;
-            GenerateRooms(RandomIn(_settings.DungeonPattern));
+            _enemySettings = enemySettings;
+            _itemSettings = itemSettings;
+            _dungeonSettings = dungeonSettings;
+            GenerateRooms(RandomIn(dungeonSettings.DungeonPattern));
             AddPlayer();
-            AddEnemies(Random.Range(0, _settings.MaxEnemiesOnStart));
+            AddEnemies(Random.Range(0, enemySettings.MaxTilesOnStart));
+            AddItems(Random.Range(0, itemSettings.MaxTilesOnStart));
         }
 
 
@@ -39,11 +44,11 @@ namespace Project.Generation
                     break;
 
                 case DungeonPatternType.StandardRandom:
-                    DungeonPatterns.GenerateRandomDungeon(_settings.MinMaxFeatureSize, _settings.MaxRooms);
+                    DungeonPatterns.GenerateRandomDungeon(_dungeonSettings.MinMaxFeatureSize, _dungeonSettings.MaxRooms);
                     break;
 
                 case DungeonPatternType.StandardRandomDoubleCorridors:
-                    DungeonPatterns.GenerateRandomDungeon(_settings.MinMaxFeatureSize, _settings.MaxRooms, true);
+                    DungeonPatterns.GenerateRandomDungeon(_dungeonSettings.MinMaxFeatureSize, _dungeonSettings.MaxRooms, true);
                     break;
 
                 default:
@@ -64,8 +69,9 @@ namespace Project.Generation
         {
             Cell spawnCell;
 
-            //If we are at the second floor or deeper, we create a Upstairs Tile
-            if (GameSystem.s_FloorLevel > 1 && !DungeonInfo.s_Upstairs)
+            //If we are at the second floor or deeper, we create a Upstairs Tile.
+            //OR, if it's the first level and we have the final item, we create a Upstairs to Level 0, which will quit the game.
+            if ((GameSystem.s_FloorLevel > 1 && !DungeonInfo.s_Upstairs) || (GameSystem.s_FloorLevel == 1 && GameSystem.s_IsGoalReached))
             {
                 //Get a random Walkable Cell in that Room
                 //For the upstairs, we set them at Center.x + 1 to not overlap them with the downstairs
@@ -95,6 +101,7 @@ namespace Project.Generation
                 downstairsTile.Position = spawnCell.Position;
                 spawnCell.Tiles.Add(downstairsTile);
                 DungeonInfo.s_Downstairs = downstairsTile;
+
             }
 
         }
@@ -137,31 +144,103 @@ namespace Project.Generation
         /// </summary>
         public static void AddEnemies(int count)
         {
+            System.Func<Cell, bool> match = cell => cell.Walkable && !cell.IsInPlayerFov && !cell.Contains<Tile>("Upstairs", "Downstairs");
+
             for (int i = 0; i < count; i++)
             {
                 //Get a random Room on the map without any player in it
                 Feature randomRoom = DungeonInfo.s_RandomRoomWithoutPlayer;
-                List<Cell> walkableCells = randomRoom.Cells.Where(cell => cell.Walkable && !cell.IsInPlayerFov && !cell.Contains<Tile>("Upstairs") && !cell.Contains<Tile>("Downstairs")).ToList();
+                List<Cell> walkableCells = randomRoom.Cells.Where(match).ToList();
 
                 //Get a random Walkable Cell in that Room
                 Cell spawnCell = null;
                 if (walkableCells.Count > 0)
                 {
                     spawnCell = walkableCells[Random.Range(0, walkableCells.Count)];
-                }
 
-                //Select a random EnemyTile in the settings' list and add it to the Map
-                Tile enemyTile = TileLibrary.GetRandomEnemy(_settings);
-                if (enemyTile && spawnCell != null)
-                {
-                    enemyTile.Position = spawnCell.Position;
-                    spawnCell.Tiles.Add(enemyTile);
-                    DungeonInfo.s_AllActors.Add(enemyTile as ActorTile);
-                    DungeonInfo.s_AllEnemies.Add(enemyTile as EnemyTile);
+                    if (spawnCell != null)
+                    {
+                        //Select a random EnemyTile in the settings' list and add it to the Map
+                        Tile enemyTile = _enemySettings.GetRandomTile();
+
+                        if (enemyTile)
+                        {
+                            enemyTile.Position = spawnCell.Position;
+                            spawnCell.Tiles.Add(enemyTile);
+                            DungeonInfo.s_AllActors.Add(enemyTile as ActorTile);
+                            DungeonInfo.s_AllEnemies.Add(enemyTile as EnemyTile);
+                        }
+                    }
                 }
             }
-
-
         }
+
+
+        /// <summary>
+        /// Selects a random Walkable Tile and adds an ItemTile on top of it.
+        /// </summary>
+        public static void AddItems(int count)
+        {
+            static bool match(Cell cell) => cell.Walkable && !cell.Contains<Tile>("Upstairs", "Downstairs") && !cell.Contains<ItemTile>();
+
+            //Instantiate each mandatory Item first
+            SpawnsPerLevel spawn = _itemSettings.TilesToForceSpawnPerLevel[GameSystem.s_FloorLevel-1];
+            if(spawn.TileSpawnRates.Length > 0) {
+                for (int j = 0; j < spawn.TileSpawnRates.Length; j++)
+                {
+                    //Get a random Room on the map without any player in it
+                    Feature randomRoom = DungeonInfo.s_RandomRoomWithoutPlayer;
+                    List<Cell> walkableCells = randomRoom.Cells.Where(match).ToList();
+
+                    //Get a random Walkable Cell in that Room
+                    Cell spawnCell = null;
+                    if (walkableCells.Count > 0)
+                    {
+                        spawnCell = walkableCells[Random.Range(0, walkableCells.Count)];
+
+                        if (spawnCell != null)
+                        {
+                            Tile itemTile = TileLibrary.GetTile(spawn.TileSpawnRates[j].TileToSpawn.TileName);
+
+                            if (itemTile)
+                            {
+                                itemTile.Position = spawnCell.Position;
+                                spawnCell.Tiles.Add(itemTile);
+                                DungeonInfo.s_AllItems.Add(itemTile as ItemTile);
+                            }
+                        }
+                    }
+                }
+            }
+                
+
+            for (int i = 0; i < count; i++)
+            {
+                //Get a random Room on the map without any player in it
+                Feature randomRoom = DungeonInfo.s_RandomRoomWithoutPlayer;
+                List<Cell> walkableCells = randomRoom.Cells.Where(match).ToList();
+
+                //Get a random Walkable Cell in that Room
+                Cell spawnCell = null;
+                if (walkableCells.Count > 0)
+                {
+                    spawnCell = walkableCells[Random.Range(0, walkableCells.Count)];
+
+                    if (spawnCell != null)
+                    {
+                        //Select a random EnemyTile in the settings' list and add it to the Map
+                        Tile itemTile = _itemSettings.GetRandomTile();
+
+                        if (itemTile)
+                        {
+                            itemTile.Position = spawnCell.Position;
+                            spawnCell.Tiles.Add(itemTile);
+                            DungeonInfo.s_AllItems.Add(itemTile as ItemTile);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

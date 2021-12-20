@@ -94,6 +94,22 @@ namespace Project.Tiles
 
             return contains;
         }
+        public bool Contains<TileType>(params string[] tileNames) where TileType : Tile
+        {
+            foreach (string tileName in tileNames)
+            {
+                for (int i = 0; i < Tiles.Count; i++)
+                {
+                    if (Tiles[i] is TileType && Tiles[i].TileName == tileName)
+                    {
+                        return true;
+                    }
+                }
+            }
+            
+
+            return false;
+        }
 
         public void OnActorEntered(ActorTile actor)
         {

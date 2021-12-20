@@ -1,3 +1,4 @@
+using Project.Generation;
 using Project.Logic;
 using System.Reflection;
 using UnityEngine;
@@ -12,7 +13,8 @@ namespace Project.Combat
     public static class StatsLibrary
     {
         //TODO : Use Object Pooling instead of those Instantiate() to recycle the Tiles instead of wasting memory on recreating them.
-        public static ActorStats PlayerStats { get { return Object.Instantiate(Resources.Load<ActorStats>("Stats/PlayerStats")); } }
+        //Creates a new ActorStats for the Player if it doesn't already have one.
+        public static ActorStats PlayerStats { get { return (DungeonInfo.s_PlayerStats) ? DungeonInfo.s_PlayerStats : Object.Instantiate(Resources.Load<ActorStats>("Stats/PlayerStats")); } }
         public static ActorStats RatStats
         {
             //RatStats set explicitely in case we want to modify its stats before returning it

@@ -23,18 +23,18 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4292275934
   <BackgroundColorInFOV>k__BackingField:
-    ColorName: 0
+    ColorName: 4
     Color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4280028180
   <TextColorOutFOV>k__BackingField:
     ColorName: 11
     Color:
       serializedVersion: 2
       rgba: 4292275934
   <BackgroundColorOutFOV>k__BackingField:
-    ColorName: 0
+    ColorName: 2
     Color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4278190080
   <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 24aa35f22f6f63947b998f4a21ab5a86, type: 2}

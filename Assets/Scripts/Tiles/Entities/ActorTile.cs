@@ -50,6 +50,10 @@ namespace Project.Tiles
                 //Auto-retrieves an ActorStats using the TileName.
                 return _statsTemplate = _statsTemplate != null ? _statsTemplate : StatsLibrary.GetStats(TileName);
             }
+            set
+            {
+                _statsTemplate = value;
+            }
         }
         private ActorStats _statsTemplate;
 

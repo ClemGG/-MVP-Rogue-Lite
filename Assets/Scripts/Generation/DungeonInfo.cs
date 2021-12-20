@@ -1,3 +1,4 @@
+using Project.Combat;
 using Project.Tiles;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Project.Generation
 
         public static List<ActorTile> s_AllActors { get; set; } = new List<ActorTile>();
         public static List<EnemyTile> s_AllEnemies { get; set; } = new List<EnemyTile>();
+        public static List<ItemTile> s_AllItems { get; set; } = new List<ItemTile>();
 
         public static Feature s_RandomRoomWithoutPlayer
         {
@@ -43,6 +45,8 @@ namespace Project.Generation
                 }
             }
         }
+
+        //The Player, with its Stats stored separately to allow persistence between generations
         public static PlayerTile s_Player
         {
             get
@@ -55,6 +59,7 @@ namespace Project.Generation
             }
         }
         private static PlayerTile _player;
+        public static ActorStats s_PlayerStats;
 
         //The Stairs allowing the player to generate the next level
         public static Tile s_Upstairs { get; set; }
@@ -75,6 +80,7 @@ namespace Project.Generation
             s_AllDoors.Clear();
             s_AllActors.Clear();
             s_AllEnemies.Clear();
+            s_AllItems.Clear();
             s_Player = null;
             s_Upstairs = null;
             s_Downstairs = null;
@@ -177,7 +183,7 @@ namespace Project.Generation
             GetCellAt(actor.Position).Tiles.Remove(actor);
             s_AllActors.Remove(actor);
 
-            if (actor is EnemyTile)
+            if (actor is Tile)
             {
                 s_AllEnemies.Remove(actor as EnemyTile);
             }

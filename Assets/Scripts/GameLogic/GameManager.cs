@@ -4,7 +4,6 @@ using Project.Display;
 using Project.Input;
 using UnityEngine;
 using Project.Tiles;
-using System;
 
 namespace Project.Logic
 {
@@ -14,9 +13,17 @@ namespace Project.Logic
         #region Fields
 
         [field: SerializeField] private GameObject _helpCanvas { get; set; }
-        [field: SerializeField] private DungeonGenerationSettingsSO _settings { get; set; }
+        [field: SerializeField] private DungeonGenerationSettingsSO _dungeonSettings { get; set; }
+        [field: SerializeField] private TileGenerationSettingsSO _enemySettings { get; set; }
+        [field: SerializeField] private TileGenerationSettingsSO _itemSettings { get; set; }
         [field: SerializeField] private Vector2Int _dungeonSize { get; set; } = new Vector2Int(97, 34);
         [field: SerializeField] private int _turnsPassedOnWait { get; set; } = 50;
+
+        [field: SerializeField, Min(1), Tooltip("How many turns should we wait before spawning a new Enemy ?")]
+        public int _turnsBeforeSpawn { get; private set; } = 20;
+
+        [field: SerializeField, Range(0, 100), Tooltip("The chance to spawn a new Enemy each time we've reached [TurnsBeforeSpawn] turns.")]
+        public int _enemySpawnChance { get; private set; } = 50;
 
         private int _nbTurnsPassed { get; set; } = 0;   //Increments each time the Player takes an action
 
@@ -93,9 +100,12 @@ namespace Project.Logic
                     MessageLog.Print($"You wait for {_turnsPassedOnWait} turns.");
 
                     _nbTurnsPassed += _turnsPassedOnWait;
-                    int nbCalls = _turnsPassedOnWait % _settings.SpawnRate;
+                    int nbCalls = _turnsPassedOnWait % _turnsBeforeSpawn;
                     for (int i = 0; i < nbCalls; i++)
                     {
+
+                        //We check the SpawnChance to see if we should spawn after each call
+                        if (Random.Range(0f, 100f) < _enemySpawnChance)
                         DungeonGenerator.AddEnemies(1);
                     }
 
@@ -130,9 +140,11 @@ namespace Project.Logic
 
                 //One turn has passed. If enough turns have passed, we spawn a new Enemy
                 _nbTurnsPassed++;
-                if(_nbTurnsPassed % _settings.SpawnRate == 0)
+                if(_nbTurnsPassed % _turnsBeforeSpawn == 0)
                 {
-                    DungeonGenerator.AddEnemies(1);
+                    //We check the SpawnChance to see if we should spawn after each call
+                    if (Random.Range(0f, 100f) < _enemySpawnChance)
+                        DungeonGenerator.AddEnemies(1);
                 }
 
 
@@ -167,7 +179,7 @@ namespace Project.Logic
         public void GenerateNewDungeon()
         {
             DungeonInfo.ClearMap();
-            DungeonGenerator.Generate(_settings, _dungeonSize);
+            DungeonGenerator.Generate(_dungeonSettings, _enemySettings, _itemSettings, _dungeonSize);
 
             AutoRedrawMap();
 

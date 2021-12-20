@@ -45,6 +45,12 @@ namespace Project.Colors
         [field: SerializeField] private static Color32 StairsFov { get; } = Swatch.Black;
 
 
+
+        //Item Colors
+        [field: SerializeField] private static Color32 FinalItem { get; } = Swatch.Red;
+        [field: SerializeField] private static Color32 HealthPotion { get; } = Swatch.Green;
+
+
         //Log
         //For all info to write on the console logs on screen
         [field: SerializeField] public static Color32 Gold { get; } = Swatch.DbSun;
