@@ -322,6 +322,14 @@ namespace Project.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""a28fbfe4-261e-46a7-9653-c91ce7917f4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -478,6 +486,17 @@ namespace Project.Input
                     ""action"": ""ToggleHelp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd87ebba-7c19-497e-a6c1-bbda4beb7b29"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ToggleInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -546,6 +565,7 @@ namespace Project.Input
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
             m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
             m_UI_ToggleHelp = m_UI.FindAction("ToggleHelp", throwIfNotFound: true);
+            m_UI_ToggleInventory = m_UI.FindAction("ToggleInventory", throwIfNotFound: true);
             // Debug
             m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
             m_Debug_RegenerateDungeon = m_Debug.FindAction("RegenerateDungeon", throwIfNotFound: true);
@@ -666,6 +686,7 @@ namespace Project.Input
         private readonly InputAction m_UI_Move;
         private readonly InputAction m_UI_Accept;
         private readonly InputAction m_UI_ToggleHelp;
+        private readonly InputAction m_UI_ToggleInventory;
         public struct UIActions
         {
             private @PlayerControls m_Wrapper;
@@ -673,6 +694,7 @@ namespace Project.Input
             public InputAction @Move => m_Wrapper.m_UI_Move;
             public InputAction @Accept => m_Wrapper.m_UI_Accept;
             public InputAction @ToggleHelp => m_Wrapper.m_UI_ToggleHelp;
+            public InputAction @ToggleInventory => m_Wrapper.m_UI_ToggleInventory;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -691,6 +713,9 @@ namespace Project.Input
                     @ToggleHelp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
                     @ToggleHelp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
                     @ToggleHelp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
+                    @ToggleInventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
+                    @ToggleInventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
+                    @ToggleInventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -704,6 +729,9 @@ namespace Project.Input
                     @ToggleHelp.started += instance.OnToggleHelp;
                     @ToggleHelp.performed += instance.OnToggleHelp;
                     @ToggleHelp.canceled += instance.OnToggleHelp;
+                    @ToggleInventory.started += instance.OnToggleInventory;
+                    @ToggleInventory.performed += instance.OnToggleInventory;
+                    @ToggleInventory.canceled += instance.OnToggleInventory;
                 }
             }
         }
@@ -772,6 +800,7 @@ namespace Project.Input
             void OnMove(InputAction.CallbackContext context);
             void OnAccept(InputAction.CallbackContext context);
             void OnToggleHelp(InputAction.CallbackContext context);
+            void OnToggleInventory(InputAction.CallbackContext context);
         }
         public interface IDebugActions
         {

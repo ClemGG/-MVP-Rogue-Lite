@@ -30,6 +30,7 @@ namespace Project.Input
         private static float _autoMoveIntervalTimer { get; set; }
 
         public static bool s_ToggleHelp { get; private set; }
+        public static bool s_ToggleInventory { get; private set; }
         public static bool s_Waits { get; private set; }
         public static bool s_IsMoving { get; private set; }
         public static bool s_Interacts { get; private set; }
@@ -80,6 +81,7 @@ namespace Project.Input
             s_MoveDirResult = Vector2Int.zero;
 
             s_ToggleHelp = _playerControls.UI.ToggleHelp.triggered;
+            s_ToggleInventory = _playerControls.UI.ToggleInventory.triggered;
             s_RightClick = _playerControls.Debug.RegenerateDungeon.triggered;
             s_Interacts = _playerControls.Player.Interact.triggered;
             s_Waits = _playerControls.Player.Wait.triggered;

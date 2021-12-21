@@ -13,6 +13,7 @@ namespace Project.Logic
         #region Fields
 
         [field: SerializeField] private GameObject _helpCanvas { get; set; }
+        [field: SerializeField] private GameObject _inventoryCanvas { get; set; }
         [field: SerializeField] private DungeonGenerationSettingsSO _dungeonSettings { get; set; }
         [field: SerializeField] private TileGenerationSettingsSO _enemySettings { get; set; }
         [field: SerializeField] private TileGenerationSettingsSO _itemSettings { get; set; }
@@ -50,6 +51,10 @@ namespace Project.Logic
             {
                 _helpCanvas.SetActive(false);
             }
+            if (_inventoryCanvas)
+            {
+                _inventoryCanvas.SetActive(false);
+            }
         }
 
 
@@ -69,12 +74,16 @@ namespace Project.Logic
                     return;
                 }
 
-                if (PlayerInput.s_ToggleHelp)
+                if (PlayerInput.s_ToggleHelp && !_inventoryCanvas.activeSelf)
                 {
                     _helpCanvas.SetActive(!_helpCanvas.activeSelf);
                 }
+                if (PlayerInput.s_ToggleInventory && !_helpCanvas.activeSelf)
+                {
+                    _inventoryCanvas.SetActive(!_inventoryCanvas.activeSelf);
+                }
                 //We don't want the Player to do anything while the Commands menu is active
-                if (_helpCanvas.activeSelf)
+                if (_helpCanvas.activeSelf || _inventoryCanvas.activeSelf)
                 {
                     return;
                 }

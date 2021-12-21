@@ -307,6 +307,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleInventory",
+                    "type": "Button",
+                    "id": "a28fbfe4-261e-46a7-9653-c91ce7917f4f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -461,6 +469,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "ToggleHelp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd87ebba-7c19-497e-a6c1-bbda4beb7b29",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ToggleInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
