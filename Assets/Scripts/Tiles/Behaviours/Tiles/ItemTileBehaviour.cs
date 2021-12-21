@@ -1,4 +1,5 @@
 using Project.Display;
+using Project.Items;
 using Project.Tiles;
 
 namespace Project.Behaviours.Tiles
@@ -16,13 +17,20 @@ namespace Project.Behaviours.Tiles
         public override void OnActorInteracted(PlayerTile player, Cell thisCell, Tile thisTile)
         {
             //TODO: Implement Inventory, add item to Inventory if possible, leave it otherwise.
-
-            //MessageLog.Print($"You added a {thisTile.TileName} to your inventory.");
-            //MessageLog.Print($"No free slot left in your inventory; you left the {thisTile.TileName} where you found it.");
-            //thisCell.Tiles.Remove(thisTile);
+            ItemTile item = thisTile as ItemTile;
+            if(Inventory.HasRoomLeftForItem(item))
+            {
+                Inventory.AddItem(thisTile as ItemTile);
+                thisCell.Tiles.Remove(thisTile);
+                MessageLog.Print($"You added a {item.TileName} to your inventory.");
+            }
+            else
+            {
+                MessageLog.Print($"No free slot left in your inventory; you left the {item.TileName} where you found it.");
+            }
         }
 
-        public virtual void OnItemConsumed(PlayerTile player, Cell thisCell, Tile thisTile)
+        public virtual void OnItemConsumed(PlayerTile player, ItemTile thisTile)
         {
             //When consumed, remove this Item from the Inventory and apply its effects to the Player
         }

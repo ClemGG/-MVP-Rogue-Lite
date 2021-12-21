@@ -4,6 +4,7 @@ using Project.Logic;
 using Project.DiceRandom;
 using Project.Tiles;
 using System.Text;
+using UnityEngine;
 
 /// <summary>
 /// Handles all the combat calculations between two Actors.
@@ -104,7 +105,7 @@ public static class CombatSystem
     {
         if (damage > 0)
         {
-            defender.Stats.Health -= damage;
+            defender.Stats.Health = Mathf.Clamp(defender.Stats.Health - damage, 0, defender.Stats.MaxHealth);
 
             MessageLog.Print($"  The {defender.TileName} was hit for {damage} damage.");
 

@@ -10,6 +10,9 @@ namespace Project.Behaviours.Tiles
     {
         public override void OnActorInteracted(PlayerTile player, Cell thisCell, Tile thisTile)
         {
+            base.OnActorInteracted(player, thisCell, thisTile);
+
+
             //The Player has collected the final item, which means he is now able to go upstairs and leave the dungeon.
             GameSystem.s_IsGoalReached = true;
             MessageLog.Print($"You have retrieved the {thisTile.TileName}! You can leave the dungeon now!");

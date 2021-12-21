@@ -55,6 +55,7 @@ namespace Project.Colors
         //For all info to write on the console logs on screen
         [field: SerializeField] public static Color32 Gold { get; } = Swatch.DbSun;
         [field: SerializeField] public static Color32 DisplayedTileName { get; } = Swatch.DbBrightWood;
+        [field: SerializeField] public static Color32 InventoryChar { get; } = Swatch.Green;
 
 
         //Debug

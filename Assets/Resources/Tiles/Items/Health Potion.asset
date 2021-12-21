@@ -38,5 +38,5 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4278190080
   <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 513bf49f0559a4b4ebdf2c58f10d6803, type: 2}
-  _isStackable: 1
-  _isConsumable: 1
+  <IsStackable>k__BackingField: 1
+  <IsConsumable>k__BackingField: 1

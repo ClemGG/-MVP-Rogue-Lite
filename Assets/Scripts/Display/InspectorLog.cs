@@ -1,7 +1,6 @@
 using Project.Colors;
 using Project.Logic;
 using Project.Tiles;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +38,7 @@ namespace Project.Display
                     _hbs = new GameObject[GameSystem.c_MaxHealthBars];
                     for (int i = 0; i < GameSystem.c_MaxHealthBars; i++)
                     {
-                        _hbs[i] = ObjectPooler.instance.SpawnFromPool("healthbar", Vector3.zero, Quaternion.identity, HealthBarsParent);
+                        _hbs[i] = HealthBarsParent.GetChild(i).gameObject;
                         _hbs[i].SetActive(false);
                     }
                 }
@@ -66,7 +65,7 @@ namespace Project.Display
 
         internal static void ClearHealthbarsList()
         {
-            //Hide all healthbars aat the start of a turn before only showing the ones we need
+            //Hide all healthbars at the start of a turn before only showing the ones we need
             if (_nbVisibleActors > 0)
             {
                 _nbVisibleActors = 0;

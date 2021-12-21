@@ -22,10 +22,14 @@ namespace Project.Logic
 
         public const string c_ShowHelpText = "Press h to toggle the commands menu.";
 
-        // Define the maximum number of lines in the MessageLog our resolution allows
+        /// Defines the maximum number of lines in the MessageLog our resolution allows
         public const int c_MaxLines = 5;
-        // Define the maximum number of visible healthbars in the InspectorLog our resolution alllows
+        /// Defines the maximum number of visible healthbars in the InspectorLog our resolution alllows
         public const int c_MaxHealthBars = 15;
+        /// Defines the maximum size of the Inventory our resolution alllows
+        public const int c_MaxInventorySize = 15;
+        /// Defines the maximum size of the Inventory our resolution alllows
+        public const int c_MaxInventoryStackSize = 10;
 
         #endregion
     }

@@ -4,6 +4,7 @@ using Project.Display;
 using Project.Input;
 using UnityEngine;
 using Project.Tiles;
+using Project.Items;
 
 namespace Project.Logic
 {
@@ -13,7 +14,6 @@ namespace Project.Logic
         #region Fields
 
         [field: SerializeField] private GameObject _helpCanvas { get; set; }
-        [field: SerializeField] private GameObject _inventoryCanvas { get; set; }
         [field: SerializeField] private DungeonGenerationSettingsSO _dungeonSettings { get; set; }
         [field: SerializeField] private TileGenerationSettingsSO _enemySettings { get; set; }
         [field: SerializeField] private TileGenerationSettingsSO _itemSettings { get; set; }
@@ -36,7 +36,7 @@ namespace Project.Logic
         // Start is called before the first frame update
         void Start()
         {
-            
+            SetupStaticClasses();
             SetupComponents();
 
             MessageLog.Print(GameSystem.c_ShowHelpText);
@@ -45,15 +45,16 @@ namespace Project.Logic
 
         }
 
+        private void SetupStaticClasses()
+        {
+            Inventory.Init();
+        }
+
         private void SetupComponents()
         {
             if (_helpCanvas)
             {
                 _helpCanvas.SetActive(false);
-            }
-            if (_inventoryCanvas)
-            {
-                _inventoryCanvas.SetActive(false);
             }
         }
 
@@ -74,26 +75,23 @@ namespace Project.Logic
                     return;
                 }
 
-                if (PlayerInput.s_ToggleHelp && !_inventoryCanvas.activeSelf)
+                if (PlayerInput.s_ToggleHelp)
                 {
                     _helpCanvas.SetActive(!_helpCanvas.activeSelf);
                 }
-                if (PlayerInput.s_ToggleInventory && !_helpCanvas.activeSelf)
-                {
-                    _inventoryCanvas.SetActive(!_inventoryCanvas.activeSelf);
-                }
                 //We don't want the Player to do anything while the Commands menu is active
-                if (_helpCanvas.activeSelf || _inventoryCanvas.activeSelf)
+                if (_helpCanvas.activeSelf)
                 {
                     return;
                 }
 
-#if UNITY_EDITOR
-                if (PlayerInput.s_RightClick)
-                {
-                    GenerateNewDungeon();
-                }
-#endif
+//#if UNITY_EDITOR
+                    //Doesn' work anymore since we use stairs and level checks to regenerate a new level
+//                if (PlayerInput.s_RightClick)
+//                {
+//                    GenerateNewDungeon();
+//                }
+//#endif
 
                 if (PlayerInput.s_IsCheckingTiles)
                 {
@@ -124,57 +122,18 @@ namespace Project.Logic
                     PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
                 }
             }
-            //If the player moves the character...
+            if (PlayerInput.s_UseItem)
+            {
+                Inventory.UseItem(PlayerInput.s_UseItemIndex);
+                SpendOneTurn(false);
+            }
+            //If the player moves the character or uses an item...
             if (PlayerInput.s_IsMoving)
             {
-                //Update the player's FOV and position
-                FOV.Clear();
-                InspectorLog.ClearHealthbarsList();
 
-                DungeonInfo.s_Player.OnTick();
+                //We consume one turn, allowing the Player and the Enemies to move if able
+                SpendOneTurn(true);
 
-                //Then do the same for all enemies in the dungeon
-                for (int i = 0; i < DungeonInfo.s_AllActors.Count; i++)
-                {
-                    ActorTile actor = DungeonInfo.s_AllActors[i];
-                    if (!actor.Equals(DungeonInfo.s_Player))
-                    {
-                        actor.OnTick();
-                        if (actor.Stats != null && DungeonInfo.GetCellAt(actor.Position).IsInPlayerFov)
-                        {
-                            InspectorLog.DisplayHealth(actor);
-                        }
-                    }
-                }
-
-                //One turn has passed. If enough turns have passed, we spawn a new Enemy
-                _nbTurnsPassed++;
-                if(_nbTurnsPassed % _turnsBeforeSpawn == 0)
-                {
-                    //We check the SpawnChance to see if we should spawn after each call
-                    if (Random.Range(0f, 100f) < _enemySpawnChance)
-                        DungeonGenerator.AddEnemies(1);
-                }
-
-
-                //Then we redraw the map
-                FOV.ShowExploredTiles();
-                MapLog.Draw(DungeonInfo.s_Size, DungeonInfo.s_Map);
-
-                //Then we draw the healthbars of all visible Enemies
-                //Needs to be called after FOV.ShowExploredTiles() to set Cell.IsInPlayerFov to true
-                for (int i = 0; i < DungeonInfo.s_AllEnemies.Count; i++)
-                {
-                    EnemyTile enemy = DungeonInfo.s_AllEnemies[i];
-                    enemy.OnTick();
-                    if (enemy.Stats != null && DungeonInfo.GetCellAt(enemy.Position).IsInPlayerFov)
-                    {
-                        InspectorLog.DisplayHealth(enemy);
-                    }
-                }
-
-                //Updates the player's stat UI
-                PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
             }
             else if (PlayerInput.s_Interacts)
             {
@@ -183,7 +142,76 @@ namespace Project.Logic
             }
         }
 
+        private void SpendOneTurn(bool shouldPlayerAct)
+        {
 
+            //Update the player's FOV and position
+            FOV.Clear();
+            InspectorLog.ClearHealthbarsList();
+
+            #region Ticks
+
+            //If the Player is allowed to act (ie. not using items, etc.), then activate all its ticks
+            if (shouldPlayerAct)
+            {
+                DungeonInfo.s_Player.OnTick();
+            }
+            else
+            {
+                //We update at least the FOV to still be able to see the other Tiles
+                DungeonInfo.s_Player.Fov.OnTick(DungeonInfo.s_Player);
+            }
+
+            //Then do the same for all enemies in the dungeon
+            for (int i = 0; i < DungeonInfo.s_AllActors.Count; i++)
+            {
+                ActorTile actor = DungeonInfo.s_AllActors[i];
+                if (!actor.Equals(DungeonInfo.s_Player))
+                {
+                    actor.OnTick();
+                }
+            }
+
+            #endregion
+
+
+            #region Add Enemies after Turns
+
+            //One turn has passed. If enough turns have passed, we spawn a new Enemy
+            _nbTurnsPassed++;
+            if (_nbTurnsPassed % _turnsBeforeSpawn == 0)
+            {
+                //We check the SpawnChance to see if we should spawn after each call
+                if (Random.Range(0f, 100f) < _enemySpawnChance)
+                    DungeonGenerator.AddEnemies(1);
+            }
+
+            #endregion
+
+
+            //Then we redraw the map
+            FOV.ShowExploredTiles();
+            MapLog.Draw(DungeonInfo.s_Size, DungeonInfo.s_Map);
+
+
+            #region InspectorLog
+
+            //Then we draw the healthbars of all visible Enemies
+            //Needs to be called after FOV.ShowExploredTiles() to set Cell.IsInPlayerFov to true
+            for (int i = 0; i < DungeonInfo.s_AllEnemies.Count; i++)
+            {
+                EnemyTile enemy = DungeonInfo.s_AllEnemies[i];
+                if (enemy.Stats != null && DungeonInfo.GetCellAt(enemy.Position).IsInPlayerFov)
+                {
+                    InspectorLog.DisplayHealth(enemy);
+                }
+            }
+
+            //Updates the player's stat UI
+            PlayerLog.DisplayPlayerStats(DungeonInfo.s_Player.TileName, DungeonInfo.s_Player.Stats);
+
+            #endregion
+        }
 
         public void GenerateNewDungeon()
         {

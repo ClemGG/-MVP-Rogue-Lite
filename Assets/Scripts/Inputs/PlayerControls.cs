@@ -195,17 +195,6 @@ namespace Project.Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""fac36b3c-96e7-4b17-a578-cbaab4d6eb60"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""NumpadDiagonal"",
                     ""id"": ""568735f3-ad10-4954-8d40-85ea661b695c"",
                     ""path"": ""2DVector"",
@@ -324,7 +313,7 @@ namespace Project.Input
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ToggleInventory"",
+                    ""name"": ""UseItem"",
                     ""type"": ""Button"",
                     ""id"": ""a28fbfe4-261e-46a7-9653-c91ce7917f4f"",
                     ""expectedControlType"": ""Button"",
@@ -348,17 +337,6 @@ namespace Project.Input
                     ""name"": """",
                     ""id"": ""5f014b48-1c1d-4a5c-a5cc-c81d9d79f5e1"",
                     ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Accept"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""787f3671-3bca-4661-b89b-10e8f3e7b7a4"",
-                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -490,11 +468,165 @@ namespace Project.Input
                 {
                     ""name"": """",
                     ""id"": ""dd87ebba-7c19-497e-a6c1-bbda4beb7b29"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/#(a)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""ToggleInventory"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d9d5f88-1922-4cf7-9004-30e11efac006"",
+                    ""path"": ""<Keyboard>/#(z)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6c5521a-b08e-46ce-8703-3f4128bca453"",
+                    ""path"": ""<Keyboard>/#(e)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e829790b-1934-4abb-aa64-11a18954d436"",
+                    ""path"": ""<Keyboard>/#(r)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9675beb-225c-4ecd-aa7e-a05224ed172e"",
+                    ""path"": ""<Keyboard>/#(t)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00d665f2-c730-4958-829a-aa5fa4a3bb25"",
+                    ""path"": ""<Keyboard>/#(y)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ff8c68e-f55f-47df-a59b-692e6b4223d3"",
+                    ""path"": ""<Keyboard>/#(u)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a020ab1-6d06-41c0-9582-a88bab9e75a1"",
+                    ""path"": ""<Keyboard>/#(i)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb8e633b-2459-4631-8a3c-ecbfd1c8b008"",
+                    ""path"": ""<Keyboard>/#(o)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""559cca5c-9ef3-469b-b223-e91cf456a3af"",
+                    ""path"": ""<Keyboard>/#(p)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f407956e-5fe9-491d-9d70-73ba0473fd69"",
+                    ""path"": ""<Keyboard>/#(q)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caa37270-9183-44a4-9d5c-518099807f59"",
+                    ""path"": ""<Keyboard>/#(s)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a68767fe-d874-42d4-aac3-0ab86440d465"",
+                    ""path"": ""<Keyboard>/#(d)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd8eb464-672b-4c7d-b5f5-9aab893c916c"",
+                    ""path"": ""<Keyboard>/#(f)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""854dd11c-b4da-4709-ba53-56e39303f6b9"",
+                    ""path"": ""<Keyboard>/#(g)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -565,7 +697,7 @@ namespace Project.Input
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
             m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
             m_UI_ToggleHelp = m_UI.FindAction("ToggleHelp", throwIfNotFound: true);
-            m_UI_ToggleInventory = m_UI.FindAction("ToggleInventory", throwIfNotFound: true);
+            m_UI_UseItem = m_UI.FindAction("UseItem", throwIfNotFound: true);
             // Debug
             m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
             m_Debug_RegenerateDungeon = m_Debug.FindAction("RegenerateDungeon", throwIfNotFound: true);
@@ -686,7 +818,7 @@ namespace Project.Input
         private readonly InputAction m_UI_Move;
         private readonly InputAction m_UI_Accept;
         private readonly InputAction m_UI_ToggleHelp;
-        private readonly InputAction m_UI_ToggleInventory;
+        private readonly InputAction m_UI_UseItem;
         public struct UIActions
         {
             private @PlayerControls m_Wrapper;
@@ -694,7 +826,7 @@ namespace Project.Input
             public InputAction @Move => m_Wrapper.m_UI_Move;
             public InputAction @Accept => m_Wrapper.m_UI_Accept;
             public InputAction @ToggleHelp => m_Wrapper.m_UI_ToggleHelp;
-            public InputAction @ToggleInventory => m_Wrapper.m_UI_ToggleInventory;
+            public InputAction @UseItem => m_Wrapper.m_UI_UseItem;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -713,9 +845,9 @@ namespace Project.Input
                     @ToggleHelp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
                     @ToggleHelp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
                     @ToggleHelp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleHelp;
-                    @ToggleInventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
-                    @ToggleInventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
-                    @ToggleInventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
+                    @UseItem.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
+                    @UseItem.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
+                    @UseItem.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -729,9 +861,9 @@ namespace Project.Input
                     @ToggleHelp.started += instance.OnToggleHelp;
                     @ToggleHelp.performed += instance.OnToggleHelp;
                     @ToggleHelp.canceled += instance.OnToggleHelp;
-                    @ToggleInventory.started += instance.OnToggleInventory;
-                    @ToggleInventory.performed += instance.OnToggleInventory;
-                    @ToggleInventory.canceled += instance.OnToggleInventory;
+                    @UseItem.started += instance.OnUseItem;
+                    @UseItem.performed += instance.OnUseItem;
+                    @UseItem.canceled += instance.OnUseItem;
                 }
             }
         }
@@ -800,7 +932,7 @@ namespace Project.Input
             void OnMove(InputAction.CallbackContext context);
             void OnAccept(InputAction.CallbackContext context);
             void OnToggleHelp(InputAction.CallbackContext context);
-            void OnToggleInventory(InputAction.CallbackContext context);
+            void OnUseItem(InputAction.CallbackContext context);
         }
         public interface IDebugActions
         {

@@ -10,9 +10,9 @@ namespace Project.Behaviours.Tiles
         [field: SerializeField] private int HealthGain { get; set; }
 
 
-        public override void OnItemConsumed(PlayerTile player, Cell thisCell, Tile thisTile)
+        public override void OnItemConsumed(PlayerTile player, ItemTile thisTile)
         {
-            base.OnItemConsumed(player, thisCell, thisTile);
+            base.OnItemConsumed(player, thisTile);
 
             //Heal Player by [HealthGain] amount
             player.Stats.Health = Mathf.Clamp(player.Stats.Health + HealthGain, player.Stats.Health, player.Stats.MaxHealth);

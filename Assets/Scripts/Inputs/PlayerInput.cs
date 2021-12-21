@@ -29,8 +29,13 @@ namespace Project.Input
         private static float _autoMoveDelayTimer { get; set; }
         private static float _autoMoveIntervalTimer { get; set; }
 
+        public static bool s_UseItem { get; private set; }
+        public static int s_UseItemIndex { get; private set; }  //Used to retrieve the item index depending on the key pressed
+
+
         public static bool s_ToggleHelp { get; private set; }
-        public static bool s_ToggleInventory { get; private set; }
+
+
         public static bool s_Waits { get; private set; }
         public static bool s_IsMoving { get; private set; }
         public static bool s_Interacts { get; private set; }
@@ -80,8 +85,20 @@ namespace Project.Input
             s_moveDirDiagonal = Vector2Int.zero;
             s_MoveDirResult = Vector2Int.zero;
 
+            s_UseItem = _playerControls.UI.UseItem.triggered;
+            //Converts the key pressed to an int to select an item in the Inventory
+            if (s_UseItem)
+            {
+                for (int i = 0; i < _playerControls.UI.UseItem.controls.Count; i++)
+                {
+                    if(_playerControls.UI.UseItem.activeControl.name == _playerControls.UI.UseItem.controls[i].name)
+                    {
+                        s_UseItemIndex = i;
+                    }
+                }
+            }
+
             s_ToggleHelp = _playerControls.UI.ToggleHelp.triggered;
-            s_ToggleInventory = _playerControls.UI.ToggleInventory.triggered;
             s_RightClick = _playerControls.Debug.RegenerateDungeon.triggered;
             s_Interacts = _playerControls.Player.Interact.triggered;
             s_Waits = _playerControls.Player.Wait.triggered;
@@ -151,6 +168,12 @@ namespace Project.Input
                 s_MoveDirResult = s_moveDirPlus;
             }
 
+        }
+
+
+        public static string GetInventoryChar(int index)
+        {
+            return _playerControls.UI.UseItem.controls[index].displayName;
         }
 
         #endregion
