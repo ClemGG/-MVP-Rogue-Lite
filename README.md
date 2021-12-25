@@ -9,6 +9,8 @@ This is the Minimum Viable Product of this project, made in 2 Months. It contain
 - A Player Character,
 - 1 Enemy (using 1* pathfinding),
 - 2 Items,
+- An Inspector Log to inspect currently visible Tiles on the Map,
+- A Console Log,
 - One Map procedurally generated at each level of the dungeon (currently 20 levels),
 - 3 different level generation algorithms.
 
