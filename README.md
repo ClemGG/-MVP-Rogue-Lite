@@ -7,7 +7,7 @@ The demo is available in the 'Builds' folder.
 
 This is the Minimum Viable Product of this project, made in 2 Months. It contains:
 - A Player Character,
-- 1 Enemy (using 1* pathfinding),
+- 1 Enemy (using the A* pathfinding algorithm),
 - 2 Items,
 - An Inspector Log to inspect currently visible Tiles on the Map,
 - A Console Log,
