@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73595b835ba830b46b1a6edc18acb925, type: 3}
   m_Name: Item Spawn Settings
   m_EditorClassIdentifier: 
-  <MaxTilesOnStart>k__BackingField: 1000
+  <MaxTilesOnStart>k__BackingField: 10
   <SpawnRatesPerLevel>k__BackingField:
   - <TileSpawnRates>k__BackingField:
     - <TileToSpawn>k__BackingField: {fileID: 11400000, guid: 15c2cbe0e0abe09419bea83dcea01b28, type: 2}

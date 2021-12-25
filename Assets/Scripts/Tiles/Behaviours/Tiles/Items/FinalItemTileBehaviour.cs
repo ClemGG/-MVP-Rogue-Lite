@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Project.Behaviours.Tiles
 {
     [CreateAssetMenu(fileName = "Final Item Behaviour", menuName = "Rogue/Actors/Behaviours/Tile/Item/Final Item Behaviour")]
-    public class FinalItemTileBehaviour : TileBehaviour
+    public class FinalItemTileBehaviour : ItemTileBehaviour
     {
         public override void OnActorInteracted(PlayerTile player, Cell thisCell, Tile thisTile)
         {

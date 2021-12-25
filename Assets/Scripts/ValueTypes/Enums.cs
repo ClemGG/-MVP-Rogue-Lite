@@ -37,7 +37,9 @@ namespace Project.ValueTypes
     {
         Input = 0,   //Uses the Player's inputs
         Random = 1,  //The next adjacent Tile is chosen at random
-        Explore = 2, //Finds the closest unexplored Floor Tile until none are found or an enemy is nearby
+        //Explore = 2, //Finds the closest unexplored Floor Tile until none are found or an enemy is nearby (Player only)
+        //Patrol = 3,  // Finds a random Walkable Tile in any other Room and moves towards it
+        Chase = 4,  // The Actor goes directly towards the designated Tile
     }
 
     #endregion

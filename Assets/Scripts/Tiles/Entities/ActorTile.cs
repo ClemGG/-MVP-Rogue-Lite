@@ -19,7 +19,7 @@ namespace Project.Tiles
         [field: Space(10)]
 
 
-        [field: SerializeField, Tooltip("The Behaviour determining its field of view.")]
+        [field: Tooltip("The Behaviour determining its field of view.")]
         public FOV Fov
         {
             get
@@ -30,7 +30,7 @@ namespace Project.Tiles
         }
         private FOV _fovTemplate;
 
-        [field: SerializeField, Tooltip("The Behaviour determining its movement pattern.")]
+        [field: Tooltip("The Behaviour determining its movement pattern.")]
         public Movement Movement
         {
             get
@@ -65,7 +65,7 @@ namespace Project.Tiles
         #region Methods
 
         //On player turn, compute Movement and show all Cells in FOV
-        public void OnTick()
+        public virtual void OnTick()
         {
             if (Movement) Movement.OnTick(this);
             if (Fov) Fov.OnTick(this);

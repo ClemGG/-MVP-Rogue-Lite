@@ -29,15 +29,15 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4280028180
   <TextColorOutFOV>k__BackingField:
-    ColorName: 0
+    ColorName: 23
     Color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4278190335
   <BackgroundColorOutFOV>k__BackingField:
     ColorName: 2
     Color:
       serializedVersion: 2
       rgba: 4278190080
   <TileBehaviour>k__BackingField: {fileID: 11400000, guid: 7dccce88581407e4b8dc036ff27a5dd6, type: 2}
-  _isStackable: 0
-  _isConsumable: 0
+  <IsStackable>k__BackingField: 0
+  <IsConsumable>k__BackingField: 0

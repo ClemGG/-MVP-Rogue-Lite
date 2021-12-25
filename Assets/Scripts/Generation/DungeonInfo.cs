@@ -171,6 +171,12 @@ namespace Project.Generation
             return s_Map[pos.x, pos.y];
         }
         
+        ///Used to retrieve Cells on the map
+        public static Cell GetCellAt(int x, int y)
+        {
+            return s_Map[x, y];
+        }
+
         ///Used to retrieve enemies on the map
         public static ActorTile GetActorAt(Vector2Int pos)
         {

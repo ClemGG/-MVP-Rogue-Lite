@@ -8816,8 +8816,8 @@ MonoBehaviour:
   <_enemySettings>k__BackingField: {fileID: 11400000, guid: f95f58feb52b4ea45b5b4fc92cfec1ca, type: 2}
   <_itemSettings>k__BackingField: {fileID: 11400000, guid: 27a7fb8f3dca5a9488dc08d67f5692e7, type: 2}
   <_dungeonSize>k__BackingField: {x: 97, y: 34}
-  <_turnsPassedOnWait>k__BackingField: 20
-  <_turnsBeforeSpawn>k__BackingField: 20
+  <_turnsPassedOnWait>k__BackingField: 50
+  <_turnsBeforeSpawn>k__BackingField: 50
   <_enemySpawnChance>k__BackingField: 50
 --- !u!1001 &2053549000
 PrefabInstance:

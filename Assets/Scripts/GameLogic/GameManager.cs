@@ -107,7 +107,7 @@ namespace Project.Logic
                     MessageLog.Print($"You wait for {_turnsPassedOnWait} turns.");
 
                     _nbTurnsPassed += _turnsPassedOnWait;
-                    int nbCalls = _turnsPassedOnWait % _turnsBeforeSpawn;
+                    int nbCalls = _turnsPassedOnWait / _turnsBeforeSpawn;
                     for (int i = 0; i < nbCalls; i++)
                     {
 
@@ -137,8 +137,16 @@ namespace Project.Logic
             }
             else if (PlayerInput.s_Interacts)
             {
+                bool containsItem = DungeonInfo.GetCellAt(DungeonInfo.s_Player.Position).Contains<ItemTile>();
+
                 //We get all Tiles underneath the Player and we call OnActorInteracted on their TileBehaviour
                 DungeonInfo.GetCellAt(DungeonInfo.s_Player.Position).OnActorInteracted(DungeonInfo.s_Player);
+
+                //We only consume the Player's turn if he tries to pick up an Item.
+                if (containsItem)
+                {
+                    SpendOneTurn(false);
+                }
             }
         }
 

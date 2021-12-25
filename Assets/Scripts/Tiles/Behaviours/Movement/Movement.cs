@@ -1,3 +1,4 @@
+using Project.Generation;
 using Project.Tiles;
 using Project.ValueTypes;
 using UnityEngine;
@@ -13,8 +14,11 @@ namespace Project.Behaviours.Movement
     [CreateAssetMenu(fileName = "New Movement Behaviour", menuName = "Rogue/Actors/Behaviours/Movement")]
     public class Movement : ScriptableObject
     {
-        [field: SerializeField] private MovementPatternType _movementPattern { get; set; }
-        private (Cell actorCell, Cell destCell) cells { get; set; } = (null, null);
+        [field: SerializeField]
+        public MovementPatternType MovementPattern { get; set; }
+
+        //[field: SerializeField, Tooltip("If, false, the Actor can only move in 4 directions.")]
+        //public bool CanMoveIn8Directions { get; set; } = true;
 
 
         public void OnTick(ActorTile actor)
@@ -24,18 +28,29 @@ namespace Project.Behaviours.Movement
 
         protected void Move(ActorTile actor)
         {
-            switch (_movementPattern)
+            Cell actorCell = DungeonInfo.GetCellAt(actor.Position);
+            Cell destCell = null;
+
+            switch (MovementPattern)
             {
                 case MovementPatternType.Input:
-                    cells = MovementPatterns.GetInputNextPosition(actor.Position);
+                    destCell = MovementPatterns.GetInputNextPosition(actor.Position);
                     break;
 
                 case MovementPatternType.Random:
-                    cells = MovementPatterns.GetRandomAdjacentTile(actor.Position);
+                    destCell = MovementPatterns.GetRandomAdjacentTile(actor.Position);
                     break;
 
-                case MovementPatternType.Explore:
-                    cells = MovementPatterns.GetTileClosestToUnexploredFloorTile(actor.Position);
+                //case MovementPatternType.Explore:
+                //    destCell = MovementPatterns.GetTileClosestToUnexploredFloorTile(actor.Position);
+                //    break;
+
+                //case MovementPatternType.Patrol:
+                //    destCell = MovementPatterns.GetRandomRoomTile(actor.Position);
+                //    break;
+
+                case MovementPatternType.Chase:
+                    destCell = MovementPatterns.GoToTile(actor.Position, DungeonInfo.s_Player);
                     break;
 
                 default:
@@ -43,23 +58,23 @@ namespace Project.Behaviours.Movement
             }
 
             //In case we haven't implemented a pattern method yet
-            if (cells.Equals((null, null))) return;
+            if (destCell == null) return;
 
             //If the destination is a Walkable Cell, move the ActorTile from the old Tile to the new one.
-            if (cells.destCell.Walkable)
+            if (destCell.Walkable)
             {
-                cells.actorCell.Tiles.Remove(actor);
-                cells.destCell.Tiles.Add(actor);
-                actor.Position = cells.destCell.Position;
+                actorCell.Tiles.Remove(actor);
+                destCell.Tiles.Add(actor);
+                actor.Position = destCell.Position;
 
                 //If the cells contains a Tile that racts when entered, invoke its method.
-                cells.destCell.OnActorEntered(actor);
+                destCell.OnActorEntered(actor);
 
             }
             else
             {
                 //Else, display in the Log what Tile we have bumped into.
-                cells.destCell.OnActorCollided(actor);
+                destCell.OnActorCollided(actor);
             }
         }
     }

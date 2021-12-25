@@ -116,6 +116,11 @@ namespace Project.Behaviours.FOV
 
         }
 
+        public bool IsPlayerInFOV()
+        {
+            return _visibleCellsForThisActor.Contains(DungeonInfo.s_Player.Position);
+        }
+
         #endregion
     }
 }
